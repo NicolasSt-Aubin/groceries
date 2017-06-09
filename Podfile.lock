@@ -1,0 +1,42 @@
+PODS:
+  - Alamofire (4.4.0)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
+  - KeychainSwift (8.0.2)
+  - PKHUD (3.2.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
+  - SwiftGen (4.2.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - Crashlytics
+  - Fabric
+  - KeychainSwift
+  - PKHUD (from `https://github.com/toyship/PKHUD.git`)
+  - SDWebImage
+  - SwiftGen
+
+EXTERNAL SOURCES:
+  PKHUD:
+    :git: https://github.com/toyship/PKHUD.git
+
+CHECKOUT OPTIONS:
+  PKHUD:
+    :commit: 28fb970b41d63134e962f9da766b96670c0f55f0
+    :git: https://github.com/toyship/PKHUD.git
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  KeychainSwift: 213db04dfe7244988e61f77c72a2afb2f775954a
+  PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SwiftGen: b6bfed151243348e4603b91bf5bc4eb2486c9d5b
+
+PODFILE CHECKSUM: 741dff47248b254d8377e9fdb9de011e8e238abc
+
+COCOAPODS: 1.0.1
