@@ -44,8 +44,11 @@ enum Asset {
   static let addIcon: AssetType = "add-icon"
   static let categoryIcon: AssetType = "category-icon"
   static let dairy: AssetType = "dairy"
+  static let emailIcon: AssetType = "email-icon"
+  static let passwordIcon: AssetType = "password-icon"
   static let priceIcon: AssetType = "price-icon"
   static let searchIcon: AssetType = "search-icon"
+  static let userIcon: AssetType = "user-icon"
 }
 // swiftlint:enable type_body_length
 

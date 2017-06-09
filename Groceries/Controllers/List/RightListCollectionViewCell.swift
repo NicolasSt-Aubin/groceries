@@ -31,8 +31,6 @@ class RightListCollectionViewCell: UICollectionViewCell {
     
     fileprivate lazy var completeButton: GRButton = {
         let button = GRButton()
-        button.backgroundColor = .flatBelizeHole
-        button.setTitleColor(.white, for: .normal)
         button.setTitle(L10n.complete, for: .normal)
         //        button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
         return button
@@ -60,7 +58,6 @@ class RightListCollectionViewCell: UICollectionViewCell {
         completeButton.frame.size.height = CGFloat.formFieldHeight
         completeButton.center.x = bounds.width/2
         completeButton.frame.origin.y = bounds.height - completeButton.frame.height - CGFloat.pageMargin
-        completeButton.layer.cornerRadius = CGFloat.formFieldRadius
         
         tableView.frame.size.width = bounds.width - CGFloat.pageMargin * 2
         

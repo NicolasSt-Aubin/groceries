@@ -24,30 +24,31 @@ class LoginViewController: BaseViewController {
         return label
     }()
     
-    fileprivate lazy var emailTextField: UITextField = {
-        let textField = UITextField.generateGRTextField()
+    fileprivate lazy var emailTextField: GRTextField = {
+        let textField = GRTextField(icon: Asset.emailIcon.image)
         textField.delegate = self
         textField.returnKeyType = .next
         textField.textContentType = UITextContentType.emailAddress
         textField.placeholder = L10n.email
+        textField.addTarget(self, action: #selector(self.textFieldValueChanged), for: .allEditingEvents)
         return textField
     }()
     
-    fileprivate lazy var passwordTextField: UITextField = {
-        let textField = UITextField.generateGRTextField()
+    fileprivate lazy var passwordTextField: GRTextField = {
+        let textField = GRTextField(icon: Asset.passwordIcon.image)
         textField.delegate = self
         textField.returnKeyType = .go
         textField.placeholder = L10n.password
         textField.isSecureTextEntry = true
+        textField.addTarget(self, action: #selector(self.textFieldValueChanged), for: .allEditingEvents)
         return textField
     }()
     
     fileprivate lazy var loginButton: GRButton = {
         let button = GRButton()
-        button.backgroundColor = .flatBelizeHole
-        button.setTitleColor(.white, for: .normal)
         button.setTitle(L10n.login, for: .normal)
         button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
@@ -77,7 +78,7 @@ class LoginViewController: BaseViewController {
         
         emailTextField.frame.size = textFieldSize
         emailTextField.layer.cornerRadius = CGFloat.formFieldRadius
-        emailTextField.frame.origin.y = welcomeLabel.frame.maxY + CGFloat.bottomTitleMargin
+        emailTextField.frame.origin.y = welcomeLabel.frame.maxY + 20
         emailTextField.center.x = view.bounds.width/2
         
         passwordTextField.frame.size = textFieldSize
@@ -86,7 +87,6 @@ class LoginViewController: BaseViewController {
         passwordTextField.center.x = view.bounds.width/2
         
         loginButton.frame.size = textFieldSize
-        loginButton.layer.cornerRadius = CGFloat.formFieldRadius
         loginButton.center.x = view.bounds.width/2
         loginButton.frame.origin.y = view.bounds.height - CGFloat.pageMargin - keyboardHeight - loginButton.frame.height
     }
@@ -111,6 +111,10 @@ class LoginViewController: BaseViewController {
         view.layoutIfNeeded()
     }
     
+    func textFieldValueChanged() {
+        loginButton.isEnabled = emailTextField.text != nil && emailTextField.text != "" && passwordTextField.text != nil && passwordTextField.text != ""
+    }
+    
     func login() {
         guard let email = emailTextField.text else {
             HUD.flash(.error)
@@ -132,12 +136,17 @@ class LoginViewController: BaseViewController {
             return
         }
 
-        HUD.show(.progress)
+        emailTextField.isEnabled = false
+        passwordTextField.isEnabled = false
+        loginButton.isLoading = true
         
         APIService.login(email: email, password: password, success: {
             HUD.flash(.success)
             (UIApplication.shared.delegate as! AppDelegate).goToMainAppContent()
         }, failure: { error in
+            self.emailTextField.isEnabled = true
+            self.passwordTextField.isEnabled = true
+            self.loginButton.isLoading = false
             self.presentError(error)
         })
         

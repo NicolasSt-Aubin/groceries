@@ -43,6 +43,7 @@ class ListManagerViewController: BaseViewController {
         let button = GRButton()
         button.setTitle(L10n.overview, for: .normal)
         button.setTitleColor(.flatBelizeHole, for: .normal)
+        button.backgroundColor = .clear
         button.addTarget(self, action: #selector(self.selectLeftPage), for: .touchUpInside)
         return button
     }()
@@ -51,6 +52,7 @@ class ListManagerViewController: BaseViewController {
         let button = GRButton()
         button.setTitle(L10n.needToBuy, for: .normal)
         button.setTitleColor(.flatBlack, for: .normal)
+        button.backgroundColor = .clear
         button.addTarget(self, action: #selector(self.selectRightPage), for: .touchUpInside)
         return button
     }()
