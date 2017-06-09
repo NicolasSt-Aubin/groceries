@@ -1,0 +1,30 @@
+/* 
+  languages.strings
+  Groceries
+
+  Created by Nicolas St-Aubin on 2017-06-08.
+  Copyright © 2017 Third Bridge. All rights reserved.
+*/
+
+// GENERAL
+
+"OPTIONAL_INDICATOR" = "(opt)";
+
+// ERRORS
+
+"GENERAL_NETWORK_ERROR" = "Erreur réseau";
+
+// LOGIN
+
+"WELCOME" = "Bienvenue";
+"EMAIL" = "Courriel";
+"PASSWORD" = "Mot de passe";
+"LOGIN" = "Connexion";
+
+// LIST MANAGER
+
+"OVERVIEW" = "Vue d'ensemble";
+"NEED_TO_BUY" = "À acheter";
+"SEARCH_PLACEHOLDER" = "Lait, poulet, jus...";
+"CATEGORY" = "Categorie";
+"ADD" = "Ajouter";

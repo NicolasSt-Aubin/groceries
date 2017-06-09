@@ -19,7 +19,7 @@ class LoginViewController: BaseViewController {
     
     fileprivate lazy var welcomeLabel: UILabel = {
         let label = UILabel.generateTitleLabel()
-        label.text = "Welcome"
+        label.text = L10n.welcome
         label.sizeToFit()
         return label
     }()
@@ -29,7 +29,7 @@ class LoginViewController: BaseViewController {
         textField.delegate = self
         textField.returnKeyType = .next
         textField.textContentType = UITextContentType.emailAddress
-        textField.placeholder = "Email"
+        textField.placeholder = L10n.email
         return textField
     }()
     
@@ -37,7 +37,7 @@ class LoginViewController: BaseViewController {
         let textField = UITextField.generateGRTextField()
         textField.delegate = self
         textField.returnKeyType = .go
-        textField.placeholder = "Password"
+        textField.placeholder = L10n.password
         textField.isSecureTextEntry = true
         return textField
     }()
@@ -46,7 +46,7 @@ class LoginViewController: BaseViewController {
         let button = GRButton()
         button.backgroundColor = .flatBelizeHole
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("Login", for: .normal)
+        button.setTitle(L10n.login, for: .normal)
         button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
         return button
     }()

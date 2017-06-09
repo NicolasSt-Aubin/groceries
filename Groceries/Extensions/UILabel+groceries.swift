@@ -13,7 +13,7 @@ extension UILabel {
     class func generateTitleLabel() -> UILabel {
         let label = UILabel()
         label.textColor = .flatBlack
-        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.font = UIFont.grBoldFont(ofSize: 32)
         return label
     }
     

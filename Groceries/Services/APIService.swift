@@ -24,7 +24,7 @@ class APIService {
             }
             
             guard let object = response.obj else {
-                failure?("Network error")
+                failure?(L10n.generalNetworkError)
                 return
             }
             
@@ -34,7 +34,7 @@ class APIService {
                 return
             }
             
-            failure?("Network error")
+            failure?(L10n.generalNetworkError)
             return
             
         }

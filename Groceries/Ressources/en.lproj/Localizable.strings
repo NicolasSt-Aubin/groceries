@@ -1,0 +1,24 @@
+/* 
+  languages.strings
+  Groceries
+
+  Created by Nicolas St-Aubin on 2017-06-08.
+  Copyright © 2017 Third Bridge. All rights reserved.
+*/
+
+// ERRORS
+
+"GENERAL_NETWORK_ERROR" = "Network error";
+
+// LOGIN
+
+"WELCOME" = "Login";
+"EMAIL" = "Email";
+"PASSWORD" = "Password";
+"LOGIN" = "Login";
+
+// LIST MANAGER
+
+"OVERVIEW" = "Overview";
+"NEED_TO_BUY" = "Need to buy";
+"SEARCH_PLACEHOLDER" = "Milk, chicken, juice...";

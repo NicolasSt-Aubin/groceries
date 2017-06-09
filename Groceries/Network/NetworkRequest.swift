@@ -112,7 +112,7 @@ enum NetworkRequest {
             }
         }
         
-        return NetworkResponse(obj: nil, errorMessage: "Network error")
+        return NetworkResponse(obj: nil, errorMessage: L10n.generalNetworkError)
     }
     
 }

@@ -10,11 +10,25 @@ import UIKit
 
 class ListManagerViewController: BaseViewController {
 
+    // MARK: - Properties
+    
+    var userIsSearching: Bool = false {
+        didSet {
+            collectionView.isScrollEnabled = !userIsSearching
+            collectionView.collectionViewLayout.invalidateLayout()
+            UIView.animate(withDuration: 0.3) {
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
     // MARK: - UI Elements
     
     fileprivate lazy var headerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.clipsToBounds = true
         return view
     }()
     
@@ -27,7 +41,7 @@ class ListManagerViewController: BaseViewController {
     
     fileprivate lazy var leftPageButton: GRButton = {
         let button = GRButton()
-        button.setTitle("Overview", for: .normal)
+        button.setTitle(L10n.overview, for: .normal)
         button.setTitleColor(.flatBelizeHole, for: .normal)
         button.addTarget(self, action: #selector(self.selectLeftPage), for: .touchUpInside)
         return button
@@ -35,7 +49,7 @@ class ListManagerViewController: BaseViewController {
     
     fileprivate lazy var rightPageButton: GRButton = {
         let button = GRButton()
-        button.setTitle("Need to buy", for: .normal)
+        button.setTitle(L10n.needToBuy, for: .normal)
         button.setTitleColor(.flatBlack, for: .normal)
         button.addTarget(self, action: #selector(self.selectRightPage), for: .touchUpInside)
         return button
@@ -45,14 +59,6 @@ class ListManagerViewController: BaseViewController {
         let view = UIView()
         view.backgroundColor = .flatBelizeHole
         return view
-    }()
-    
-    fileprivate lazy var searchAddTextField: UITextField = {
-        let textField = UITextField.generateGRTextField()
-//        textField.delegate = self
-        textField.returnKeyType = .done
-        textField.placeholder = "Milk, chicken, juice..."
-        return textField
     }()
     
     fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
@@ -89,7 +95,6 @@ class ListManagerViewController: BaseViewController {
         headerView.addSubview(rightPageButton)
         headerView.addSubview(pageSelectionIndicatorView)
         
-        view.addSubview(searchAddTextField)
         view.addSubview(collectionView)
     }
     
@@ -102,7 +107,7 @@ class ListManagerViewController: BaseViewController {
         leftPageButton.frame.size.width = view.bounds.width/2
         leftPageButton.frame.size.height = 40
         leftPageButton.frame.origin.x = 0
-        leftPageButton.frame.origin.y = titleLabel.frame.maxY + 20
+        leftPageButton.frame.origin.y = titleLabel.frame.maxY + 15
         
         rightPageButton.frame.size = leftPageButton.frame.size
         rightPageButton.frame.origin.x = leftPageButton.frame.maxX
@@ -115,17 +120,11 @@ class ListManagerViewController: BaseViewController {
         pageSelectionIndicatorView.layer.cornerRadius = pageSelectionIndicatorView.frame.height/2
         
         headerView.frame.size.width = view.bounds.width
-        headerView.frame.size.height = pageSelectionIndicatorView.frame.maxY + 2
-        
-        searchAddTextField.frame.size.width = view.bounds.width - 2 * CGFloat.pageMargin
-        searchAddTextField.frame.size.height = CGFloat.formFieldHeight
-        searchAddTextField.center.x = view.bounds.width/2
-        searchAddTextField.frame.origin.y = headerView.frame.maxY + CGFloat.pageMargin
-        searchAddTextField.layer.cornerRadius = CGFloat.formFieldRadius
+        headerView.frame.size.height = userIsSearching ? 20 : pageSelectionIndicatorView.frame.maxY + 2
         
         collectionView.frame.size.width = view.bounds.width
-        collectionView.frame.size.height = view.bounds.height - searchAddTextField.frame.maxY - CGFloat.pageMargin
-        collectionView.frame.origin.y = searchAddTextField.frame.maxY + CGFloat.pageMargin
+        collectionView.frame.size.height = view.bounds.height - headerView.frame.maxY
+        collectionView.frame.origin.y = headerView.frame.maxY
     }
     
     // MARK: - Selector Methods
@@ -178,6 +177,18 @@ class ListManagerViewController: BaseViewController {
 
 }
 
+extension ListManagerViewController: LeftListCollectionViewCellDelegate {
+    
+    func userDidStartSearching() {
+        userIsSearching = true
+    }
+    
+    func userDidStopSearching() {
+        userIsSearching = false
+    }
+    
+}
+
 extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -194,7 +205,9 @@ extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: LeftListCollectionViewCell.reuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeftListCollectionViewCell.reuseIdentifier, for: indexPath) as! LeftListCollectionViewCell
+            cell.delegate = self
+            return cell
         } else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: RightListCollectionViewCell.reuseIdentifier, for: indexPath)
         }

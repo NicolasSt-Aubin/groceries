@@ -28,6 +28,10 @@
 		1E4433AF1EEA2D5100E25141 /* LeftListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433AE1EEA2D5100E25141 /* LeftListCollectionViewCell.swift */; };
 		1E4433B31EEA2D7100E25141 /* RightListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433B21EEA2D7100E25141 /* RightListCollectionViewCell.swift */; };
 		1E4433B51EEA47A500E25141 /* ElementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433B41EEA47A500E25141 /* ElementTableViewCell.swift */; };
+		1E4433B91EEA522400E25141 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E4433BB1EEA522400E25141 /* Localizable.strings */; };
+		1E4433C01EEA538C00E25141 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433BE1EEA538C00E25141 /* Images.swift */; };
+		1E4433C11EEA538C00E25141 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433BF1EEA538C00E25141 /* Localize.swift */; };
+		1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */; };
 		D74AF178236AFB0B61A7A1CF /* Pods_Groceries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +80,11 @@
 		1E4433AE1EEA2D5100E25141 /* LeftListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftListCollectionViewCell.swift; path = Controllers/List/LeftListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E4433B21EEA2D7100E25141 /* RightListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightListCollectionViewCell.swift; path = Controllers/List/RightListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E4433B41EEA47A500E25141 /* ElementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ElementTableViewCell.swift; path = Controllers/List/ElementTableViewCell.swift; sourceTree = "<group>"; };
+		1E4433BA1EEA522400E25141 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E4433BD1EEA524500E25141 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E4433BE1EEA538C00E25141 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Images.swift; path = Ressources/Images.swift; sourceTree = "<group>"; };
+		1E4433BF1EEA538C00E25141 /* Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Localize.swift; path = Ressources/Localize.swift; sourceTree = "<group>"; };
+		1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Groceries.swift"; path = "Extensions/UIFont+Groceries.swift"; sourceTree = "<group>"; };
 		267ABA873849129144FA8EE1 /* Pods-Groceries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.release.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.release.xcconfig"; sourceTree = "<group>"; };
 		4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Groceries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26074693FA53D79460268E /* Pods-Groceries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +141,7 @@
 		1E0A82B31EE872EF00FFE941 /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				1E4433B61EEA501800E25141 /* Ressources */,
 				1E0A845F1EE9BAF100FFE941 /* Services */,
 				1E0A82F11EE878E800FFE941 /* Network */,
 				1E0A82EE1EE874F100FFE941 /* Views */,
@@ -181,6 +191,7 @@
 				1E0A82EA1EE8740400FFE941 /* UIView+groceries.swift */,
 				1E0A84661EE9EEA800FFE941 /* UILabel+groceries.swift */,
 				1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */,
+				1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -220,6 +231,16 @@
 				1E4433B41EEA47A500E25141 /* ElementTableViewCell.swift */,
 			);
 			name = List;
+			sourceTree = "<group>";
+		};
+		1E4433B61EEA501800E25141 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				1E4433BE1EEA538C00E25141 /* Images.swift */,
+				1E4433BF1EEA538C00E25141 /* Localize.swift */,
+				1E4433BB1EEA522400E25141 /* Localizable.strings */,
+			);
+			name = Ressources;
 			sourceTree = "<group>";
 		};
 		3AAD6B8DBF7874772F336B2F /* Frameworks */ = {
@@ -334,6 +355,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 1E0A82A81EE872EF00FFE941;
 			productRefGroup = 1E0A82B21EE872EF00FFE941 /* Products */;
@@ -353,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E0A82BF1EE872EF00FFE941 /* LaunchScreen.storyboard in Resources */,
+				1E4433B91EEA522400E25141 /* Localizable.strings in Resources */,
 				1E0A82BC1EE872EF00FFE941 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,13 +456,16 @@
 				1E0A82F31EE8791A00FFE941 /* NetworkRequest.swift in Sources */,
 				1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */,
 				1E4433AF1EEA2D5100E25141 /* LeftListCollectionViewCell.swift in Sources */,
+				1E4433C11EEA538C00E25141 /* Localize.swift in Sources */,
 				1E4433B31EEA2D7100E25141 /* RightListCollectionViewCell.swift in Sources */,
 				1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */,
 				1E0A84631EE9BCCE00FFE941 /* APIService.swift in Sources */,
 				1E0A82EB1EE8740400FFE941 /* CGFLoat+groceries.swift in Sources */,
 				1E0A82F51EE8792D00FFE941 /* NetworkResponse.swift in Sources */,
 				1E0A84671EE9EEA800FFE941 /* UILabel+groceries.swift in Sources */,
+				1E4433C01EEA538C00E25141 /* Images.swift in Sources */,
 				1E0A82F01EE8751400FFE941 /* GRButton.swift in Sources */,
+				1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */,
 				1E0A82E61EE873FB00FFE941 /* LoginViewController.swift in Sources */,
 				1E0A82B51EE872EF00FFE941 /* AppDelegate.swift in Sources */,
 				1E4433B51EEA47A500E25141 /* ElementTableViewCell.swift in Sources */,
@@ -486,6 +512,16 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		1E4433BB1EEA522400E25141 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E4433BA1EEA522400E25141 /* Base */,
+				1E4433BD1EEA524500E25141 /* fr */,
+			);
+			name = Localizable.strings;
+			path = Ressources;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -493,6 +529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -544,6 +581,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

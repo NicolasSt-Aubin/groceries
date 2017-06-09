@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
     
-    func borderize(width: CGFloat = 1, color: UIColor = .flatBlack) {
+    func borderize(width: CGFloat = 1, color: UIColor = .red) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.cgColor
     }
