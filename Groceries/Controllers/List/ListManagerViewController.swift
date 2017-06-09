@@ -29,6 +29,7 @@ class ListManagerViewController: BaseViewController {
         let button = GRButton()
         button.setTitle("Overview", for: .normal)
         button.setTitleColor(.flatBelizeHole, for: .normal)
+        button.addTarget(self, action: #selector(self.selectLeftPage), for: .touchUpInside)
         return button
     }()
     
@@ -36,6 +37,7 @@ class ListManagerViewController: BaseViewController {
         let button = GRButton()
         button.setTitle("Need to buy", for: .normal)
         button.setTitleColor(.flatBlack, for: .normal)
+        button.addTarget(self, action: #selector(self.selectRightPage), for: .touchUpInside)
         return button
     }()
     
@@ -113,7 +115,7 @@ class ListManagerViewController: BaseViewController {
         pageSelectionIndicatorView.layer.cornerRadius = pageSelectionIndicatorView.frame.height/2
         
         headerView.frame.size.width = view.bounds.width
-        headerView.frame.size.height = pageSelectionIndicatorView.frame.maxY + 1
+        headerView.frame.size.height = pageSelectionIndicatorView.frame.maxY + 2
         
         searchAddTextField.frame.size.width = view.bounds.width - 2 * CGFloat.pageMargin
         searchAddTextField.frame.size.height = CGFloat.formFieldHeight
@@ -124,6 +126,16 @@ class ListManagerViewController: BaseViewController {
         collectionView.frame.size.width = view.bounds.width
         collectionView.frame.size.height = view.bounds.height - searchAddTextField.frame.maxY - CGFloat.pageMargin
         collectionView.frame.origin.y = searchAddTextField.frame.maxY + CGFloat.pageMargin
+    }
+    
+    // MARK: - Selector Methods
+    
+    func selectLeftPage() {
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true)
+    }
+    
+    func selectRightPage() {
+        collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true)
     }
     
     // MARK: - Private Methods
@@ -152,6 +164,16 @@ class ListManagerViewController: BaseViewController {
         let widthDifference = rightWidth - leftWidth
         
         pageSelectionIndicatorView.frame.size.width = leftWidth + widthDifference * progress
+        
+        // Update left color
+    
+        let leftColor = UIColor(fromColor: .flatBelizeHole, toColor: .flatBlack, progress: progress)
+        leftPageButton.setTitleColor(leftColor, for: .normal)
+        
+        // Update right color
+        
+        let rightColor = UIColor(fromColor: .flatBlack, toColor: .flatBelizeHole, progress: progress)
+        rightPageButton.setTitleColor(rightColor, for: .normal)
     }
 
 }

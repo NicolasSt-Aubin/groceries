@@ -8,6 +8,7 @@ target 'Groceries' do
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'KeychainSwift'
+    pod 'SwiftGen’
 
     post_install do |installer|
         installer.pods_project.targets.each do |target|

@@ -35,6 +35,17 @@ extension UIColor {
         self.init()
     }
     
+    convenience init(fromColor: UIColor, toColor: UIColor, progress: CGFloat) {
+        let fromRGBA = fromColor.rgba()
+        let toRGBA = toColor.rgba()
+        
+        let red = (toRGBA.0 - fromRGBA.0) * progress + fromRGBA.0
+        let green = (toRGBA.1 - fromRGBA.1) * progress + fromRGBA.1
+        let blue = (toRGBA.2 - fromRGBA.2) * progress + fromRGBA.2
+        
+        self.init(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
     // MARK: - Public methods
     
     func toHexString() -> String {
@@ -50,7 +61,16 @@ extension UIColor {
         return String(format:"#%06x", rgb)
     }
     
-    // MARK: - Paradym colors
+    func rgba() -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+        var fRed : CGFloat = 0
+        var fGreen : CGFloat = 0
+        var fBlue : CGFloat = 0
+        var fAlpha: CGFloat = 0
+        self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
+        return (fRed, fGreen, fBlue, fAlpha)
+    }
+    
+    // MARK: - Groceries colors
     
     class var flatCloud: UIColor {
         return UIColor(colorString: "#ecf0f1")
