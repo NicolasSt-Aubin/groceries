@@ -15,17 +15,29 @@ class NeedToBuyTableViewCell: UITableViewCell {
     static let reuseIdentifier = "NeedToBuyTableViewCellReuseIdentifier"
     static let height: CGFloat = 70
     
+    // MARK: - Properties
+    
+    var checked: Bool = false 
+    
     // MARK: - UI Elements
     
-    fileprivate lazy var imageContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .flatPeterRiver
-        return view
+    lazy var checkButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .flatPeterRiver
+        return button
     }()
     
     fileprivate lazy var categoryImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Asset.dairy.image
+        imageView.contentMode = .scaleAspectFit
+        imageView.alpha = 0.85
+        return imageView
+    }()
+    
+    fileprivate lazy var checkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Asset.checkIcon.image
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.85
         return imageView
@@ -49,15 +61,6 @@ class NeedToBuyTableViewCell: UITableViewCell {
         return label
     }()
     
-    fileprivate lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font  = UIFont.systemFont(ofSize: 14)
-        label.textColor = .flatSilver
-        label.text = " "
-        label.sizeToFit()
-        return label
-    }()
-    
     lazy var separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = .flatCloud
@@ -74,12 +77,12 @@ class NeedToBuyTableViewCell: UITableViewCell {
         
         contentView.backgroundColor = .white
         
-        contentView.addSubview(imageContainerView)
-        imageContainerView.addSubview(categoryImageView)
+        contentView.addSubview(checkButton)
+        checkButton.addSubview(categoryImageView)
+        checkButton.addSubview(checkImageView)
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
-        contentView.addSubview(dateLabel)
         contentView.addSubview(separatorView)
     }
     
@@ -96,28 +99,31 @@ class NeedToBuyTableViewCell: UITableViewCell {
         contentView.frame.size.height = bounds.height
         contentView.center.x = bounds.width/2
         
-        let cellPadding: CGFloat = 20
+        let cellPadding: CGFloat = 30
         let cellMargin: CGFloat = 25
         
-        imageContainerView.frame.size = CGSize(width: 40, height: 40)
-        imageContainerView.layer.cornerRadius = imageContainerView.frame.height/2
-        imageContainerView.frame.origin.x = cellPadding
-        imageContainerView.center.y = contentView.bounds.height/2
+        checkButton.frame.size = CGSize(width: 40, height: 40)
+        checkButton.layer.cornerRadius = checkButton.frame.height/2
+        checkButton.frame.origin.x = contentView.bounds.width - checkButton.frame.width - cellPadding
+        checkButton.center.y = contentView.bounds.height/2
         
-        categoryImageView.frame.size = CGSize(width: 30, height: 30)
-        categoryImageView.center.x = imageContainerView.bounds.width/2
+        categoryImageView.frame.size.width = checked ? 0 : 30
+        categoryImageView.frame.size.height = checked ? 0 : 30
+        categoryImageView.center.x = checkButton.bounds.width/2
         categoryImageView.frame.origin.y = 10
         
-        dateLabel.frame.origin.x = contentView.bounds.width - dateLabel.frame.width - cellPadding
-        dateLabel.center.y = imageContainerView.center.y
+        checkImageView.frame.size.width = checked ? 15 : 0
+        checkImageView.frame.size.height = checked ? 15 : 0
+        checkImageView.center.x = checkButton.bounds.width/2
+        checkImageView.center.y = checkButton.bounds.height/2
         
-        titleLabel.frame.size.width = dateLabel.frame.minX - imageContainerView.frame.maxX - 2 * cellMargin
-        titleLabel.frame.origin.x = imageContainerView.frame.maxX + cellMargin
-        titleLabel.center.y = imageContainerView.center.y - dateLabel.frame.height/2
+        titleLabel.frame.size.width = contentView.bounds.width - checkButton.frame.width - 2 * cellPadding - cellMargin
+        titleLabel.frame.origin.x = cellPadding
+        titleLabel.center.y = checkButton.center.y - titleLabel.frame.height/3
         
-        priceLabel.frame.size.width = contentView.bounds.width - imageContainerView.frame.maxX - 2 * cellMargin
+        priceLabel.frame.size.width = titleLabel.frame.width
         priceLabel.frame.origin.x = titleLabel.frame.origin.x
-        priceLabel.frame.origin.y = titleLabel.frame.maxY + 5
+        priceLabel.frame.origin.y = titleLabel.frame.maxY + 3
         
         separatorView.frame.size.width = contentView.bounds.width
         separatorView.frame.size.height = 1
@@ -128,6 +134,58 @@ class NeedToBuyTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         separatorView.isHidden = false
+    }
+    
+    // MARK: - Public Methods
+    
+    func animateSelection() {
+
+        backgroundColor = .red
+        
+        UIView.animate(withDuration: 0.3, animations: {
+        
+            self.categoryImageView.frame.size.width = 0
+            self.categoryImageView.frame.size.height = 0
+            
+        }, completion: { completed in
+            
+            UIView.animate(withDuration: 0.3, animations: { 
+                
+                self.checkImageView.frame.size.width = 15
+                self.checkImageView.frame.size.height = 15
+                
+            }, completion: { completed in
+            
+            })
+
+        })
+        
+    }
+    
+    func animateUnselection() {
+        print("shoudl animate unselection")
+        if !checked {
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.checkImageView.frame.size.width = 0
+                self.checkImageView.frame.size.height = 0
+                
+            }, completion: { completed in
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.categoryImageView.frame.size.width = 15
+                    self.categoryImageView.frame.size.height = 15
+                    
+                }, completion: { completed in
+                    
+                })
+                
+            })
+            
+        }
+        
     }
 
 }

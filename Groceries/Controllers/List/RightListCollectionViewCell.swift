@@ -70,6 +70,12 @@ class RightListCollectionViewCell: UICollectionViewCell {
         tableView.layer.cornerRadius = CGFloat.formFieldRadius
     }
     
+    // MARK: - Selector Methods
+    
+    func didTapCheckButton(_ sender : UIButton?) {
+        print(sender?.tag)
+    }
+    
 }
 
 extension RightListCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
@@ -85,7 +91,14 @@ extension RightListCollectionViewCell: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NeedToBuyTableViewCell.reuseIdentifier, for: indexPath) as! NeedToBuyTableViewCell
         cell.separatorView.isHidden = indexPath.row == numberOrRows-1
+        cell.checkButton.tag = indexPath.row
+        cell.checkButton.addTarget(self, action: #selector(self.didTapCheckButton(_:)), for: .touchUpInside)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NeedToBuyTableViewCell.reuseIdentifier, for: indexPath) as! NeedToBuyTableViewCell
+        cell.animateSelection()
     }
     
 }
