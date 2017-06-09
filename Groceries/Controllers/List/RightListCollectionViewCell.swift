@@ -73,7 +73,10 @@ class RightListCollectionViewCell: UICollectionViewCell {
     // MARK: - Selector Methods
     
     func didTapCheckButton(_ sender : UIButton?) {
-        print(sender?.tag)
+        if let checkButton = sender as? CheckButton {
+            checkButton.isChecked = !checkButton.isChecked
+        }
+//        print(sender?.tag)
     }
     
 }
@@ -95,10 +98,5 @@ extension RightListCollectionViewCell: UITableViewDelegate, UITableViewDataSourc
         cell.checkButton.addTarget(self, action: #selector(self.didTapCheckButton(_:)), for: .touchUpInside)
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NeedToBuyTableViewCell.reuseIdentifier, for: indexPath) as! NeedToBuyTableViewCell
-        cell.animateSelection()
-    }
-    
+
 }

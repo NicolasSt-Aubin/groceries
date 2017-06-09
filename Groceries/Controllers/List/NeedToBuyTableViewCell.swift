@@ -21,26 +21,10 @@ class NeedToBuyTableViewCell: UITableViewCell {
     
     // MARK: - UI Elements
     
-    lazy var checkButton: UIButton = {
-        let button = UIButton()
+    lazy var checkButton: CheckButton = {
+        let button = CheckButton(mainImage: Asset.dairy.image)
         button.backgroundColor = .flatPeterRiver
         return button
-    }()
-    
-    fileprivate lazy var categoryImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Asset.dairy.image
-        imageView.contentMode = .scaleAspectFit
-        imageView.alpha = 0.85
-        return imageView
-    }()
-    
-    fileprivate lazy var checkImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Asset.checkIcon.image
-        imageView.contentMode = .scaleAspectFit
-        imageView.alpha = 0.85
-        return imageView
     }()
     
     fileprivate lazy var titleLabel: UILabel = {
@@ -78,8 +62,6 @@ class NeedToBuyTableViewCell: UITableViewCell {
         contentView.backgroundColor = .white
         
         contentView.addSubview(checkButton)
-        checkButton.addSubview(categoryImageView)
-        checkButton.addSubview(checkImageView)
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
@@ -107,16 +89,6 @@ class NeedToBuyTableViewCell: UITableViewCell {
         checkButton.frame.origin.x = contentView.bounds.width - checkButton.frame.width - cellPadding
         checkButton.center.y = contentView.bounds.height/2
         
-        categoryImageView.frame.size.width = checked ? 0 : 30
-        categoryImageView.frame.size.height = checked ? 0 : 30
-        categoryImageView.center.x = checkButton.bounds.width/2
-        categoryImageView.frame.origin.y = 10
-        
-        checkImageView.frame.size.width = checked ? 15 : 0
-        checkImageView.frame.size.height = checked ? 15 : 0
-        checkImageView.center.x = checkButton.bounds.width/2
-        checkImageView.center.y = checkButton.bounds.height/2
-        
         titleLabel.frame.size.width = contentView.bounds.width - checkButton.frame.width - 2 * cellPadding - cellMargin
         titleLabel.frame.origin.x = cellPadding
         titleLabel.center.y = checkButton.center.y - titleLabel.frame.height/3
@@ -134,58 +106,6 @@ class NeedToBuyTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         separatorView.isHidden = false
-    }
-    
-    // MARK: - Public Methods
-    
-    func animateSelection() {
-
-        backgroundColor = .red
-        
-        UIView.animate(withDuration: 0.3, animations: {
-        
-            self.categoryImageView.frame.size.width = 0
-            self.categoryImageView.frame.size.height = 0
-            
-        }, completion: { completed in
-            
-            UIView.animate(withDuration: 0.3, animations: { 
-                
-                self.checkImageView.frame.size.width = 15
-                self.checkImageView.frame.size.height = 15
-                
-            }, completion: { completed in
-            
-            })
-
-        })
-        
-    }
-    
-    func animateUnselection() {
-        print("shoudl animate unselection")
-        if !checked {
-            
-            UIView.animate(withDuration: 0.3, animations: {
-                
-                self.checkImageView.frame.size.width = 0
-                self.checkImageView.frame.size.height = 0
-                
-            }, completion: { completed in
-                
-                UIView.animate(withDuration: 0.3, animations: {
-                    
-                    self.categoryImageView.frame.size.width = 15
-                    self.categoryImageView.frame.size.height = 15
-                    
-                }, completion: { completed in
-                    
-                })
-                
-            })
-            
-        }
-        
     }
 
 }
