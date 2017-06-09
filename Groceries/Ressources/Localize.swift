@@ -16,6 +16,8 @@ enum L10n {
   static let add = L10n.tr("ADD")
   /// Category
   static let category = L10n.tr("CATEGORY")
+  /// Complete
+  static let complete = L10n.tr("COMPLETE")
   /// Email
   static let email = L10n.tr("EMAIL")
   /// Network error

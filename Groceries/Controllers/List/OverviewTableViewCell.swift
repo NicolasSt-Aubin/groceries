@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ElementTableViewCell: UITableViewCell {
+class OverviewTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let reuseIdentifier = "ElementTableViewCellReuseIdentifier"
+    static let reuseIdentifier = "OverviewTableViewCellReuseIdentifier"
     static let height: CGFloat = 90
     
     // MARK: - UI Elements

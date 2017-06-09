@@ -27,11 +27,12 @@
 		1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433AC1EEA2D1700E25141 /* ListManagerViewController.swift */; };
 		1E4433AF1EEA2D5100E25141 /* LeftListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433AE1EEA2D5100E25141 /* LeftListCollectionViewCell.swift */; };
 		1E4433B31EEA2D7100E25141 /* RightListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433B21EEA2D7100E25141 /* RightListCollectionViewCell.swift */; };
-		1E4433B51EEA47A500E25141 /* ElementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433B41EEA47A500E25141 /* ElementTableViewCell.swift */; };
+		1E4433B51EEA47A500E25141 /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433B41EEA47A500E25141 /* OverviewTableViewCell.swift */; };
 		1E4433B91EEA522400E25141 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E4433BB1EEA522400E25141 /* Localizable.strings */; };
 		1E4433C01EEA538C00E25141 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433BE1EEA538C00E25141 /* Images.swift */; };
 		1E4433C11EEA538C00E25141 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433BF1EEA538C00E25141 /* Localize.swift */; };
 		1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */; };
+		1E4433C51EEA892200E25141 /* NeedToBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C41EEA892200E25141 /* NeedToBuyTableViewCell.swift */; };
 		D74AF178236AFB0B61A7A1CF /* Pods_Groceries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,12 +80,13 @@
 		1E4433AC1EEA2D1700E25141 /* ListManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListManagerViewController.swift; path = Controllers/List/ListManagerViewController.swift; sourceTree = "<group>"; };
 		1E4433AE1EEA2D5100E25141 /* LeftListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftListCollectionViewCell.swift; path = Controllers/List/LeftListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E4433B21EEA2D7100E25141 /* RightListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightListCollectionViewCell.swift; path = Controllers/List/RightListCollectionViewCell.swift; sourceTree = "<group>"; };
-		1E4433B41EEA47A500E25141 /* ElementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ElementTableViewCell.swift; path = Controllers/List/ElementTableViewCell.swift; sourceTree = "<group>"; };
+		1E4433B41EEA47A500E25141 /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverviewTableViewCell.swift; path = Controllers/List/OverviewTableViewCell.swift; sourceTree = "<group>"; };
 		1E4433BA1EEA522400E25141 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1E4433BD1EEA524500E25141 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1E4433BE1EEA538C00E25141 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Images.swift; path = Ressources/Images.swift; sourceTree = "<group>"; };
 		1E4433BF1EEA538C00E25141 /* Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Localize.swift; path = Ressources/Localize.swift; sourceTree = "<group>"; };
 		1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Groceries.swift"; path = "Extensions/UIFont+Groceries.swift"; sourceTree = "<group>"; };
+		1E4433C41EEA892200E25141 /* NeedToBuyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeedToBuyTableViewCell.swift; sourceTree = "<group>"; };
 		267ABA873849129144FA8EE1 /* Pods-Groceries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.release.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.release.xcconfig"; sourceTree = "<group>"; };
 		4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Groceries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26074693FA53D79460268E /* Pods-Groceries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,7 +230,8 @@
 				1E4433AC1EEA2D1700E25141 /* ListManagerViewController.swift */,
 				1E4433AE1EEA2D5100E25141 /* LeftListCollectionViewCell.swift */,
 				1E4433B21EEA2D7100E25141 /* RightListCollectionViewCell.swift */,
-				1E4433B41EEA47A500E25141 /* ElementTableViewCell.swift */,
+				1E4433B41EEA47A500E25141 /* OverviewTableViewCell.swift */,
+				1E4433C41EEA892200E25141 /* NeedToBuyTableViewCell.swift */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				1E0A84611EE9BB4B00FFE941 /* CurrentUserService.swift in Sources */,
 				1E0A846B1EEA04DB00FFE941 /* UITextField+groceries.swift in Sources */,
 				1E0A82ED1EE8740400FFE941 /* UIView+groceries.swift in Sources */,
+				1E4433C51EEA892200E25141 /* NeedToBuyTableViewCell.swift in Sources */,
 				1E0A82EC1EE8740400FFE941 /* UIColor+groceries.swift in Sources */,
 				1E0A82F31EE8791A00FFE941 /* NetworkRequest.swift in Sources */,
 				1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */,
@@ -468,7 +472,7 @@
 				1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */,
 				1E0A82E61EE873FB00FFE941 /* LoginViewController.swift in Sources */,
 				1E0A82B51EE872EF00FFE941 /* AppDelegate.swift in Sources */,
-				1E4433B51EEA47A500E25141 /* ElementTableViewCell.swift in Sources */,
+				1E4433B51EEA47A500E25141 /* OverviewTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

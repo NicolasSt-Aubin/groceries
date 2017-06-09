@@ -134,7 +134,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(ElementTableViewCell.classForCoder(), forCellReuseIdentifier: ElementTableViewCell.reuseIdentifier)
+        tableView.register(OverviewTableViewCell.classForCoder(), forCellReuseIdentifier: OverviewTableViewCell.reuseIdentifier)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.clipsToBounds = false
@@ -194,7 +194,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         searchIconImageView.center.y = leftSearchView.frame.height/2
         
         addIconImageView.alpha = userIsCreating ? 1 : 0
-        addIconImageView.frame.size = searchIconImageView.frame.size
+        addIconImageView.frame.size = CGSize(width: 15, height: 15)
         addIconImageView.center = searchIconImageView.center
         
         activityIndicatorView.center = searchIconImageView.center
@@ -286,11 +286,11 @@ extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ElementTableViewCell.height
+        return OverviewTableViewCell.height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: ElementTableViewCell.reuseIdentifier, for: indexPath)
+        return tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.reuseIdentifier, for: indexPath)
     }
     
 }
