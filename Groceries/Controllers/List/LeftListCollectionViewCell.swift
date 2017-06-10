@@ -26,7 +26,15 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     var delegate: LeftListCollectionViewCellDelegate? = nil
-    var dataSource: LeftListCollectionViewCellDataSource? = nil
+    var dataSource: LeftListCollectionViewCellDataSource? = nil {
+        didSet {
+            updateElements()
+        }
+    }
+    
+    var elements: [Element] = []
+    
+    var userIsCreating: Bool = false
     
     fileprivate var keyboardHeight: CGFloat = 0 {
         didSet {
@@ -37,23 +45,38 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    fileprivate var userIsCreating: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.5) {
-                self.setNeedsLayout()
-                self.layoutIfNeeded()
-            }
-        }
-    }
-    
     // MARK: - UI Elements
+    
+    fileprivate lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(OverviewTableViewCell.classForCoder(), forCellReuseIdentifier: OverviewTableViewCell.reuseIdentifier)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapOutsideKeyboard))
+        tableView.addGestureRecognizer(tapGestureRecognizer)
+        
+        return tableView
+    }()
     
     fileprivate lazy var searchAddTextField: GRTextField = {
         let textField = GRTextField(icon: Asset.searchIcon.image)
         textField.delegate = self
-        textField.returnKeyType = .done
+        textField.returnKeyType = .search
         textField.placeholder = L10n.searchPlaceholder
+        textField.addTarget(self, action: #selector(self.searchFieldTextDidChange), for: .allEditingEvents)
+        textField.clearButtonMode = .always
         return textField
+    }()
+    
+    fileprivate lazy var elementCreationView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        view.alpha = 0
+        return view
     }()
     
     fileprivate lazy var categoryTextField: GRTextField = {
@@ -69,24 +92,22 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         textField.delegate = self
         textField.returnKeyType = .done
         textField.placeholder = L10n.optionalIndicator
+        textField.isClearable = false
         return textField
     }()
     
-    fileprivate lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(OverviewTableViewCell.classForCoder(), forCellReuseIdentifier: OverviewTableViewCell.reuseIdentifier)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-        tableView.showsVerticalScrollIndicator = false
-        return tableView
+    fileprivate lazy var cancelButton: GRButton = {
+        let button = GRButton()
+        button.setTitle(L10n.cancel, for: .normal)
+        button.backgroundColor = .flatSilver
+        button.addTarget(self, action: #selector(self.cancelCreation), for: .touchUpInside)
+        return button
     }()
     
     fileprivate lazy var addButton: GRButton = {
         let button = GRButton()
         button.setTitle(L10n.add, for: .normal)
-//        button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
+        //        button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
         return button
     }()
     
@@ -97,9 +118,11 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         
         addSubview(tableView)
         addSubview(searchAddTextField)
-        addSubview(categoryTextField)
-        addSubview(priceTextField)
-        addSubview(addButton)
+        addSubview(elementCreationView)
+        elementCreationView.addSubview(categoryTextField)
+        elementCreationView.addSubview(priceTextField)
+        elementCreationView.addSubview(addButton)
+        elementCreationView.addSubview(cancelButton)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -119,32 +142,35 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         searchAddTextField.center.x = bounds.width/2
         searchAddTextField.frame.origin.y = CGFloat.pageMargin
         
+        tableView.frame.size.width = bounds.width
+        tableView.frame.size.height = bounds.height - searchAddTextField.frame.maxY - CGFloat.pageMargin - keyboardHeight
+        tableView.frame.origin.y = searchAddTextField.frame.maxY + CGFloat.pageMargin
+        
+        elementCreationView.frame.size.width = bounds.width
+        elementCreationView.frame.size.height = bounds.height - searchAddTextField.frame.maxY - keyboardHeight
+        elementCreationView.frame.origin.y = searchAddTextField.frame.maxY
+        
         let dualFormAvailableWidth: CGFloat = bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin
         
-        categoryTextField.alpha = userIsCreating ? 1 : 0
-        categoryTextField.isUserInteractionEnabled = userIsCreating
         categoryTextField.frame.size.height = CGFloat.formFieldHeight
         categoryTextField.frame.size.width = dualFormAvailableWidth * 2 / 3
         categoryTextField.frame.origin.x = CGFloat.pageMargin
-        categoryTextField.frame.origin.y = searchAddTextField.frame.maxY + CGFloat.formMargin
+        categoryTextField.frame.origin.y = CGFloat.formMargin
         
-        priceTextField.alpha = userIsCreating ? 1 : 0
-        priceTextField.isUserInteractionEnabled = userIsCreating
         priceTextField.frame.size.height = CGFloat.formFieldHeight
         priceTextField.frame.size.width = dualFormAvailableWidth * 1 / 3
         priceTextField.frame.origin.x = categoryTextField.frame.maxX + CGFloat.formMargin
         priceTextField.frame.origin.y = categoryTextField.frame.origin.y
         
-        addButton.alpha = userIsCreating ? 1 : 0
-        addButton.isUserInteractionEnabled = userIsCreating
-        addButton.frame.size = searchAddTextField.frame.size
-        addButton.center.x = bounds.width/2
-        addButton.frame.origin.y = bounds.height - addButton.frame.height - CGFloat.pageMargin - keyboardHeight
+        cancelButton.frame.size.width = dualFormAvailableWidth/2
+        cancelButton.frame.size.height = CGFloat.formFieldHeight
+        cancelButton.frame.origin.x = CGFloat.pageMargin
+        cancelButton.frame.origin.y = elementCreationView.bounds.height - cancelButton.frame.height - CGFloat.pageMargin
         
-        tableView.alpha = userIsCreating ? 0 : 1
-        tableView.frame.size.width = bounds.width
-        tableView.frame.size.height = bounds.height - searchAddTextField.frame.maxY - CGFloat.pageMargin - keyboardHeight
-        tableView.frame.origin.y = searchAddTextField.frame.maxY + CGFloat.pageMargin
+        addButton.frame.size = cancelButton.frame.size
+        addButton.frame.origin.x = cancelButton.frame.maxX + CGFloat.formMargin
+        addButton.frame.origin.y = cancelButton.frame.origin.y
+        
     }
     
     // MARK: - Selector Methods
@@ -160,24 +186,124 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     func keyboardWillHide(_ notification: NSNotification) {
         keyboardHeight = 0
     }
+    
+    func searchFieldTextDidChange() {
+        guard let text = searchAddTextField.text else {
+            return
+        }
+        
+        let query = text.lowercased().trimmingCharacters(in: .whitespaces)
+        updateElements(query: query)
+    }
+    
+    func cancelCreation() {
+        searchAddTextField.clearText()
+        searchAddTextField.resignFirstResponder()
+        categoryTextField.resignFirstResponder()
+        priceTextField.resignFirstResponder()
+        delegate?.userDidStopSearching()
+    }
+    
+    func didTapOutsideKeyboard() {
+        searchAddTextField.resignFirstResponder()
+        delegate?.userDidStopSearching()
+    }
+    
+    // MARK: - Private Methods
 
+    fileprivate func updateElements(query: String = "") {
+        guard let dataSource = dataSource else {
+            elements = []
+            tableView.reloadData()
+            updateInputLayout()
+            return
+        }
+        guard query != "" else {
+            elements = dataSource.unactiveElements()
+            tableView.reloadData()
+            updateInputLayout()
+            return
+        }
+        
+        elements = dataSource.unactiveElements().filter({ element in return element.matchesQuery(query: query) })
+        tableView.reloadData()
+        updateInputLayout()
+    }
+    
+    fileprivate func updateInputLayout() {
+        
+        if userIsCreating && elements.count > 0 {
+            userIsCreating = false
+        } else if !userIsCreating && elements.count == 0 {
+            userIsCreating = true
+        } else {
+            return
+        }
+        print("Update required")
+        
+        if userIsCreating {
+            
+            searchAddTextField.iconImage = Asset.addIcon.image
+            searchAddTextField.returnKeyType = .next
+            searchAddTextField.reloadInputViews()
+            elementCreationView.isHidden = false
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.elementCreationView.alpha = 1
+                self.tableView.alpha = 0
+                
+            }, completion: { completed in
+                
+                self.tableView.isHidden = true
+                
+            })
+            
+        } else {
+            
+            searchAddTextField.iconImage = Asset.searchIcon.image
+            searchAddTextField.returnKeyType = .search
+            searchAddTextField.reloadInputViews()
+            tableView.isHidden = false
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.elementCreationView.alpha = 0
+                self.tableView.alpha = 1
+                
+            }, completion: { completed in
+                
+                self.elementCreationView.isHidden = true
+                self.categoryTextField.text = ""
+                self.priceTextField.text = ""
+                
+            })
+            
+        }
+        
+    }
+    
 }
 
 extension LeftListCollectionViewCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        userIsCreating = true
         delegate?.userDidStartSearching()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        userIsCreating = false
-        delegate?.userDidStopSearching()
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        
+        if textField == searchAddTextField && !userIsCreating {
+            textField.resignFirstResponder()
+            delegate?.userDidStopSearching()
+        } else if textField == searchAddTextField && userIsCreating {
+            print("search + create")
+            categoryTextField.becomeFirstResponder()
+        } else if textField == categoryTextField {
+            priceTextField.becomeFirstResponder()
+        }
+        
+        return false
     }
     
 }
@@ -185,11 +311,7 @@ extension LeftListCollectionViewCell: UITextFieldDelegate {
 extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let dataSource = dataSource else {
-            return 0
-        }
-        
-        return dataSource.unactiveElements().count
+        return elements.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -197,12 +319,8 @@ extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let dataSource = dataSource else {
-            return tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.reuseIdentifier, for: indexPath)
-        }
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.reuseIdentifier, for: indexPath) as! OverviewTableViewCell
-        cell.element = dataSource.unactiveElements()[indexPath.row]
+        cell.element = elements[indexPath.row]
         return cell
     }
     

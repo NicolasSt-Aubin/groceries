@@ -32,9 +32,10 @@ class GRTextField: UITextField {
         }
     }
     
+    var isClearable: Bool = true
+    
     // MARK: - UI Elements
     
-
     fileprivate lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .flatSilver
@@ -50,6 +51,14 @@ class GRTextField: UITextField {
         activityIndicatorView.sizeToFit()
         return activityIndicatorView
     }()
+    
+    fileprivate lazy var clearImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.tintColor = .flatMidnightBlue
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = Asset.clearIcon.image.withRenderingMode(.alwaysTemplate)
+        return imageView
+    }()
 
     // MARK: - Init
     
@@ -63,6 +72,14 @@ class GRTextField: UITextField {
         leftView = UIView()
         leftView!.addSubview(iconImageView)
         leftView!.addSubview(activityIndicatorView)
+        
+        rightViewMode = .always
+        rightView = UIView()
+        rightView!.clipsToBounds = true
+        rightView!.alpha = 0
+        rightView!.addSubview(clearImageView)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.clearText))
+        rightView!.addGestureRecognizer(tapGestureRecognizer)
         
         backgroundColor = .white
         borderize(width: 1, color: .flatSilver)
@@ -92,13 +109,28 @@ class GRTextField: UITextField {
         iconImageView.center.y = leftView!.frame.height/2
         
         activityIndicatorView.center = iconImageView.center
+        
+        rightView!.frame.size = isClearable ? leftView!.frame.size : .zero
+        
+        clearImageView.frame.size = CGSize(width: 20, height: 20)
+        clearImageView.center.x = rightView!.frame.width/2
+        clearImageView.center.y = rightView!.frame.height/2
     }
 
     // MARK: - Selector Methods
     
     func textDidChange() {
-        iconImageView.tintColor = text != nil && text != "" ? .flatMidnightBlue : .flatSilver
-        activityIndicatorView.color = text != nil && text != "" ? .flatMidnightBlue : .flatSilver
+        UIView.animate(withDuration: 0.2) {
+            self.iconImageView.tintColor = self.text != nil && self.text != "" ? .flatMidnightBlue : .flatSilver
+            self.activityIndicatorView.color = self.text != nil && self.text != "" ? .flatMidnightBlue : .flatSilver
+            self.rightView!.alpha = self.text != nil && self.text != "" ?  1 : 0
+        }
+    }
+    
+    func clearText() {
+        text = ""
+        textDidChange()
+        sendActions(for: .allEditingEvents)
     }
     
 }

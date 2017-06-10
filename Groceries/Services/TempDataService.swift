@@ -34,7 +34,9 @@ class TempDataService {
             Element(id: "9", name: "salad", active: false, category: cats[3]),
             Element(id: "10", name: "yogourt", active: true, category: cats[1], price: 6.00),
             Element(id: "11", name: "eggs", active: true, category: cats[0], price: 4.00),
-            Element(id: "12", name: "salsa", active: true, category: cats[3], price: 2.50, inCart: true)
+            Element(id: "12", name: "salsa", active: true, category: cats[3], price: 2.50, inCart: true),
+            Element(id: "13", name: "linguini pasta coucou", active: false, category: cats[3]),
+            Element(id: "14", name: "pasta linguini coucou", active: false, category: cats[2])
         ]
     }
     

@@ -9,6 +9,7 @@
 // GENERAL
 
 "OPTIONAL_INDICATOR" = "(opt)";
+"CANCEL" = "Cancel";
 
 // ERRORS
 

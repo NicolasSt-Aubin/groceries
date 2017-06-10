@@ -14,6 +14,8 @@ import Foundation
 enum L10n {
   /// Add
   static let add = L10n.tr("ADD")
+  /// Cancel
+  static let cancel = L10n.tr("CANCEL")
   /// Category
   static let category = L10n.tr("CATEGORY")
   /// Complete

@@ -44,6 +44,7 @@ enum Asset {
   static let addIcon: AssetType = "add-icon"
   static let categoryIcon: AssetType = "category-icon"
   static let checkIcon: AssetType = "check-icon"
+  static let clearIcon: AssetType = "clear-icon"
   static let dairy: AssetType = "dairy"
   static let emailIcon: AssetType = "email-icon"
   static let passwordIcon: AssetType = "password-icon"
