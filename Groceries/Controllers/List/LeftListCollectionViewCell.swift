@@ -286,8 +286,8 @@ class LeftListCollectionViewCell: UICollectionViewCell {
             }, completion: { completed in
                 
                 self.elementCreationView.isHidden = true
-                self.categoryTextField.text = ""
-                self.priceTextField.text = ""
+                self.categoryTextField.clearText()
+                self.priceTextField.clearText()
                 
             })
             
