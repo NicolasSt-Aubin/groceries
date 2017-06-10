@@ -14,20 +14,22 @@ class CheckButton: UIButton {
     
     var mainImage: UIImage? = nil {
         didSet {
-            guard let image = mainImage else {
-                return
-            }
-            
-            mainImageView.image = image.withRenderingMode(.alwaysTemplate)
+            mainImageView.image = mainImage
         }
     }
     
-    var isChecked: Bool = false {
+    var isChecked: Bool = false
+    var element: Element! {
         didSet {
-            setNeedsLayout()
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
+            mainImage = element.category.image
+            backgroundColor = element.category.color
+            isChecked = element.inCart
+            
+            mainImageView.frame.size.width = isChecked ? 0 : 30
+            mainImageView.frame.size.height = isChecked ? 0 : 30
+            
+            checkImageView.frame.size.width = isChecked ? 15 : 0
+            checkImageView.frame.size.height = isChecked ? 15 : 0
         }
     }
 
@@ -43,7 +45,7 @@ class CheckButton: UIButton {
     
     fileprivate lazy var checkImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Asset.checkIcon.image.withRenderingMode(.alwaysTemplate)
+        imageView.image = Asset.checkIcon.image
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.85
         imageView.tintColor = .white
@@ -56,7 +58,7 @@ class CheckButton: UIButton {
         super.init(frame: .zero)
         
         self.mainImage = mainImage
-        mainImageView.image = mainImage?.withRenderingMode(.alwaysTemplate)
+        mainImageView.image = mainImage
         
         setupView()
     }
@@ -86,12 +88,23 @@ class CheckButton: UIButton {
         mainImageView.frame.size.width = isChecked ? 0 : 30
         mainImageView.frame.size.height = isChecked ? 0 : 30
         mainImageView.center.x = bounds.width/2
-        mainImageView.frame.origin.y = bounds.height - mainImageView.frame.height
+        mainImageView.frame.origin.y = bounds.height - mainImageView.frame.height + 3
         
         checkImageView.frame.size.width = isChecked ? 15 : 0
         checkImageView.frame.size.height = isChecked ? 15 : 0
         checkImageView.center.x = bounds.width/2
         checkImageView.center.y = bounds.height/2
+    }
+    
+    // MARK: - Public methods
+    
+    func animateCheck(completion: @escaping () -> Void) {
+        setNeedsLayout()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.layoutIfNeeded()
+        }, completion: { complete in
+            completion()
+        })
     }
 
 }

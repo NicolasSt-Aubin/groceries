@@ -28,11 +28,7 @@ class GRTextField: UITextField {
     
     var iconImage: UIImage? = nil {
         didSet {
-            guard let image = iconImage else {
-                return
-            }
-            
-            iconImageView.image = image.withRenderingMode(.alwaysTemplate)
+            iconImageView.image = iconImage?.withRenderingMode(.alwaysTemplate)
         }
     }
     

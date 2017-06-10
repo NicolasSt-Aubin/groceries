@@ -22,10 +22,14 @@ enum L10n {
   static let email = L10n.tr("EMAIL")
   /// Network error
   static let generalNetworkError = L10n.tr("GENERAL_NETWORK_ERROR")
+  /// In your cart
+  static let inYourCart = L10n.tr("IN_YOUR_CART")
   /// Login
   static let login = L10n.tr("LOGIN")
   /// Need to buy
   static let needToBuy = L10n.tr("NEED_TO_BUY")
+  /// On the shelf
+  static let onTheShelf = L10n.tr("ON_THE_SHELF")
   /// (opt)
   static let optionalIndicator = L10n.tr("OPTIONAL_INDICATOR")
   /// Overview

@@ -13,6 +13,10 @@ protocol LeftListCollectionViewCellDelegate {
     func userDidStopSearching()
 }
 
+protocol LeftListCollectionViewCellDataSource {
+    func unactiveElements() -> [Element]
+}
+
 class LeftListCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Class Properties
@@ -22,6 +26,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     var delegate: LeftListCollectionViewCellDelegate? = nil
+    var dataSource: LeftListCollectionViewCellDataSource? = nil
     
     fileprivate var keyboardHeight: CGFloat = 0 {
         didSet {
@@ -74,7 +79,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         tableView.register(OverviewTableViewCell.classForCoder(), forCellReuseIdentifier: OverviewTableViewCell.reuseIdentifier)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
-        tableView.clipsToBounds = false
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -180,7 +185,11 @@ extension LeftListCollectionViewCell: UITextFieldDelegate {
 extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        guard let dataSource = dataSource else {
+            return 0
+        }
+        
+        return dataSource.unactiveElements().count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -188,7 +197,13 @@ extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.reuseIdentifier, for: indexPath)
+        guard let dataSource = dataSource else {
+            return tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.reuseIdentifier, for: indexPath)
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.reuseIdentifier, for: indexPath) as! OverviewTableViewCell
+        cell.element = dataSource.unactiveElements()[indexPath.row]
+        return cell
     }
     
 }

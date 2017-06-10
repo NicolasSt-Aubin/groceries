@@ -15,17 +15,35 @@ class OverviewTableViewCell: UITableViewCell {
     static let reuseIdentifier = "OverviewTableViewCellReuseIdentifier"
     static let height: CGFloat = 90
     
+    // MARK: - Properties
+    
+    var element: Element! {
+        didSet {
+            imageContainerView.backgroundColor = element.category.color
+            categoryImageView.image = element.category.image
+            titleLabel.text = element.name
+            if let price = element.price {
+                priceLabel.text = String(format: "%.2f", price) + " $"
+                titleLabel.center.y = imageContainerView.center.y - dateLabel.frame.height/2
+            } else {
+                priceLabel.text = " "
+                titleLabel.center.y = imageContainerView.center.y
+            }
+        }
+    }
+    
     // MARK: - UI Elements
     
     fileprivate lazy var imageContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .flatPeterRiver
+        view.backgroundColor = .flatBlack
+        view.clipsToBounds = true
         return view
     }()
     
     fileprivate lazy var categoryImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Asset.dairy.image
+        imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.85
         return imageView
@@ -35,7 +53,7 @@ class OverviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font  = .boldSystemFont(ofSize: 16)
         label.textColor = .flatBlack
-        label.text = "Chicken"
+        label.text = " "
         label.sizeToFit()
         return label
     }()
@@ -44,7 +62,7 @@ class OverviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font  = .systemFont(ofSize: 10)
         label.textColor = .flatSilver
-        label.text = "15.00$"
+        label.text = " "
         label.sizeToFit()
         return label
     }()
@@ -100,14 +118,18 @@ class OverviewTableViewCell: UITableViewCell {
         
         categoryImageView.frame.size = CGSize(width: 40, height: 40)
         categoryImageView.center.x = imageContainerView.bounds.width/2
-        categoryImageView.frame.origin.y = 10
+        categoryImageView.frame.origin.y = imageContainerView.bounds.height - categoryImageView.frame.height + 5
         
         dateLabel.frame.origin.x = contentView.bounds.width - dateLabel.frame.width - cellPadding
         dateLabel.center.y = imageContainerView.center.y
         
         titleLabel.frame.size.width = dateLabel.frame.minX - imageContainerView.frame.maxX - 2 * cellMargin
         titleLabel.frame.origin.x = imageContainerView.frame.maxX + cellMargin
-        titleLabel.center.y = imageContainerView.center.y - dateLabel.frame.height/2
+        if element.price != nil {
+            titleLabel.center.y = imageContainerView.center.y - dateLabel.frame.height/2
+        } else {
+            titleLabel.center.y = imageContainerView.center.y
+        }
         
         priceLabel.frame.size.width = contentView.bounds.width - imageContainerView.frame.maxX - 2 * cellMargin
         priceLabel.frame.origin.x = titleLabel.frame.origin.x

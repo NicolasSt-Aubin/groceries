@@ -17,19 +17,34 @@ class NeedToBuyTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var checked: Bool = false 
+    var element: Element! {
+        didSet {
+            
+            checkButton.element = element
+            titleLabel.text = element.name
+            
+            if let price = element.price {
+                priceLabel.text = String(format: "%.2f", price) + " $"
+                titleLabel.center.y = checkButton.center.y - titleLabel.frame.height/3
+            } else {
+                priceLabel.text = " "
+                titleLabel.center.y = checkButton.center.y
+            }
+            
+        }
+    }
     
     // MARK: - UI Elements
     
     lazy var checkButton: CheckButton = {
         let button = CheckButton(mainImage: Asset.dairy.image)
-        button.backgroundColor = .flatPeterRiver
+        button.backgroundColor = .flatBlack
         return button
     }()
     
     fileprivate lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font  = .boldSystemFont(ofSize: 16)
+        label.font  = .boldSystemFont(ofSize: 14)
         label.textColor = .flatBlack
         label.text = "Chicken"
         label.sizeToFit()
@@ -91,7 +106,11 @@ class NeedToBuyTableViewCell: UITableViewCell {
         
         titleLabel.frame.size.width = contentView.bounds.width - checkButton.frame.width - 2 * cellPadding - cellMargin
         titleLabel.frame.origin.x = cellPadding
-        titleLabel.center.y = checkButton.center.y - titleLabel.frame.height/3
+        if let price = element.price {
+            titleLabel.center.y = checkButton.center.y - titleLabel.frame.height/3
+        } else {
+            titleLabel.center.y = checkButton.center.y
+        }
         
         priceLabel.frame.size.width = titleLabel.frame.width
         priceLabel.frame.origin.x = titleLabel.frame.origin.x

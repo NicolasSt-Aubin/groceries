@@ -23,6 +23,8 @@ class ListManagerViewController: BaseViewController {
         }
     }
     
+    var elements: [Element] = []
+    
     // MARK: - UI Elements
     
     fileprivate lazy var headerView: UIView = {
@@ -98,6 +100,8 @@ class ListManagerViewController: BaseViewController {
         headerView.addSubview(pageSelectionIndicatorView)
         
         view.addSubview(collectionView)
+        
+        elements = TempDataService.elements // TEMP
     }
     
     override func viewWillLayoutSubviews() {
@@ -209,15 +213,38 @@ extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewD
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeftListCollectionViewCell.reuseIdentifier, for: indexPath) as! LeftListCollectionViewCell
             cell.delegate = self
+            cell.dataSource = self
             return cell
         } else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: RightListCollectionViewCell.reuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RightListCollectionViewCell.reuseIdentifier, for: indexPath) as! RightListCollectionViewCell
+            cell.dataSource = self
+            return cell
         }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
+    }
+    
+}
+
+extension ListManagerViewController: LeftListCollectionViewCellDataSource {
+    
+    func unactiveElements() -> [Element] {
+        return elements.filter({ element in return !element.active})
+    }
+    
+}
+
+extension ListManagerViewController: RightListCollectionViewCellDataSource {
+    
+    func onShelfElements() -> [Element] {
+        return elements.filter({ element in return element.active && !element.inCart})
+    }
+    
+    func inCartElements() -> [Element] {
+        return elements.filter({ element in return element.active && element.inCart})
     }
     
 }

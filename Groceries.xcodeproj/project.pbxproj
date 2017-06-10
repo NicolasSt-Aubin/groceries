@@ -35,6 +35,10 @@
 		1E4433C71EEB143000E25141 /* GRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C61EEB143000E25141 /* GRTextField.swift */; };
 		1E4433C91EEB3AEF00E25141 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C81EEB3AEF00E25141 /* CheckButton.swift */; };
 		1E4433CB1EEB3C5200E25141 /* NeedToBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433CA1EEB3C5200E25141 /* NeedToBuyTableViewCell.swift */; };
+		1E4433CD1EEB3FC400E25141 /* NeedToBuyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433CC1EEB3FC400E25141 /* NeedToBuyTableHeaderView.swift */; };
+		1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C01EEB44F50029D7C8 /* Element.swift */; };
+		1EA683C31EEB46460029D7C8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C21EEB46460029D7C8 /* Category.swift */; };
+		1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C41EEB52570029D7C8 /* TempDataService.swift */; };
 		D74AF178236AFB0B61A7A1CF /* Pods_Groceries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +95,10 @@
 		1E4433C61EEB143000E25141 /* GRTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRTextField.swift; path = Views/GRTextField.swift; sourceTree = "<group>"; };
 		1E4433C81EEB3AEF00E25141 /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckButton.swift; path = Views/CheckButton.swift; sourceTree = "<group>"; };
 		1E4433CA1EEB3C5200E25141 /* NeedToBuyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableViewCell.swift; path = Controllers/List/NeedToBuyTableViewCell.swift; sourceTree = "<group>"; };
+		1E4433CC1EEB3FC400E25141 /* NeedToBuyTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableHeaderView.swift; path = Controllers/List/NeedToBuyTableHeaderView.swift; sourceTree = "<group>"; };
+		1EA683C01EEB44F50029D7C8 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Element.swift; path = Models/Element.swift; sourceTree = "<group>"; };
+		1EA683C21EEB46460029D7C8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Models/Category.swift; sourceTree = "<group>"; };
+		1EA683C41EEB52570029D7C8 /* TempDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempDataService.swift; path = Services/TempDataService.swift; sourceTree = "<group>"; };
 		267ABA873849129144FA8EE1 /* Pods-Groceries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.release.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.release.xcconfig"; sourceTree = "<group>"; };
 		4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Groceries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26074693FA53D79460268E /* Pods-Groceries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +155,7 @@
 		1E0A82B31EE872EF00FFE941 /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				1EA683BF1EEB44D00029D7C8 /* Models */,
 				1E4433B61EEA501800E25141 /* Ressources */,
 				1E0A845F1EE9BAF100FFE941 /* Services */,
 				1E0A82F11EE878E800FFE941 /* Network */,
@@ -226,6 +235,7 @@
 			children = (
 				1E0A84601EE9BB4B00FFE941 /* CurrentUserService.swift */,
 				1E0A84621EE9BCCE00FFE941 /* APIService.swift */,
+				1EA683C41EEB52570029D7C8 /* TempDataService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -238,6 +248,7 @@
 				1E4433B21EEA2D7100E25141 /* RightListCollectionViewCell.swift */,
 				1E4433B41EEA47A500E25141 /* OverviewTableViewCell.swift */,
 				1E4433CA1EEB3C5200E25141 /* NeedToBuyTableViewCell.swift */,
+				1E4433CC1EEB3FC400E25141 /* NeedToBuyTableHeaderView.swift */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -250,6 +261,15 @@
 				1E4433BB1EEA522400E25141 /* Localizable.strings */,
 			);
 			name = Ressources;
+			sourceTree = "<group>";
+		};
+		1EA683BF1EEB44D00029D7C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1EA683C01EEB44F50029D7C8 /* Element.swift */,
+				1EA683C21EEB46460029D7C8 /* Category.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		3AAD6B8DBF7874772F336B2F /* Frameworks */ = {
@@ -462,15 +482,19 @@
 				1E4433C91EEB3AEF00E25141 /* CheckButton.swift in Sources */,
 				1E0A84611EE9BB4B00FFE941 /* CurrentUserService.swift in Sources */,
 				1E0A846B1EEA04DB00FFE941 /* UITextField+groceries.swift in Sources */,
+				1E4433CD1EEB3FC400E25141 /* NeedToBuyTableHeaderView.swift in Sources */,
 				1E0A82ED1EE8740400FFE941 /* UIView+groceries.swift in Sources */,
 				1E0A82EC1EE8740400FFE941 /* UIColor+groceries.swift in Sources */,
 				1E0A82F31EE8791A00FFE941 /* NetworkRequest.swift in Sources */,
 				1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */,
+				1EA683C31EEB46460029D7C8 /* Category.swift in Sources */,
 				1E4433AF1EEA2D5100E25141 /* LeftListCollectionViewCell.swift in Sources */,
 				1E4433C11EEA538C00E25141 /* Localize.swift in Sources */,
+				1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */,
 				1E4433B31EEA2D7100E25141 /* RightListCollectionViewCell.swift in Sources */,
 				1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */,
 				1E0A84631EE9BCCE00FFE941 /* APIService.swift in Sources */,
+				1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */,
 				1E0A82EB1EE8740400FFE941 /* CGFLoat+groceries.swift in Sources */,
 				1E0A82F51EE8792D00FFE941 /* NetworkResponse.swift in Sources */,
 				1E4433CB1EEB3C5200E25141 /* NeedToBuyTableViewCell.swift in Sources */,
