@@ -69,6 +69,10 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         textField.placeholder = L10n.searchPlaceholder
         textField.addTarget(self, action: #selector(self.searchFieldTextDidChange), for: .allEditingEvents)
         textField.clearButtonMode = .always
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapSearchFieldClearButton))
+        textField.rightView!.addGestureRecognizer(tapGestureRecognizer)
+        
         return textField
     }()
     
@@ -207,6 +211,14 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     func didTapOutsideKeyboard() {
         searchAddTextField.resignFirstResponder()
         delegate?.userDidStopSearching()
+    }
+    
+    func didTapSearchFieldClearButton() {
+        if !searchAddTextField.isFirstResponder {
+            cancelCreation()
+        } else {
+            searchAddTextField.clearText()
+        }
     }
     
     // MARK: - Private Methods
