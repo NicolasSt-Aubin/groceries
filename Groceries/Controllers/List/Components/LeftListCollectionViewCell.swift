@@ -67,7 +67,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         textField.delegate = self
         textField.returnKeyType = .search
         textField.placeholder = L10n.searchPlaceholder
-        textField.addTarget(self, action: #selector(self.searchFieldTextDidChange), for: .allEditingEvents)
+        textField.addTarget(self, action: #selector(self.searchFieldTextDidChange), for: .editingChanged)
         textField.clearButtonMode = .always
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapSearchFieldClearButton))
@@ -82,22 +82,10 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         view.alpha = 0
         return view
     }()
-    
-    fileprivate lazy var categoryTextField: GRTextField = {
-        let textField = GRTextField(icon: Asset.categoryIcon.image)
-        textField.delegate = self
-        textField.returnKeyType = .next
-        textField.placeholder = L10n.category
-        return textField
-    }()
-    
-    fileprivate lazy var priceTextField: GRTextField = {
-        let textField = GRTextField(icon: Asset.priceIcon.image)
-        textField.delegate = self
-        textField.returnKeyType = .done
-        textField.placeholder = L10n.optionalIndicator
-        textField.isClearable = false
-        return textField
+
+    fileprivate lazy var categorySelectionView: CategorySelectionView = {
+        let categorySelectionView = CategorySelectionView()
+        return categorySelectionView
     }()
     
     fileprivate lazy var cancelButton: GRButton = {
@@ -111,7 +99,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     fileprivate lazy var addButton: GRButton = {
         let button = GRButton()
         button.setTitle(L10n.add, for: .normal)
-        //        button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
         return button
     }()
     
@@ -123,8 +111,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         addSubview(tableView)
         addSubview(searchAddTextField)
         addSubview(elementCreationView)
-        elementCreationView.addSubview(categoryTextField)
-        elementCreationView.addSubview(priceTextField)
+        elementCreationView.addSubview(categorySelectionView)
         elementCreationView.addSubview(addButton)
         elementCreationView.addSubview(cancelButton)
         
@@ -154,17 +141,11 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         elementCreationView.frame.size.height = bounds.height - searchAddTextField.frame.maxY - keyboardHeight
         elementCreationView.frame.origin.y = searchAddTextField.frame.maxY
         
-        let dualFormAvailableWidth: CGFloat = bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin
+        categorySelectionView.frame.size.width = elementCreationView.bounds.width
+        categorySelectionView.frame.size.height = 100
+        categorySelectionView.frame.origin.y = CGFloat.formMargin
         
-        categoryTextField.frame.size.height = CGFloat.formFieldHeight
-        categoryTextField.frame.size.width = dualFormAvailableWidth * 2 / 3
-        categoryTextField.frame.origin.x = CGFloat.pageMargin
-        categoryTextField.frame.origin.y = CGFloat.formMargin
-        
-        priceTextField.frame.size.height = CGFloat.formFieldHeight
-        priceTextField.frame.size.width = dualFormAvailableWidth * 1 / 3
-        priceTextField.frame.origin.x = categoryTextField.frame.maxX + CGFloat.formMargin
-        priceTextField.frame.origin.y = categoryTextField.frame.origin.y
+        let dualFormAvailableWidth: CGFloat = elementCreationView.bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin
         
         cancelButton.frame.size.width = dualFormAvailableWidth/2
         cancelButton.frame.size.height = CGFloat.formFieldHeight
@@ -203,8 +184,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     func cancelCreation() {
         searchAddTextField.clearText()
         searchAddTextField.resignFirstResponder()
-        categoryTextField.resignFirstResponder()
-        priceTextField.resignFirstResponder()
         delegate?.userDidStopSearching()
     }
     
@@ -251,7 +230,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         } else {
             return
         }
-        print("Update required")
         
         if userIsCreating {
             
@@ -286,9 +264,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
             }, completion: { completed in
                 
                 self.elementCreationView.isHidden = true
-                self.categoryTextField.clearText()
-                self.priceTextField.clearText()
-                
+                self.categorySelectionView.reset()
             })
             
         }
@@ -310,9 +286,6 @@ extension LeftListCollectionViewCell: UITextFieldDelegate {
             delegate?.userDidStopSearching()
         } else if textField == searchAddTextField && userIsCreating {
             print("search + create")
-            categoryTextField.becomeFirstResponder()
-        } else if textField == categoryTextField {
-            priceTextField.becomeFirstResponder()
         }
         
         return false

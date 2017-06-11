@@ -87,7 +87,9 @@ class GRTextField: UITextField {
         textAlignment = .left
         tintColor = .flatBelizeHole
         
-        addTarget(self, action: #selector(self.textDidChange), for: .allEditingEvents)
+        addTarget(self, action: #selector(self.editingChanged), for: .editingChanged)
+        addTarget(self, action: #selector(self.editingDidBegin), for: .editingDidBegin)
+        addTarget(self, action: #selector(self.editingDidEnd), for: .editingDidEnd)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -119,7 +121,7 @@ class GRTextField: UITextField {
 
     // MARK: - Selector Methods
     
-    func textDidChange() {
+    func editingChanged() {
         UIView.animate(withDuration: 0.2) {
             self.iconImageView.tintColor = self.text != nil && self.text != "" ? .flatMidnightBlue : .flatSilver
             self.activityIndicatorView.color = self.text != nil && self.text != "" ? .flatMidnightBlue : .flatSilver
@@ -127,10 +129,22 @@ class GRTextField: UITextField {
         }
     }
     
+    func editingDidBegin() {
+        UIView.animate(withDuration: 0.2) {
+//            self.layer.borderColor = UIColor.flatMidnightBlue.cgColor
+        }
+    }
+    
+    func editingDidEnd() {
+        UIView.animate(withDuration: 0.2) {
+//            self.layer.borderColor = UIColor.flatSilver.cgColor
+        }
+    }
+    
     func clearText() {
         text = ""
-        textDidChange()
-        sendActions(for: .allEditingEvents)
+        editingChanged()
+        sendActions(for: .editingChanged)
     }
     
 }

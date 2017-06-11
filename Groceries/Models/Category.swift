@@ -15,10 +15,15 @@ class Category {
     var image: UIImage? = nil
     var color: UIColor = .flatBlack
     
-    init(name: String, image: UIImage, color: UIColor) {
+    init(id: String, name: String, image: UIImage, color: UIColor) {
+        self.id = id
         self.name = name
         self.image = image
         self.color = color
     }
     
+}
+
+func == (lhs:Category,rhs:Category) -> Bool {
+    return lhs.id == rhs.id
 }
