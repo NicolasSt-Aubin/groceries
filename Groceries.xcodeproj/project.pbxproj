@@ -42,6 +42,7 @@
 		1EA683C31EEB46460029D7C8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C21EEB46460029D7C8 /* Category.swift */; };
 		1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C41EEB52570029D7C8 /* TempDataService.swift */; };
 		1EC28EAD1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */; };
+		1EC28EAF1EECF1D600FAE60B /* PriceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */; };
 		D74AF178236AFB0B61A7A1CF /* Pods_Groceries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,7 @@
 		1EA683C21EEB46460029D7C8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Models/Category.swift; sourceTree = "<group>"; };
 		1EA683C41EEB52570029D7C8 /* TempDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempDataService.swift; path = Services/TempDataService.swift; sourceTree = "<group>"; };
 		1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategorySelectionCollectionViewCell.swift; path = Controllers/List/Components/CategorySelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PriceSelectionView.swift; path = Controllers/List/Components/PriceSelectionView.swift; sourceTree = "<group>"; };
 		267ABA873849129144FA8EE1 /* Pods-Groceries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.release.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.release.xcconfig"; sourceTree = "<group>"; };
 		4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Groceries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26074693FA53D79460268E /* Pods-Groceries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.debug.xcconfig"; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				1E8935931EECABA000EBD2E9 /* OverviewTableViewCell.swift */,
 				1E8935991EECABE500EBD2E9 /* CategorySelectionView.swift */,
 				1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */,
+				1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */,
 			);
 			name = LeftView;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */,
 				1E0A82EB1EE8740400FFE941 /* CGFLoat+groceries.swift in Sources */,
 				1E0A82F51EE8792D00FFE941 /* NetworkResponse.swift in Sources */,
+				1EC28EAF1EECF1D600FAE60B /* PriceSelectionView.swift in Sources */,
 				1E0A84671EE9EEA800FFE941 /* UILabel+groceries.swift in Sources */,
 				1E4433C01EEA538C00E25141 /* Images.swift in Sources */,
 				1E89359A1EECABE500EBD2E9 /* CategorySelectionView.swift in Sources */,

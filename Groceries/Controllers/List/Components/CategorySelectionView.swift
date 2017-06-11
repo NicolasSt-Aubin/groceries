@@ -24,7 +24,7 @@ class CategorySelectionView: UIView {
         let label = UILabel()
         label.textColor = .flatSilver
         label.font = UIFont.boldSystemFont(ofSize: 10)
-        label.text = "select category".uppercased()
+        label.text = L10n.selectCategory.uppercased()
         label.sizeToFit()
         return label
     }()

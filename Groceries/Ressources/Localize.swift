@@ -40,6 +40,10 @@ enum L10n {
   static let password = L10n.tr("PASSWORD")
   /// Milk, chicken, juice...
   static let searchPlaceholder = L10n.tr("SEARCH_PLACEHOLDER")
+  /// Select Category
+  static let selectCategory = L10n.tr("SELECT_CATEGORY")
+  /// Select Price
+  static let selectPrice = L10n.tr("SELECT_PRICE")
   /// Welcome
   static let welcome = L10n.tr("WELCOME")
 }

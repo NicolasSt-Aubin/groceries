@@ -32,3 +32,5 @@
 "COMPLETE" = "Complete";
 "ON_THE_SHELF" = "On the shelf";
 "IN_YOUR_CART" = "In your cart";
+"SELECT_CATEGORY" = "Select Category";
+"SELECT_PRICE" = "Select Price";

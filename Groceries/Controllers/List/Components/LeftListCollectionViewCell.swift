@@ -88,6 +88,11 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         return categorySelectionView
     }()
     
+    fileprivate lazy var priceSelectionView: PriceSelectionView = {
+        let priceSelectionView = PriceSelectionView()
+        return priceSelectionView
+    }()
+    
     fileprivate lazy var cancelButton: GRButton = {
         let button = GRButton()
         button.setTitle(L10n.cancel, for: .normal)
@@ -112,6 +117,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         addSubview(searchAddTextField)
         addSubview(elementCreationView)
         elementCreationView.addSubview(categorySelectionView)
+        elementCreationView.addSubview(priceSelectionView)
         elementCreationView.addSubview(addButton)
         elementCreationView.addSubview(cancelButton)
         
@@ -144,6 +150,10 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         categorySelectionView.frame.size.width = elementCreationView.bounds.width
         categorySelectionView.frame.size.height = 120
         categorySelectionView.frame.origin.y = CGFloat.formMargin
+        
+        priceSelectionView.frame.size.width = elementCreationView.bounds.width
+        priceSelectionView.frame.size.height = 80
+        priceSelectionView.frame.origin.y = categorySelectionView.frame.maxY + CGFloat.formMargin
         
         let dualFormAvailableWidth: CGFloat = elementCreationView.bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin
         
