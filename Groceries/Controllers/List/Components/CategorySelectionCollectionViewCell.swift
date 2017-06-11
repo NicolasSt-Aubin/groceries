@@ -26,7 +26,7 @@ class CategorySelectionCollectionViewCell: UICollectionViewCell {
     var isInSelection: Bool = false {
         didSet {
             setNeedsLayout()
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.3) {
                 self.layoutIfNeeded()
             }
         }

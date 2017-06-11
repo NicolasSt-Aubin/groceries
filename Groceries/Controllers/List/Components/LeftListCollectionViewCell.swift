@@ -82,7 +82,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         view.alpha = 0
         return view
     }()
-
+    
     fileprivate lazy var categorySelectionView: CategorySelectionView = {
         let categorySelectionView = CategorySelectionView()
         return categorySelectionView
@@ -142,7 +142,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         elementCreationView.frame.origin.y = searchAddTextField.frame.maxY
         
         categorySelectionView.frame.size.width = elementCreationView.bounds.width
-        categorySelectionView.frame.size.height = 100
+        categorySelectionView.frame.size.height = 120
         categorySelectionView.frame.origin.y = CGFloat.formMargin
         
         let dualFormAvailableWidth: CGFloat = elementCreationView.bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin

@@ -20,6 +20,15 @@ class CategorySelectionView: UIView {
     
     // MARK: - UI Elements
     
+    fileprivate lazy var instructionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .flatSilver
+        label.font = UIFont.boldSystemFont(ofSize: 10)
+        label.text = "select category".uppercased()
+        label.sizeToFit()
+        return label
+    }()
+    
     fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: CGFloat.pageMargin, bottom: 0, right: CGFloat.pageMargin)
@@ -44,6 +53,7 @@ class CategorySelectionView: UIView {
     init() {
         super.init(frame: .zero)
         
+        addSubview(instructionLabel)
         addSubview(collectionView)
     }
     
@@ -56,7 +66,12 @@ class CategorySelectionView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        collectionView.frame = bounds
+        instructionLabel.frame.size.width = bounds.width - CGFloat.pageMargin*2
+        instructionLabel.frame.origin.x = CGFloat.pageMargin
+        
+        collectionView.frame.size.width = bounds.width
+        collectionView.frame.size.height = bounds.height - instructionLabel.frame.height - CGFloat.formMargin
+        collectionView.frame.origin.y = instructionLabel.frame.maxY + CGFloat.formMargin
     }
     
     // MARK: - Public Methods
@@ -91,7 +106,7 @@ extension CategorySelectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        return CGSize(width: bounds.height, height: bounds.height)
+        return CGSize(width: collectionView.bounds.height, height: collectionView.bounds.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
