@@ -36,7 +36,7 @@ class ListManagerViewController: BaseViewController {
     
     fileprivate lazy var titleLabel: UILabel = {
         let label = UILabel.generateTitleLabel()
-        label.text = "Appart"
+        label.text = "Appartement"
         label.sizeToFit()
         return label
     }()
@@ -81,6 +81,7 @@ class ListManagerViewController: BaseViewController {
         collectionView.register(RightListCollectionViewCell.self, forCellWithReuseIdentifier: RightListCollectionViewCell.reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.bounces = false
         collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OverviewTableViewCellDelegate {
+    func didSwipeCell(withElement element: Element)
+}
+
 class OverviewTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
@@ -17,11 +21,14 @@ class OverviewTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var delegate: OverviewTableViewCellDelegate? = nil
+    
     var element: Element! {
         didSet {
             imageContainerView.backgroundColor = element.category.color
             categoryImageView.image = element.category.image
             titleLabel.text = element.name
+            contentView.isHidden = element.active
             if let price = element.price {
                 priceLabel.text = String(format: "%.2f", price) + " $"
                 titleLabel.center.y = imageContainerView.center.y - dateLabel.frame.height/2
@@ -33,6 +40,16 @@ class OverviewTableViewCell: UITableViewCell {
     }
     
     // MARK: - UI Elements
+    
+    fileprivate lazy var instructionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .flatBlack
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.text = "Add to you next grocery list ->"
+        label.alpha = 0
+        label.sizeToFit()
+        return label
+    }()
     
     fileprivate lazy var imageContainerView: UIView = {
         let view = UIView()
@@ -81,6 +98,9 @@ class OverviewTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        addSubview(instructionLabel)
+        sendSubview(toBack: instructionLabel)
+        
         selectionStyle = .none
         backgroundColor = .clear
         
@@ -92,6 +112,10 @@ class OverviewTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(dateLabel)
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.didPanContentView(_:)))
+        panGestureRecognizer.delegate = self
+        contentView.addGestureRecognizer(panGestureRecognizer)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -102,6 +126,9 @@ class OverviewTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        instructionLabel.center.y = bounds.height/2
+        instructionLabel.frame.origin.x = CGFloat.pageMargin*3
         
         contentView.frame.size.width = bounds.width - CGFloat.pageMargin*2
         contentView.frame.size.height = bounds.height - CGFloat.pageMargin
@@ -141,5 +168,73 @@ class OverviewTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
     }
+    
+    // MARK: - Selector Methods
 
+    var initialPanPosition: CGFloat = CGFloat.pageMargin
+    
+    func didPanContentView(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            initialPanPosition = contentView.frame.origin.x
+        }
+        
+        let xTranslation = gestureRecognizer.translation(in: self).x
+        let xVelocity = gestureRecognizer.velocity(in: self).x
+        
+        if initialPanPosition + xTranslation >= CGFloat.pageMargin {
+            contentView.frame.origin.x = initialPanPosition + xTranslation
+        }
+        
+        let progress = contentView.frame.origin.x / bounds.width
+        instructionLabel.alpha = progress
+        
+        if gestureRecognizer.state == .ended {
+            completeSwipeAnimation(xVelocity: xVelocity)
+        }
+        
+    }
+    
+    // MARK: Private Methods
+    
+    func completeSwipeAnimation(xVelocity: CGFloat) {
+        
+        
+        let completeSwipe = xVelocity > 500 || (contentView.frame.origin.x > bounds.width/2 && xVelocity > 0)
+        
+        let finalPosition = bounds.width + CGFloat.pageMargin
+        let initialPosition = CGFloat.pageMargin
+        
+        var speedConefficient = 1 / (abs(xVelocity) / 200)
+        
+        if speedConefficient > 1 { speedConefficient = 1 }
+        if speedConefficient < 1/4 { speedConefficient = 1/4 }
+        
+        let duration: TimeInterval = 0.3 * Double(speedConefficient)
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.contentView.frame.origin.x = completeSwipe ? finalPosition : initialPosition
+            self.instructionLabel.alpha = completeSwipe ? 1 : 0
+        }, completion: { complete in
+            if completeSwipe {
+                self.contentView.isHidden = true
+                self.delegate?.didSwipeCell(withElement: self.element)
+            }
+        })
+        
+    }
+    
+}
+
+extension OverviewTableViewCell {
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            if gestureRecognizer.velocity(in: self).x < 0 {
+                return false
+            }
+        }
+        return true
+    }
+    
+    
 }

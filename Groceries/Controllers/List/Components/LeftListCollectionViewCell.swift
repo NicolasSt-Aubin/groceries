@@ -316,7 +316,25 @@ extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.reuseIdentifier, for: indexPath) as! OverviewTableViewCell
         cell.element = elements[indexPath.row]
+        cell.delegate = self
         return cell
+    }
+    
+}
+
+extension LeftListCollectionViewCell: OverviewTableViewCellDelegate {
+    
+    func didSwipeCell(withElement element: Element) {
+        if let index = elements.index(where: {elem in element == elem}) {
+            let indexPath = IndexPath(row: index, section: 0)
+            element.active = true
+            elements.remove(at: index)
+            DispatchQueue.main.async(execute: {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .top)
+                self.tableView.endUpdates()
+            })
+        }
     }
     
 }
