@@ -247,7 +247,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
             userIsCreating = false
         } else if !userIsCreating && elements.count == 0 {
             userIsCreating = true
-            print(elements)
         } else {
             return
         }
@@ -306,7 +305,6 @@ extension LeftListCollectionViewCell: UITextFieldDelegate {
             textField.resignFirstResponder()
             delegate?.userDidStopSearching()
         } else if textField == searchAddTextField && userIsCreating {
-            print("search + create")
         }
         
         return false

@@ -46,11 +46,27 @@ class PriceSelectionView: UIView {
     fileprivate lazy var circleView: UIView = {
         let view = UIView()
         view.backgroundColor = .flatBelizeHole
-        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.didPanCircleView(_:)))
         view.addGestureRecognizer(panGestureRecognizer)
-        
         return view
+    }()
+    
+    fileprivate lazy var priceIndicatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.borderize(width: 1, color: .flatSilver)
+        view.alpha = 0
+        return view
+    }()
+    
+    fileprivate lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .flatSilver
+        label.font = UIFont.boldSystemFont(ofSize: 10)
+        label.text = "0.00$"
+        label.textAlignment = .center
+        label.sizeToFit()
+        return label
     }()
     
     // MARK: - Init
@@ -64,6 +80,8 @@ class PriceSelectionView: UIView {
             addSubview(view)
         }
         addSubview(circleView)
+        addSubview(priceIndicatorView)
+        priceIndicatorView.addSubview(priceLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,9 +114,15 @@ class PriceSelectionView: UIView {
         circleView.center.y = horizontalLineView.center.y
         circleView.frame.origin.x = horizontalLineView.frame.minX
         
-//        valueIndicatorView.layer.cornerRadius = CGFloat.formFieldRadius
-//        valueIndicatorView.frame.size.height = 20
-//        valueIndicatorView.frame.origin.y = slider.frame.minY - valueIndicatorView.frame.height - CGFloat.formMargin
+        priceIndicatorView.layer.cornerRadius = CGFloat.formFieldRadius
+        priceIndicatorView.frame.size.height = priceLabel.frame.height + CGFloat.formMargin*2
+        priceIndicatorView.frame.size.width = 50
+        priceIndicatorView.frame.origin.y = circleView.frame.minY - priceIndicatorView.frame.height - 8
+        priceIndicatorView.center.x = circleView.center.x
+        
+        priceLabel.frame.size.width = priceIndicatorView.frame.width
+        priceLabel.center.x = priceIndicatorView.frame.width/2
+        priceLabel.center.y = priceIndicatorView.frame.height/2
     }
     
     // MARK: - Selector Methods
@@ -108,6 +132,9 @@ class PriceSelectionView: UIView {
     func didPanCircleView(_ gestureRecognizer: UIPanGestureRecognizer) {
         if gestureRecognizer.state == .began {
             initialPanPosition = circleView.frame.origin.x
+            UIView.animate(withDuration: 0.1) {
+                self.priceIndicatorView.alpha = 1
+            }
         }
         
         let xTranslation = gestureRecognizer.translation(in: self).x
@@ -121,6 +148,13 @@ class PriceSelectionView: UIView {
             circleView.frame.origin.x = horizontalLineView.frame.maxX - circleView.frame.width
         }
         
+        priceIndicatorView.center.x = circleView.center.x
+        
+        if gestureRecognizer.state == .ended {
+            UIView.animate(withDuration: 0.1) {
+                self.priceIndicatorView.alpha = 0
+            }
+        }
     }
     
 //    func editingDidBegin() {
