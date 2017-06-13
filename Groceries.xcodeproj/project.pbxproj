@@ -38,6 +38,7 @@
 		1E8935981EECABA000EBD2E9 /* RightListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935941EECABA000EBD2E9 /* RightListCollectionViewCell.swift */; };
 		1E89359A1EECABE500EBD2E9 /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935991EECABE500EBD2E9 /* CategorySelectionView.swift */; };
 		1E89359C1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89359B1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift */; };
+		1EA677391EF04B12006DB694 /* Double+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA677381EF04B12006DB694 /* Double+groceries.swift */; };
 		1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C01EEB44F50029D7C8 /* Element.swift */; };
 		1EA683C31EEB46460029D7C8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C21EEB46460029D7C8 /* Category.swift */; };
 		1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C41EEB52570029D7C8 /* TempDataService.swift */; };
@@ -102,6 +103,7 @@
 		1E8935941EECABA000EBD2E9 /* RightListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightListCollectionViewCell.swift; path = Controllers/List/Components/RightListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E8935991EECABE500EBD2E9 /* CategorySelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategorySelectionView.swift; path = Controllers/List/Components/CategorySelectionView.swift; sourceTree = "<group>"; };
 		1E89359B1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableHeaderView.swift; path = Controllers/List/Components/NeedToBuyTableHeaderView.swift; sourceTree = "<group>"; };
+		1EA677381EF04B12006DB694 /* Double+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+groceries.swift"; path = "Extensions/Double+groceries.swift"; sourceTree = "<group>"; };
 		1EA683C01EEB44F50029D7C8 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Element.swift; path = Models/Element.swift; sourceTree = "<group>"; };
 		1EA683C21EEB46460029D7C8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Models/Category.swift; sourceTree = "<group>"; };
 		1EA683C41EEB52570029D7C8 /* TempDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempDataService.swift; path = Services/TempDataService.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */,
 				1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */,
 				1E89358E1EEBB43300EBD2E9 /* String+groceries.swift */,
+				1EA677381EF04B12006DB694 /* Double+groceries.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				1E0A84671EE9EEA800FFE941 /* UILabel+groceries.swift in Sources */,
 				1E4433C01EEA538C00E25141 /* Images.swift in Sources */,
 				1E89359A1EECABE500EBD2E9 /* CategorySelectionView.swift in Sources */,
+				1EA677391EF04B12006DB694 /* Double+groceries.swift in Sources */,
 				1E0A82F01EE8751400FFE941 /* GRButton.swift in Sources */,
 				1E8935951EECABA000EBD2E9 /* LeftListCollectionViewCell.swift in Sources */,
 				1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */,

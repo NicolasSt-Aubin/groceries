@@ -153,7 +153,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         categorySelectionView.frame.origin.y = CGFloat.formMargin
         
         priceSelectionView.frame.size.width = elementCreationView.bounds.width
-        priceSelectionView.frame.size.height = 80
+        priceSelectionView.frame.size.height = 120
         priceSelectionView.frame.origin.y = categorySelectionView.frame.maxY + CGFloat.formMargin
         
         let dualFormAvailableWidth: CGFloat = elementCreationView.bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin

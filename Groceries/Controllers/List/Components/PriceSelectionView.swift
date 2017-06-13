@@ -12,7 +12,15 @@ class PriceSelectionView: UIView {
 
     // MARK: - Properties
     
-    
+    var value: Double = 0 {
+        didSet {
+            value = round(value)
+            priceLabel.text = String(format: "%.2f$", value)
+        }
+    }
+    var minValue: Double = 0
+    var maxValue: Double = 20
+    var gradCount: Int = 20
     
     // MARK: - UI Elements
     
@@ -34,13 +42,28 @@ class PriceSelectionView: UIView {
     fileprivate lazy var verticalLineViews: [UIView] = {
         var views: [UIView] = []
         
-        for i in 0..<21 {
+        for i in 0..<self.gradCount+1 {
             let view = UIView()
             view.backgroundColor = .flatSilver
             views.append(view)
         }
         
         return views
+    }()
+    
+    fileprivate lazy var gradLabels: [UILabel] = {
+        var labels: [UILabel] = []
+        
+        for i in 0..<(self.gradCount/2)+1 {
+            let label = UILabel()
+            label.textColor = .flatSilver
+            label.font = UIFont.systemFont(ofSize: 10)
+            label.text = String(i*2)
+            label.sizeToFit()
+            labels.append(label)
+        }
+        
+        return labels
     }()
     
     fileprivate lazy var circleView: UIView = {
@@ -51,20 +74,12 @@ class PriceSelectionView: UIView {
         return view
     }()
     
-    fileprivate lazy var priceIndicatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.borderize(width: 1, color: .flatSilver)
-        view.alpha = 0
-        return view
-    }()
-    
     fileprivate lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .flatSilver
-        label.font = UIFont.boldSystemFont(ofSize: 10)
+        label.textColor = .flatBlack
+        label.font = UIFont.systemFont(ofSize: 14)
         label.text = "0.00$"
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.sizeToFit()
         return label
     }()
@@ -74,14 +89,17 @@ class PriceSelectionView: UIView {
     init() {
         super.init(frame: .zero)
         
+        borderize()
         addSubview(instructionLabel)
+        addSubview(priceLabel)
         addSubview(horizontalLineView)
         for view in verticalLineViews {
             addSubview(view)
         }
         addSubview(circleView)
-        addSubview(priceIndicatorView)
-        priceIndicatorView.addSubview(priceLabel)
+        for view in gradLabels {
+            addSubview(view)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,10 +114,18 @@ class PriceSelectionView: UIView {
         instructionLabel.frame.size.width = bounds.width - CGFloat.pageMargin*2
         instructionLabel.frame.origin.x = CGFloat.pageMargin
         
-        horizontalLineView.frame.size.width = instructionLabel.frame.width
+        priceLabel.frame.size.width = instructionLabel.frame.width
+        priceLabel.frame.origin.x = instructionLabel.frame.origin.x
+        priceLabel.frame.origin.y = instructionLabel.frame.maxY + CGFloat.formMargin
+        
+        circleView.frame.size.width = CGFloat.pageMargin*3
+        circleView.frame.size.height = circleView.frame.width
+        circleView.layer.cornerRadius = circleView.frame.height/2
+        
+        horizontalLineView.frame.size.width = bounds.width - CGFloat.pageMargin*6
         horizontalLineView.frame.size.height = 1
-        horizontalLineView.frame.origin.x = instructionLabel.frame.origin.x
-        horizontalLineView.frame.origin.y = instructionLabel.frame.maxY + 25
+        horizontalLineView.center.x = bounds.width/2
+        horizontalLineView.frame.origin.y = priceLabel.frame.maxY + circleView.frame.size.height/2 + CGFloat.formMargin
         
         for i in 0..<verticalLineViews.count {
             verticalLineViews[i].frame.size.width = 1
@@ -108,72 +134,44 @@ class PriceSelectionView: UIView {
             verticalLineViews[i].frame.origin.y = horizontalLineView.frame.origin.y
         }
         
-        circleView.frame.size.width = 25
-        circleView.frame.size.height = circleView.frame.width
-        circleView.layer.cornerRadius = circleView.frame.height/2
         circleView.center.y = horizontalLineView.center.y
-        circleView.frame.origin.x = horizontalLineView.frame.minX
+        circleView.center.x = horizontalLineView.frame.minX
         
-        priceIndicatorView.layer.cornerRadius = CGFloat.formFieldRadius
-        priceIndicatorView.frame.size.height = priceLabel.frame.height + CGFloat.formMargin*2
-        priceIndicatorView.frame.size.width = 50
-        priceIndicatorView.frame.origin.y = circleView.frame.minY - priceIndicatorView.frame.height - 3
-        priceIndicatorView.center.x = circleView.center.x
-        
-        priceLabel.frame.size.width = priceIndicatorView.frame.width
-        priceLabel.center.x = priceIndicatorView.frame.width/2
-        priceLabel.center.y = priceIndicatorView.frame.height/2
+        for i in 0..<gradLabels.count {
+            gradLabels[i].center.x = horizontalLineView.frame.origin.x + CGFloat(i) * horizontalLineView.frame.width / CGFloat(gradLabels.count-1)
+            gradLabels[i].frame.origin.y = circleView.frame.maxY + CGFloat.formMargin
+        }
     }
     
     // MARK: - Selector Methods
     
     var initialPanPosition: CGFloat = CGFloat.pageMargin
     
+    var minX: CGFloat { return horizontalLineView.frame.minX }
+    var maxX: CGFloat { return horizontalLineView.frame.maxX }
+    
     func didPanCircleView(_ gestureRecognizer: UIPanGestureRecognizer) {
         if gestureRecognizer.state == .began {
-            initialPanPosition = circleView.frame.origin.x
-            UIView.animate(withDuration: 0.1) {
-                self.priceIndicatorView.alpha = 1
-            }
+            initialPanPosition = circleView.center.x
         }
         
         let xTranslation = gestureRecognizer.translation(in: self).x
-        circleView.frame.origin.x  = initialPanPosition + xTranslation
         
-        if circleView.frame.origin.x < horizontalLineView.frame.minX {
-            circleView.frame.origin.x = horizontalLineView.frame.minX
-        }
+        var newPos = initialPanPosition + xTranslation
+        if newPos < minX { newPos = minX }
+        if newPos > maxX { newPos = maxX }
         
-        if circleView.frame.origin.x > horizontalLineView.frame.maxX - circleView.frame.width {
-            circleView.frame.origin.x = horizontalLineView.frame.maxX - circleView.frame.width
-        }
+        circleView.center.x = newPos
         
-        priceIndicatorView.center.x = circleView.center.x
-        
-        if gestureRecognizer.state == .ended {
-            UIView.animate(withDuration: 0.1) {
-                self.priceIndicatorView.alpha = 0
-            }
-        }
+        let ratioValue = (newPos - minX) / (maxX - minX)
+        value = ( Double(ratioValue) * (maxValue - minValue) ) + minValue
     }
     
-//    func editingDidBegin() {
-//        print("edit begin")
-//        valueIndicatorView.center.x = CGFloat( slider.value/slider.maximumValue ) * slider.frame.width + slider.frame.origin.x
-//        UIView.animate(withDuration: 0.2) {
-//            self.valueIndicatorView.frame.size.width = 40
-//        }
-//    }
-//    
-//    func didDragSlider() {
-//        valueIndicatorView.center.x = CGFloat( slider.value/slider.maximumValue ) * slider.frame.width + slider.frame.origin.x
-//    }
-//    
-//    func editingDidEnd() {
-//        print("edit end")
-//        UIView.animate(withDuration: 0.2) {
-//            self.valueIndicatorView.frame.size.width = 0
-//        }
-//    }
+    // MARK: - Private Methods
+    
+    fileprivate func updatePos() {
+        let ratioPos = (value - minValue) / (maxValue - minValue)
+        circleView.center.x = ( CGFloat(ratioPos) * (maxX - minX) ) + minX
+    }
     
 }
