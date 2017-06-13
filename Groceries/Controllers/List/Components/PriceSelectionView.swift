@@ -12,7 +12,7 @@ class PriceSelectionView: UIView {
 
     // MARK: - Properties
     
-    var selectedCategory: Category? = nil
+    
     
     // MARK: - UI Elements
     
@@ -25,25 +25,31 @@ class PriceSelectionView: UIView {
         return label
     }()
     
-    fileprivate lazy var slider: UISlider = {
-        let slider = UISlider()
-        slider.tintColor = UIColor.flatBelizeHole
-        slider.minimumValue = 0
-        slider.maximumValue = 100
-        slider.addTarget(self, action: #selector(self.editingDidBegin), for: .touchDown)
-        slider.addTarget(self, action: #selector(self.didDragSlider), for: .touchDragInside)
-        slider.addTarget(self, action: #selector(self.didDragSlider), for: .touchDragOutside)
-        slider.addTarget(self, action: #selector(self.editingDidEnd), for: .touchUpInside)
-        slider.addTarget(self, action: #selector(self.editingDidEnd), for: .touchUpOutside)
-        slider.sizeToFit()
-        return slider
+    fileprivate lazy var horizontalLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .flatSilver
+        return view
     }()
     
-    fileprivate lazy var valueIndicatorView: UIView = {
+    fileprivate lazy var verticalLineViews: [UIView] = {
+        var views: [UIView] = []
+        
+        for i in 0..<21 {
+            let view = UIView()
+            view.backgroundColor = .flatSilver
+            views.append(view)
+        }
+        
+        return views
+    }()
+    
+    fileprivate lazy var circleView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.borderize(width: 1, color: .flatSilver)
-        view.clipsToBounds = true
+        view.backgroundColor = .flatBelizeHole
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.didPanCircleView(_:)))
+        view.addGestureRecognizer(panGestureRecognizer)
+        
         return view
     }()
     
@@ -53,8 +59,11 @@ class PriceSelectionView: UIView {
         super.init(frame: .zero)
         
         addSubview(instructionLabel)
-        addSubview(valueIndicatorView)
-        addSubview(slider)
+        addSubview(horizontalLineView)
+        for view in verticalLineViews {
+            addSubview(view)
+        }
+        addSubview(circleView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,34 +78,64 @@ class PriceSelectionView: UIView {
         instructionLabel.frame.size.width = bounds.width - CGFloat.pageMargin*2
         instructionLabel.frame.origin.x = CGFloat.pageMargin
         
-        slider.frame.size.width = instructionLabel.frame.width
-        slider.frame.origin.x = instructionLabel.frame.origin.x
-        slider.frame.origin.y = bounds.height - slider.frame.height
+        horizontalLineView.frame.size.width = instructionLabel.frame.width
+        horizontalLineView.frame.size.height = 1
+        horizontalLineView.frame.origin.x = instructionLabel.frame.origin.x
+        horizontalLineView.frame.origin.y = instructionLabel.frame.maxY + 25
         
-        valueIndicatorView.layer.cornerRadius = CGFloat.formFieldRadius
-        valueIndicatorView.frame.size.height = 20
-        valueIndicatorView.frame.origin.y = slider.frame.minY - valueIndicatorView.frame.height - CGFloat.formMargin
+        for i in 0..<verticalLineViews.count {
+            verticalLineViews[i].frame.size.width = 1
+            verticalLineViews[i].frame.size.height = i%2 == 0 ? 8 : 4
+            verticalLineViews[i].center.x = horizontalLineView.frame.origin.x + CGFloat(i) * horizontalLineView.frame.width / CGFloat(verticalLineViews.count-1)
+            verticalLineViews[i].frame.origin.y = horizontalLineView.frame.origin.y
+        }
+        
+        circleView.frame.size.width = 25
+        circleView.frame.size.height = circleView.frame.width
+        circleView.layer.cornerRadius = circleView.frame.height/2
+        circleView.center.y = horizontalLineView.center.y
+        circleView.frame.origin.x = horizontalLineView.frame.minX
+        
+//        valueIndicatorView.layer.cornerRadius = CGFloat.formFieldRadius
+//        valueIndicatorView.frame.size.height = 20
+//        valueIndicatorView.frame.origin.y = slider.frame.minY - valueIndicatorView.frame.height - CGFloat.formMargin
     }
     
     // MARK: - Selector Methods
     
-    func editingDidBegin() {
-        print("edit begin")
-        valueIndicatorView.center.x = CGFloat( slider.value/slider.maximumValue ) * slider.frame.width + slider.frame.origin.x
-        UIView.animate(withDuration: 0.2) {
-            self.valueIndicatorView.frame.size.width = 40
+    var initialPanPosition: CGFloat = CGFloat.pageMargin
+    
+    func didPanCircleView(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            initialPanPosition = circleView.frame.origin.x
         }
+        
+        let xTranslation = gestureRecognizer.translation(in: self).x
+        let newPos = initialPanPosition + xTranslation
+        
+        if newPos >= horizontalLineView.frame.minX && newPos <= horizontalLineView.frame.maxX - circleView.frame.width {
+            circleView.frame.origin.x = newPos
+        }
+        
     }
     
-    func didDragSlider() {
-        valueIndicatorView.center.x = CGFloat( slider.value/slider.maximumValue ) * slider.frame.width + slider.frame.origin.x
-    }
-    
-    func editingDidEnd() {
-        print("edit end")
-        UIView.animate(withDuration: 0.2) {
-            self.valueIndicatorView.frame.size.width = 0
-        }
-    }
+//    func editingDidBegin() {
+//        print("edit begin")
+//        valueIndicatorView.center.x = CGFloat( slider.value/slider.maximumValue ) * slider.frame.width + slider.frame.origin.x
+//        UIView.animate(withDuration: 0.2) {
+//            self.valueIndicatorView.frame.size.width = 40
+//        }
+//    }
+//    
+//    func didDragSlider() {
+//        valueIndicatorView.center.x = CGFloat( slider.value/slider.maximumValue ) * slider.frame.width + slider.frame.origin.x
+//    }
+//    
+//    func editingDidEnd() {
+//        print("edit end")
+//        UIView.animate(withDuration: 0.2) {
+//            self.valueIndicatorView.frame.size.width = 0
+//        }
+//    }
     
 }

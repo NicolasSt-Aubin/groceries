@@ -198,7 +198,6 @@ class OverviewTableViewCell: UITableViewCell {
     
     func completeSwipeAnimation(xVelocity: CGFloat) {
         
-        
         let completeSwipe = xVelocity > 500 || (contentView.frame.origin.x > bounds.width/2 && xVelocity > 0)
         
         let finalPosition = bounds.width + CGFloat.pageMargin

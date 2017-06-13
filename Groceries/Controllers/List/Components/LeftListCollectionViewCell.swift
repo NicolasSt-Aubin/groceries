@@ -11,6 +11,7 @@ import UIKit
 protocol LeftListCollectionViewCellDelegate {
     func userDidStartSearching()
     func userDidStopSearching()
+    func shouldRefreshNeedToBuyList()
 }
 
 protocol LeftListCollectionViewCellDataSource {
@@ -69,7 +70,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         textField.placeholder = L10n.searchPlaceholder
         textField.addTarget(self, action: #selector(self.searchFieldTextDidChange), for: .editingChanged)
         textField.clearButtonMode = .always
-        
+        textField.text = "chips"
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapSearchFieldClearButton))
         textField.rightView!.addGestureRecognizer(tapGestureRecognizer)
         
@@ -187,8 +188,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        let query = text.lowercased().trimmingCharacters(in: .whitespaces)
-        updateElements(query: query)
+        updateElements(query: text)
     }
     
     func cancelCreation() {
@@ -210,6 +210,16 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Public Methods
+    
+    func refresh() {
+        guard let text = searchAddTextField.text else {
+            updateElements()
+            return
+        }
+        updateElements(query: text)
+    }
+    
     // MARK: - Private Methods
 
     fileprivate func updateElements(query: String = "") {
@@ -225,8 +235,8 @@ class LeftListCollectionViewCell: UICollectionViewCell {
             updateInputLayout()
             return
         }
-        
-        elements = dataSource.unactiveElements().filter({ element in return element.matchesQuery(query: query) })
+
+        elements = dataSource.unactiveElements().filter({ element in return element.matchesQuery(query: query.lowercased().trimmingCharacters(in: .whitespaces)) })
         tableView.reloadData()
         updateInputLayout()
     }
@@ -237,6 +247,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
             userIsCreating = false
         } else if !userIsCreating && elements.count == 0 {
             userIsCreating = true
+            print(elements)
         } else {
             return
         }
@@ -334,6 +345,8 @@ extension LeftListCollectionViewCell: OverviewTableViewCellDelegate {
                 self.tableView.deleteRows(at: [indexPath], with: .top)
                 self.tableView.endUpdates()
             })
+            
+            delegate?.shouldRefreshNeedToBuyList()
         }
     }
     

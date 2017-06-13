@@ -87,6 +87,9 @@ class ListManagerViewController: BaseViewController {
         return collectionView
     }()
     
+    var leftListCollectionViewCell: LeftListCollectionViewCell? = nil
+    var rightListCollectionViewCell: RightListCollectionViewCell? = nil
+    
     // MARK: - Life Cycle Methods
     
     override func viewDidLoad() {
@@ -184,7 +187,7 @@ class ListManagerViewController: BaseViewController {
 
 }
 
-extension ListManagerViewController: LeftListCollectionViewCellDelegate {
+extension ListManagerViewController: LeftListCollectionViewCellDelegate, LeftListCollectionViewCellDataSource {
     
     func userDidStartSearching() {
         userIsSearching = true
@@ -192,6 +195,14 @@ extension ListManagerViewController: LeftListCollectionViewCellDelegate {
     
     func userDidStopSearching() {
         userIsSearching = false
+    }
+    
+    func shouldRefreshNeedToBuyList() {
+        rightListCollectionViewCell?.refresh()
+    }
+    
+    func unactiveElements() -> [Element] {
+        return elements.filter({ element in return !element.active})
     }
     
 }
@@ -215,10 +226,13 @@ extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewD
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeftListCollectionViewCell.reuseIdentifier, for: indexPath) as! LeftListCollectionViewCell
             cell.delegate = self
             cell.dataSource = self
+            leftListCollectionViewCell = cell
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RightListCollectionViewCell.reuseIdentifier, for: indexPath) as! RightListCollectionViewCell
+            cell.delegate = self
             cell.dataSource = self
+            rightListCollectionViewCell = cell
             return cell
         }
         
@@ -230,15 +244,11 @@ extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewD
     
 }
 
-extension ListManagerViewController: LeftListCollectionViewCellDataSource {
+extension ListManagerViewController: RightListCollectionViewCellDelegate, RightListCollectionViewCellDataSource {
     
-    func unactiveElements() -> [Element] {
-        return elements.filter({ element in return !element.active})
+    func shouldRefreshOverviewList() {
+        leftListCollectionViewCell?.refresh()
     }
-    
-}
-
-extension ListManagerViewController: RightListCollectionViewCellDataSource {
     
     func onShelfElements() -> [Element] {
         return elements.filter({ element in return element.active && !element.inCart})

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol RightListCollectionViewCellDelegate {
+    func shouldRefreshOverviewList()
+}
+
 protocol RightListCollectionViewCellDataSource {
     func onShelfElements() -> [Element]
     func inCartElements() -> [Element]
@@ -19,6 +23,7 @@ class RightListCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "RightListCollectionViewCellReuseIdentifier"
     
+    var delegate: RightListCollectionViewCellDelegate? = nil
     var dataSource: RightListCollectionViewCellDataSource? = nil
     
     var virtualNumberOfSections: Int {
@@ -165,6 +170,16 @@ class RightListCollectionViewCell: UICollectionViewCell {
         
     }
     
+    // MARK: Public Methods
+    
+    func refresh() {
+        tableView.reloadData()
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
+    
+    // MARK: Private Methods
+    
     fileprivate func reloadHeaders() {
         // Necessary hack to improve animation when one section empties into the other
         
@@ -239,6 +254,7 @@ extension RightListCollectionViewCell: UITableViewDelegate, UITableViewDataSourc
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: NeedToBuyTableViewCell.reuseIdentifier, for: indexPath) as! NeedToBuyTableViewCell
+        cell.delegate = self
         
         if indexPath.section == 0 {
             
@@ -256,6 +272,49 @@ extension RightListCollectionViewCell: UITableViewDelegate, UITableViewDataSourc
 
         cell.checkButton.addTarget(self, action: #selector(self.didTapCheckButton(_:)), for: .touchUpInside)
         return cell
+    }
+    
+}
+
+extension RightListCollectionViewCell: NeedToBuyTableViewCellDelegate {
+    
+    func didSwipeCell(withElement element: Element) {
+        guard let dataSource = dataSource else {
+            return
+        }
+        
+        if let index = dataSource.onShelfElements().index(where: {elem in element == elem}) {
+            
+            let indexPath = IndexPath(row: index, section: 0)
+            element.inCart = false
+            element.active = false
+            
+            DispatchQueue.main.async(execute: {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .top)
+                self.tableView.endUpdates()
+                
+                self.reloadHeaders()
+            })
+            self.delegate?.shouldRefreshOverviewList()
+            
+        } else if let index = dataSource.inCartElements().index(where: {elem in element == elem}) {
+            
+            let indexPath = IndexPath(row: index, section: 1)
+            element.inCart = false
+            element.active = false
+            
+            DispatchQueue.main.async(execute: {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .top)
+                self.tableView.endUpdates()
+                
+                self.reloadHeaders()
+            })
+            self.delegate?.shouldRefreshOverviewList()
+            
+        }
+        
     }
     
 }
