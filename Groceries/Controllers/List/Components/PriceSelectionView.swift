@@ -117,7 +117,7 @@ class PriceSelectionView: UIView {
         priceIndicatorView.layer.cornerRadius = CGFloat.formFieldRadius
         priceIndicatorView.frame.size.height = priceLabel.frame.height + CGFloat.formMargin*2
         priceIndicatorView.frame.size.width = 50
-        priceIndicatorView.frame.origin.y = circleView.frame.minY - priceIndicatorView.frame.height - 8
+        priceIndicatorView.frame.origin.y = circleView.frame.minY - priceIndicatorView.frame.height - 3
         priceIndicatorView.center.x = circleView.center.x
         
         priceLabel.frame.size.width = priceIndicatorView.frame.width
