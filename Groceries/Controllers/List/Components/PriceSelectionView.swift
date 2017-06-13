@@ -111,10 +111,14 @@ class PriceSelectionView: UIView {
         }
         
         let xTranslation = gestureRecognizer.translation(in: self).x
-        let newPos = initialPanPosition + xTranslation
+        circleView.frame.origin.x  = initialPanPosition + xTranslation
         
-        if newPos >= horizontalLineView.frame.minX && newPos <= horizontalLineView.frame.maxX - circleView.frame.width {
-            circleView.frame.origin.x = newPos
+        if circleView.frame.origin.x < horizontalLineView.frame.minX {
+            circleView.frame.origin.x = horizontalLineView.frame.minX
+        }
+        
+        if circleView.frame.origin.x > horizontalLineView.frame.maxX - circleView.frame.width {
+            circleView.frame.origin.x = horizontalLineView.frame.maxX - circleView.frame.width
         }
         
     }
