@@ -25,9 +25,9 @@ class CategorySelectionCollectionViewCell: UICollectionViewCell {
     
     var isInSelection: Bool = false {
         didSet {
-            setNeedsLayout()
             UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
+                self.imageContainerView.transform = self.isInSelection ? CGAffineTransform(scaleX: 2.5, y: 2.5) : .identity
+                self.contentView.layer.borderColor = self.isInSelection ? self.category.color.cgColor : UIColor.flatSilver.cgColor
             }
         }
     }
@@ -37,7 +37,6 @@ class CategorySelectionCollectionViewCell: UICollectionViewCell {
     fileprivate lazy var imageContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .flatBlack
-        view.clipsToBounds = true
         return view
     }()
     
@@ -57,10 +56,11 @@ class CategorySelectionCollectionViewCell: UICollectionViewCell {
         clipsToBounds = true
         
         contentView.borderize(width: 1, color: .flatSilver)
+        contentView.clipsToBounds = true
         contentView.backgroundColor = .white
         
         contentView.addSubview(imageContainerView)
-        imageContainerView.addSubview(categoryImageView)
+        contentView.addSubview(categoryImageView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,16 +73,16 @@ class CategorySelectionCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         
         contentView.layer.cornerRadius = CGFloat.formFieldRadius
-        contentView.layer.borderWidth = isInSelection ? 0 : 1
+        contentView.layer.borderColor = isInSelection ? category.color.cgColor : UIColor.flatSilver.cgColor
         
-        imageContainerView.frame.size = isInSelection ? CGSize(width: contentView.bounds.width*2, height:contentView.bounds.height*2) : CGSize(width: 50, height: 50)
-        imageContainerView.layer.cornerRadius = imageContainerView.frame.height/2//CGFloat.formFieldRadius
+        imageContainerView.frame.size = isInSelection ? CGSize(width: 150, height: 150) : CGSize(width: 50, height: 50)
+        imageContainerView.layer.cornerRadius = imageContainerView.frame.height/2
         imageContainerView.center.x = contentView.bounds.width/2
         imageContainerView.center.y = contentView.bounds.height/2
         
         categoryImageView.frame.size = CGSize(width: 40, height: 40)
-        categoryImageView.center.x = imageContainerView.bounds.width/2
-        categoryImageView.center.y = imageContainerView.bounds.height/2 + 10
+        categoryImageView.center.x = imageContainerView.center.x
+        categoryImageView.center.y = imageContainerView.center.y + 10
     }
     
 }

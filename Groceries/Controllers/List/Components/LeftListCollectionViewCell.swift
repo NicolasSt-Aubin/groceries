@@ -70,7 +70,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         textField.placeholder = L10n.searchPlaceholder
         textField.addTarget(self, action: #selector(self.searchFieldTextDidChange), for: .editingChanged)
         textField.clearButtonMode = .always
-        textField.text = "chips"
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapSearchFieldClearButton))
         textField.rightView!.addGestureRecognizer(tapGestureRecognizer)
         
@@ -91,7 +91,14 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     
     fileprivate lazy var priceSelectionView: PriceSelectionView = {
         let priceSelectionView = PriceSelectionView()
+        priceSelectionView.sizeToFit()
         return priceSelectionView
+    }()
+    
+    fileprivate lazy var quantityIndicatorSelectionView: QuantityIndicatorSelectionView = {
+        let quantityIndicatorSelectionView = QuantityIndicatorSelectionView()
+        quantityIndicatorSelectionView.sizeToFit()
+        return quantityIndicatorSelectionView
     }()
     
     fileprivate lazy var cancelButton: GRButton = {
@@ -119,6 +126,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         addSubview(elementCreationView)
         elementCreationView.addSubview(categorySelectionView)
         elementCreationView.addSubview(priceSelectionView)
+        elementCreationView.addSubview(quantityIndicatorSelectionView)
         elementCreationView.addSubview(addButton)
         elementCreationView.addSubview(cancelButton)
         
@@ -145,16 +153,18 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         tableView.frame.origin.y = searchAddTextField.frame.maxY + CGFloat.pageMargin
         
         elementCreationView.frame.size.width = bounds.width
-        elementCreationView.frame.size.height = bounds.height - searchAddTextField.frame.maxY - keyboardHeight
+        elementCreationView.frame.size.height = bounds.height - searchAddTextField.frame.maxY //- keyboardHeight
         elementCreationView.frame.origin.y = searchAddTextField.frame.maxY
         
         categorySelectionView.frame.size.width = elementCreationView.bounds.width
-        categorySelectionView.frame.size.height = 120
-        categorySelectionView.frame.origin.y = CGFloat.formMargin
+        categorySelectionView.frame.size.height = 100
+        categorySelectionView.frame.origin.y = CGFloat.pageMargin
         
         priceSelectionView.frame.size.width = elementCreationView.bounds.width
-        priceSelectionView.frame.size.height = 120
-        priceSelectionView.frame.origin.y = categorySelectionView.frame.maxY + CGFloat.formMargin
+        priceSelectionView.frame.origin.y = categorySelectionView.frame.maxY + CGFloat.pageMargin
+        
+        quantityIndicatorSelectionView.frame.size.width = elementCreationView.bounds.width
+        quantityIndicatorSelectionView.frame.origin.y = priceSelectionView.frame.maxY + CGFloat.pageMargin
         
         let dualFormAvailableWidth: CGFloat = elementCreationView.bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin
         
@@ -254,7 +264,7 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         if userIsCreating {
             
             searchAddTextField.iconImage = Asset.addIcon.image
-            searchAddTextField.returnKeyType = .next
+            searchAddTextField.returnKeyType = .done
             searchAddTextField.reloadInputViews()
             elementCreationView.isHidden = false
             
@@ -305,6 +315,7 @@ extension LeftListCollectionViewCell: UITextFieldDelegate {
             textField.resignFirstResponder()
             delegate?.userDidStopSearching()
         } else if textField == searchAddTextField && userIsCreating {
+            textField.resignFirstResponder()
         }
         
         return false

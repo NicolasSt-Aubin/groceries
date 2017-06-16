@@ -22,7 +22,7 @@ class CategorySelectionView: UIView {
     
     fileprivate lazy var instructionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .flatSilver
+        label.textColor = .flatGrey
         label.font = UIFont.boldSystemFont(ofSize: 10)
         label.text = L10n.selectCategory.uppercased()
         label.sizeToFit()

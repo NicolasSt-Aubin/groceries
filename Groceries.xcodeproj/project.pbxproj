@@ -31,6 +31,8 @@
 		1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */; };
 		1E4433C71EEB143000E25141 /* GRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C61EEB143000E25141 /* GRTextField.swift */; };
 		1E4433C91EEB3AEF00E25141 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C81EEB3AEF00E25141 /* CheckButton.swift */; };
+		1E5C30EC1EF45F790067D880 /* QuantityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */; };
+		1E5C30EE1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30ED1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift */; };
 		1E89358F1EEBB43300EBD2E9 /* String+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89358E1EEBB43300EBD2E9 /* String+groceries.swift */; };
 		1E8935951EECABA000EBD2E9 /* LeftListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935911EECABA000EBD2E9 /* LeftListCollectionViewCell.swift */; };
 		1E8935961EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935921EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift */; };
@@ -96,6 +98,8 @@
 		1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Groceries.swift"; path = "Extensions/UIFont+Groceries.swift"; sourceTree = "<group>"; };
 		1E4433C61EEB143000E25141 /* GRTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRTextField.swift; path = Views/GRTextField.swift; sourceTree = "<group>"; };
 		1E4433C81EEB3AEF00E25141 /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckButton.swift; path = Views/CheckButton.swift; sourceTree = "<group>"; };
+		1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantityIndicator.swift; path = Models/QuantityIndicator.swift; sourceTree = "<group>"; };
+		1E5C30ED1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantityIndicatorSelectionView.swift; path = Controllers/List/Components/QuantityIndicatorSelectionView.swift; sourceTree = "<group>"; };
 		1E89358E1EEBB43300EBD2E9 /* String+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+groceries.swift"; path = "Extensions/String+groceries.swift"; sourceTree = "<group>"; };
 		1E8935911EECABA000EBD2E9 /* LeftListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftListCollectionViewCell.swift; path = Controllers/List/Components/LeftListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E8935921EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableViewCell.swift; path = Controllers/List/Components/NeedToBuyTableViewCell.swift; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 				1E8935991EECABE500EBD2E9 /* CategorySelectionView.swift */,
 				1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */,
 				1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */,
+				1E5C30ED1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift */,
 			);
 			name = LeftView;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 			children = (
 				1EA683C01EEB44F50029D7C8 /* Element.swift */,
 				1EA683C21EEB46460029D7C8 /* Category.swift */,
+				1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -531,12 +537,14 @@
 				1EC28EAD1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift in Sources */,
 				1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */,
 				1E89358F1EEBB43300EBD2E9 /* String+groceries.swift in Sources */,
+				1E5C30EC1EF45F790067D880 /* QuantityIndicator.swift in Sources */,
 				1EA683C31EEB46460029D7C8 /* Category.swift in Sources */,
 				1E4433C11EEA538C00E25141 /* Localize.swift in Sources */,
 				1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */,
 				1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */,
 				1E0A84631EE9BCCE00FFE941 /* APIService.swift in Sources */,
 				1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */,
+				1E5C30EE1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift in Sources */,
 				1E0A82EB1EE8740400FFE941 /* CGFLoat+groceries.swift in Sources */,
 				1E0A82F51EE8792D00FFE941 /* NetworkResponse.swift in Sources */,
 				1EC28EAF1EECF1D600FAE60B /* PriceSelectionView.swift in Sources */,

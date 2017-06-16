@@ -10,6 +10,10 @@
 
 "OPTIONAL_INDICATOR" = "(opt)";
 "CANCEL" = "Cancel";
+"PER" = "per";
+"UNIT" = "unit";
+"KG" = "kg";
+"LBS" = "lbs";
 
 // ERRORS
 
@@ -34,3 +38,4 @@
 "IN_YOUR_CART" = "In your cart";
 "SELECT_CATEGORY" = "Select Category";
 "SELECT_PRICE" = "Select Price";
+"SELECT_QUANTITY_INDICATOR" = "Select Quantity Indicator";

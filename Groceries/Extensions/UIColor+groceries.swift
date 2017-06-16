@@ -84,6 +84,10 @@ extension UIColor {
         return UIColor(colorString: "#bdc3c7")
     }
     
+    class var flatGrey: UIColor {
+        return UIColor(colorString: "#9AA2AF")
+    }
+    
     class var flatPeterRiver: UIColor {
         return UIColor(colorString: "#3498db")
     }

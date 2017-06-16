@@ -10,6 +10,10 @@
 
 "OPTIONAL_INDICATOR" = "(opt)";
 "CANCEL" = "Annuler";
+"PER" = "par";
+"UNIT" = "unité";
+"KG" = "kg";
+"LBS" = "lbs";
 
 // ERRORS
 
@@ -32,3 +36,6 @@
 "COMPLETE" = "Compléter";
 "ON_THE_SHELF" = "Sur la tablette";
 "IN_YOUR_CART" = "Dans votre panier";
+"SELECT_CATEGORY" = "Selectionner une catégorie";
+"SELECT_PRICE" = "Selectionner un prix";
+"SELECT_QUANTITY_INDICATOR" = "Selectionner un indice de quantité";

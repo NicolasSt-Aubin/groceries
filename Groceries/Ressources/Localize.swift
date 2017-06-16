@@ -26,6 +26,10 @@ enum L10n {
   static let generalNetworkError = L10n.tr("GENERAL_NETWORK_ERROR")
   /// In your cart
   static let inYourCart = L10n.tr("IN_YOUR_CART")
+  /// kg
+  static let kg = L10n.tr("KG")
+  /// lbs
+  static let lbs = L10n.tr("LBS")
   /// Login
   static let login = L10n.tr("LOGIN")
   /// Need to buy
@@ -38,12 +42,18 @@ enum L10n {
   static let overview = L10n.tr("OVERVIEW")
   /// Password
   static let password = L10n.tr("PASSWORD")
+  /// per
+  static let per = L10n.tr("PER")
   /// Milk, chicken, juice...
   static let searchPlaceholder = L10n.tr("SEARCH_PLACEHOLDER")
   /// Select Category
   static let selectCategory = L10n.tr("SELECT_CATEGORY")
   /// Select Price
   static let selectPrice = L10n.tr("SELECT_PRICE")
+  /// Select Quantity Indicator
+  static let selectQuantityIndicator = L10n.tr("SELECT_QUANTITY_INDICATOR")
+  /// unit
+  static let unit = L10n.tr("UNIT")
   /// Welcome
   static let welcome = L10n.tr("WELCOME")
 }
