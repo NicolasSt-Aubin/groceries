@@ -20,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window?.rootViewController = ListManagerViewController()//CurrentUserService.savedToken == nil ? LoginViewController() : MainNavigationController()
         window?.makeKeyAndVisible()
+        
+        let launchViewController = LaunchViewController()
+        launchViewController.modalPresentationStyle = .overCurrentContext
+        window?.rootViewController?.present(launchViewController, animated: false, completion: nil)
+        
         return true
     }
 

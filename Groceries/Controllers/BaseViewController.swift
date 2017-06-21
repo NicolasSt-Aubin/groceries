@@ -25,6 +25,12 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - UI Elements
     
+    fileprivate lazy var statusBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .flatBelizeHole
+        return view
+    }()
+    
     fileprivate lazy var whiteView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -56,6 +62,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         view.backgroundColor = .white
         edgesForExtendedLayout = []
         
+        view.addSubview(statusBackgroundView)
         view.addSubview(whiteView)
         view.addSubview(loadingView)
         loadingView.addSubview(activityIndicatorView)
@@ -63,6 +70,10 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+        statusBackgroundView.frame.size.width = view.bounds.width
+        statusBackgroundView.frame.size.height = 20
+        view.bringSubview(toFront: statusBackgroundView)
         
         whiteView.frame.size.width = view.bounds.width
         if let tabBar = tabBarController?.tabBar {

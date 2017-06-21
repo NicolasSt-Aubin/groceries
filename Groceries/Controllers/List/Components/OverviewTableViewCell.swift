@@ -9,7 +9,8 @@
 import UIKit
 
 protocol OverviewTableViewCellDelegate {
-    func didSwipeCell(withElement element: Element)
+    func restartActivationProcess(forElement element: Element)
+    func completeActivationProcess(forElement element: Element)
 }
 
 class OverviewTableViewCell: UITableViewCell {
@@ -28,7 +29,7 @@ class OverviewTableViewCell: UITableViewCell {
             imageContainerView.backgroundColor = element.category.color
             categoryImageView.image = element.category.image
             titleLabel.text = element.name
-            contentView.isHidden = element.active
+            contentView.isHidden = element.active || element.activationTimer != nil
             if let price = element.price {
                 priceLabel.text = String(format: "%.2f", price) + " $"
                 titleLabel.center.y = imageContainerView.center.y - dateLabel.frame.height/2
@@ -41,14 +42,31 @@ class OverviewTableViewCell: UITableViewCell {
     
     // MARK: - UI Elements
     
-    fileprivate lazy var instructionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .flatBlack
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.text = "Add to you next grocery list ->"
-        label.alpha = 0
-        label.sizeToFit()
-        return label
+    fileprivate lazy var underView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    fileprivate lazy var quantitySelectionView: QuantitySelectionView = {
+        let quantitySelectionView = QuantitySelectionView()
+        quantitySelectionView.delegate = self
+        return quantitySelectionView
+    }()
+    
+    fileprivate lazy var checkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Asset.checkIcon.image.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = .flatGrey
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    fileprivate lazy var completeSwipeButton: GRButton = {
+        let button = GRButton()
+        button.backgroundColor = .white
+        button.borderize(width: 1, color: .flatSilver)
+        button.addTarget(self, action: #selector(self.didTapCompleteSwipeButton), for: .touchUpInside)
+        return button
     }()
     
     fileprivate lazy var imageContainerView: UIView = {
@@ -98,8 +116,12 @@ class OverviewTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview(instructionLabel)
-        sendSubview(toBack: instructionLabel)
+        
+        addSubview(underView)
+        sendSubview(toBack: underView)
+        underView.addSubview(quantitySelectionView)
+        underView.addSubview(completeSwipeButton)
+        completeSwipeButton.addSubview(checkImageView)
         
         selectionStyle = .none
         backgroundColor = .clear
@@ -127,8 +149,18 @@ class OverviewTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        instructionLabel.center.y = bounds.height/2
-        instructionLabel.frame.origin.x = CGFloat.pageMargin*3
+        quantitySelectionView.frame.size = CGSize(width: bounds.width/2, height: bounds.height/2)
+        
+        completeSwipeButton.frame.size = CGSize(width: quantitySelectionView.frame.height, height: quantitySelectionView.frame.height)
+        completeSwipeButton.frame.origin.x = quantitySelectionView.frame.maxX + CGFloat.formMargin
+        
+        checkImageView.frame.size = CGSize(width: 10, height: 10)
+        checkImageView.center = CGPoint(x: completeSwipeButton.bounds.width/2, y: completeSwipeButton.bounds.height/2)
+
+        underView.frame.size.height = quantitySelectionView.frame.height
+        underView.frame.size.width = completeSwipeButton.frame.maxX
+        underView.center.y = bounds.height/2
+        underView.center.x = bounds.width/2
         
         contentView.frame.size.width = bounds.width - CGFloat.pageMargin*2
         contentView.frame.size.height = bounds.height - CGFloat.pageMargin
@@ -186,12 +218,16 @@ class OverviewTableViewCell: UITableViewCell {
         }
         
         let progress = contentView.frame.origin.x / bounds.width
-        instructionLabel.alpha = progress
+        quantitySelectionView.alpha = progress
         
         if gestureRecognizer.state == .ended {
             completeSwipeAnimation(xVelocity: xVelocity)
         }
         
+    }
+    
+    func didTapCompleteSwipeButton() {
+        delegate?.completeActivationProcess(forElement: element)
     }
     
     // MARK: Private Methods
@@ -212,17 +248,19 @@ class OverviewTableViewCell: UITableViewCell {
         
         UIView.animate(withDuration: duration, animations: {
             self.contentView.frame.origin.x = completeSwipe ? finalPosition : initialPosition
-            self.instructionLabel.alpha = completeSwipe ? 1 : 0
+            self.quantitySelectionView.alpha = completeSwipe ? 1 : 0
         }, completion: { complete in
             if completeSwipe {
                 self.contentView.isHidden = true
-                self.delegate?.didSwipeCell(withElement: self.element)
+                self.delegate?.restartActivationProcess(forElement: self.element)
             }
         })
         
     }
     
 }
+
+// MARK: - Pan Gesture Delegate
 
 extension OverviewTableViewCell {
     
@@ -231,9 +269,21 @@ extension OverviewTableViewCell {
             if gestureRecognizer.velocity(in: self).x < 0 {
                 return false
             }
+            if abs(gestureRecognizer.velocity(in: self).y) > abs(gestureRecognizer.velocity(in: self).x) {
+                return false
+            }
         }
         return true
     }
     
+}
+
+// MARK: - QuantitySelectionViewDelegate
+
+extension OverviewTableViewCell: QuantitySelectionViewDelegate {
+    
+    func didUpdateQuantity() {
+        delegate?.restartActivationProcess(forElement: element)
+    }
     
 }

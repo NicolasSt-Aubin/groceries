@@ -220,6 +220,10 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func test() {
+        print("coucou")
+    }
+    
     // MARK: - Public Methods
     
     func refresh() {
@@ -301,6 +305,21 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         
     }
     
+    fileprivate func activateElement(element: Element) {
+        if let index = elements.index(where: {elem in element == elem}) {
+            let indexPath = IndexPath(row: index, section: 0)
+            element.active = true
+            elements.remove(at: index)
+            DispatchQueue.main.async(execute: {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .top)
+                self.tableView.endUpdates()
+            })
+            
+            delegate?.shouldRefreshNeedToBuyList()
+        }
+    }
+    
 }
 
 extension LeftListCollectionViewCell: UITextFieldDelegate {
@@ -344,19 +363,18 @@ extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource
 
 extension LeftListCollectionViewCell: OverviewTableViewCellDelegate {
     
-    func didSwipeCell(withElement element: Element) {
-        if let index = elements.index(where: {elem in element == elem}) {
-            let indexPath = IndexPath(row: index, section: 0)
-            element.active = true
-            elements.remove(at: index)
-            DispatchQueue.main.async(execute: {
-                self.tableView.beginUpdates()
-                self.tableView.deleteRows(at: [indexPath], with: .top)
-                self.tableView.endUpdates()
-            })
-            
-            delegate?.shouldRefreshNeedToBuyList()
-        }
+    func restartActivationProcess(forElement element: Element) {
+        print("restarting")
+        element.activationTimer?.invalidate()
+        element.activationTimer = nil
+        element.activationTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: {_ in
+            self.activateElement(element: element)
+        })
     }
-    
+
+    func completeActivationProcess(forElement element: Element) {
+        element.activationTimer?.invalidate()
+        element.activationTimer = nil
+        activateElement(element: element)
+    }
 }

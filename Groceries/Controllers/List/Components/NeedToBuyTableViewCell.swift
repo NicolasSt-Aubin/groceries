@@ -44,7 +44,7 @@ class NeedToBuyTableViewCell: UITableViewCell {
     // MARK: - UI Elements
     
     lazy var checkButton: CheckButton = {
-        let button = CheckButton(mainImage: Asset.dairy.image)
+        let button = CheckButton()
         button.backgroundColor = .flatBlack
         return button
     }()
@@ -198,6 +198,9 @@ extension NeedToBuyTableViewCell {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
             if gestureRecognizer.velocity(in: self).x > 0 {
+                return false
+            }
+            if abs(gestureRecognizer.velocity(in: self).y) > abs(gestureRecognizer.velocity(in: self).x) {
                 return false
             }
         }

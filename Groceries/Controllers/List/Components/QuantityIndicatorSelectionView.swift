@@ -118,7 +118,6 @@ class QuantityIndicatorSelectionView: UIView {
     
     func didTapKgButton() {
         selectedQuantityIndicator = .kg
-        print("asdkjfhaslkjh")
     }
     
     func didTapLbsButton() {
