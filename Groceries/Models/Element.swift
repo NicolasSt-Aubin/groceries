@@ -17,6 +17,7 @@ class Element {
     var inCart: Bool = false
     var category: Category!
     var activationTimer: Timer? = nil
+    var desiredQuantity: Int = 1
     
     init(id: String, name: String, active: Bool, category: Category, price: Double? = nil, inCart: Bool = false) {
         self.id = id

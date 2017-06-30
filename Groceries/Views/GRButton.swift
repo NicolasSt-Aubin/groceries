@@ -85,8 +85,6 @@ class GRButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = CGFloat.formFieldRadius
-        
         activityIndicatorView.center.x = bounds.width/2
         activityIndicatorView.center.y = bounds.height/2
     }

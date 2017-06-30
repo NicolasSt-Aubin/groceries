@@ -37,6 +37,7 @@ class OverviewTableViewCell: UITableViewCell {
                 priceLabel.text = " "
                 titleLabel.center.y = imageContainerView.center.y
             }
+            quantitySelectionView.quantity = element.desiredQuantity
         }
     }
     
@@ -283,6 +284,7 @@ extension OverviewTableViewCell {
 extension OverviewTableViewCell: QuantitySelectionViewDelegate {
     
     func didUpdateQuantity() {
+        element.desiredQuantity = quantitySelectionView.quantity
         delegate?.restartActivationProcess(forElement: element)
     }
     

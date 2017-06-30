@@ -93,6 +93,7 @@ class RightListCollectionViewCell: UICollectionViewCell {
         completeButton.frame.size.height = CGFloat.formFieldHeight
         completeButton.center.x = bounds.width/2
         completeButton.frame.origin.y = bounds.height - completeButton.frame.height - CGFloat.pageMargin
+        completeButton.layer.cornerRadius = CGFloat.formFieldRadius
         
         tableView.frame.size.width = bounds.width - CGFloat.pageMargin * 2
         

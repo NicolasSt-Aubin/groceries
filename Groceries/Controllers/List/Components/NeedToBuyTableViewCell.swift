@@ -28,7 +28,7 @@ class NeedToBuyTableViewCell: UITableViewCell {
             
             contentView.isHidden = false
             checkButton.element = element
-            titleLabel.text = element.name
+            titleLabel.text = String(element.desiredQuantity) + " x " + element.name
             
             if let price = element.price {
                 priceLabel.text = String(format: "%.2f", price) + " $"
@@ -38,10 +38,17 @@ class NeedToBuyTableViewCell: UITableViewCell {
                 titleLabel.center.y = checkButton.center.y
             }
             
+//            quantitySelectionView.quantity = element.desiredQuantity
         }
     }
     
     // MARK: - UI Elements
+    
+//    fileprivate lazy var quantitySelectionView: QuantitySelectionView = {
+//        let quantitySelectionView = QuantitySelectionView()
+//        quantitySelectionView.delegate = self
+//        return quantitySelectionView
+//    }()
     
     lazy var checkButton: CheckButton = {
         let button = CheckButton()
@@ -83,8 +90,8 @@ class NeedToBuyTableViewCell: UITableViewCell {
         
         contentView.backgroundColor = .white
         
+//        contentView.addSubview(quantitySelectionView)
         contentView.addSubview(checkButton)
-        
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(separatorView)
@@ -108,16 +115,20 @@ class NeedToBuyTableViewCell: UITableViewCell {
         contentView.center.x = bounds.width/2
         
         let cellPadding: CGFloat = 30
-        let cellMargin: CGFloat = 25
+        let cellMargin: CGFloat = 10
         
         checkButton.frame.size = CGSize(width: 40, height: 40)
         checkButton.layer.cornerRadius = checkButton.frame.height/2
         checkButton.frame.origin.x = contentView.bounds.width - checkButton.frame.width - cellPadding
         checkButton.center.y = contentView.bounds.height/2
         
-        titleLabel.frame.size.width = contentView.bounds.width - checkButton.frame.width - 2 * cellPadding - cellMargin
+//        quantitySelectionView.frame.size = CGSize(width: 20, height: contentView.bounds.height - 10)
+//        quantitySelectionView.center.y = contentView.bounds.height/2
+//        quantitySelectionView.frame.origin.x = cellPadding
+        
+        titleLabel.frame.size.width = checkButton.frame.minX - cellMargin - cellPadding
         titleLabel.frame.origin.x = cellPadding
-        if let price = element.price {
+        if element.price != nil {
             titleLabel.center.y = checkButton.center.y - titleLabel.frame.height/3
         } else {
             titleLabel.center.y = checkButton.center.y
@@ -154,9 +165,6 @@ class NeedToBuyTableViewCell: UITableViewCell {
             contentView.frame.origin.x = initialPanPosition + xTranslation
         }
         
-//        let progress = contentView.frame.origin.x / bounds.width
-//        instructionLabel.alpha = progress
-        
         if gestureRecognizer.state == .ended {
             completeSwipeAnimation(xVelocity: xVelocity)
         }
@@ -181,7 +189,6 @@ class NeedToBuyTableViewCell: UITableViewCell {
         
         UIView.animate(withDuration: duration, animations: {
             self.contentView.frame.origin.x = completeSwipe ? finalPosition : initialPosition
-//            self.instructionLabel.alpha = completeSwipe ? 1 : 0
         }, completion: { complete in
             if completeSwipe {
                 self.contentView.isHidden = true
@@ -192,6 +199,8 @@ class NeedToBuyTableViewCell: UITableViewCell {
     }
 
 }
+
+// MARK: - Pan Gesture Delegate
 
 extension NeedToBuyTableViewCell {
     
@@ -207,5 +216,14 @@ extension NeedToBuyTableViewCell {
         return true
     }
     
+}
+
+// MARK: - QuantitySelectionViewDelegate
+
+extension NeedToBuyTableViewCell: QuantitySelectionViewDelegate {
+    
+    func didUpdateQuantity() {
+//        element.desiredQuantity = quantitySelectionView.quantity
+    }
     
 }

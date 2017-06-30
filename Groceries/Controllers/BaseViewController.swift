@@ -25,7 +25,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - UI Elements
     
-    fileprivate lazy var statusBackgroundView: UIView = {
+    lazy var statusBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .flatBelizeHole
         return view

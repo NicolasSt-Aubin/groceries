@@ -89,6 +89,7 @@ class LoginViewController: BaseViewController {
         loginButton.frame.size = textFieldSize
         loginButton.center.x = view.bounds.width/2
         loginButton.frame.origin.y = view.bounds.height - CGFloat.pageMargin - keyboardHeight - loginButton.frame.height
+        loginButton.layer.cornerRadius = CGFloat.formFieldRadius
     }
     
     // MARK: - Selector Methods

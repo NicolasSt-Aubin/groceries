@@ -23,6 +23,7 @@
 		1E0A84631EE9BCCE00FFE941 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A84621EE9BCCE00FFE941 /* APIService.swift */; };
 		1E0A84671EE9EEA800FFE941 /* UILabel+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A84661EE9EEA800FFE941 /* UILabel+groceries.swift */; };
 		1E0A846B1EEA04DB00FFE941 /* UITextField+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */; };
+		1E3392C91F03012A0054C50B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3392C81F03012A0054C50B /* SettingsViewController.swift */; };
 		1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433AA1EEA2D0700E25141 /* BaseViewController.swift */; };
 		1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433AC1EEA2D1700E25141 /* ListManagerViewController.swift */; };
 		1E4433B91EEA522400E25141 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E4433BB1EEA522400E25141 /* Localizable.strings */; };
@@ -91,6 +92,7 @@
 		1E0A84621EE9BCCE00FFE941 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = Services/APIService.swift; sourceTree = "<group>"; };
 		1E0A84661EE9EEA800FFE941 /* UILabel+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UILabel+groceries.swift"; path = "Extensions/UILabel+groceries.swift"; sourceTree = "<group>"; };
 		1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+groceries.swift"; path = "Extensions/UITextField+groceries.swift"; sourceTree = "<group>"; };
+		1E3392C81F03012A0054C50B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/SettingsViewController.swift; sourceTree = "<group>"; };
 		1E4433AA1EEA2D0700E25141 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/BaseViewController.swift; sourceTree = "<group>"; };
 		1E4433AC1EEA2D1700E25141 /* ListManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListManagerViewController.swift; path = Controllers/List/ListManagerViewController.swift; sourceTree = "<group>"; };
 		1E4433BA1EEA522400E25141 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				1E9B4EEE1EF89A90001CAEFA /* LaunchViewController.swift */,
 				1E4433AA1EEA2D0700E25141 /* BaseViewController.swift */,
 				1E0A82E41EE873FB00FFE941 /* LoginViewController.swift */,
+				1E3392C81F03012A0054C50B /* SettingsViewController.swift */,
 				1E4433A91EEA2C8A00E25141 /* List */,
 			);
 			name = Controllers;
@@ -563,6 +566,7 @@
 				1E0A82F01EE8751400FFE941 /* GRButton.swift in Sources */,
 				1E8935951EECABA000EBD2E9 /* LeftListCollectionViewCell.swift in Sources */,
 				1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */,
+				1E3392C91F03012A0054C50B /* SettingsViewController.swift in Sources */,
 				1E0A82E61EE873FB00FFE941 /* LoginViewController.swift in Sources */,
 				1E0A82B51EE872EF00FFE941 /* AppDelegate.swift in Sources */,
 			);

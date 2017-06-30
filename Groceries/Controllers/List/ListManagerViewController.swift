@@ -25,6 +25,10 @@ class ListManagerViewController: BaseViewController {
     
     var elements: [Element] = []
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: - UI Elements
     
     fileprivate lazy var headerView: UIView = {

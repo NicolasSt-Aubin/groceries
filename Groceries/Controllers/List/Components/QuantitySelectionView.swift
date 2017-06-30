@@ -40,7 +40,7 @@ class QuantitySelectionView: UIView {
         button.setTitle("-", for: .normal)
         button.setTitleColor(.flatGrey, for: .normal)
         button.backgroundColor = .white
-        button.layer.borderWidth = 0
+        button.borderize(width: 0, color: .white)
         button.isEnabled = false
         button.addTarget(self, action: #selector(self.didTapMinusButton), for: .touchUpInside)
         return button
@@ -71,6 +71,7 @@ class QuantitySelectionView: UIView {
         button.setTitle("+", for: .normal)
         button.setTitleColor(.flatGrey, for: .normal)
         button.backgroundColor = .white
+        button.borderize(width: 0, color: .white)
         button.layer.borderWidth = 0
         button.addTarget(self, action: #selector(self.didTapPlusButton), for: .touchUpInside)
         return button
