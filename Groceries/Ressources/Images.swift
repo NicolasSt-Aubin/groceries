@@ -55,6 +55,8 @@ enum Asset {
   static let priceIcon: AssetType = "price-icon"
   static let redMeat: AssetType = "red-meat"
   static let searchIcon: AssetType = "search-icon"
+  static let starLord: AssetType = "star_lord"
+  static let tonyStark: AssetType = "tony_stark"
   static let userIcon: AssetType = "user-icon"
   static let vegies: AssetType = "vegies"
 }

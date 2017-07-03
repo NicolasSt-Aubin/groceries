@@ -16,7 +16,7 @@ class SettingsViewController: BaseViewController {
     let smallMargin: CGFloat = 10
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+        return .lightContent
     }
     
     // MARK: - UI Elements
@@ -66,41 +66,9 @@ class SettingsViewController: BaseViewController {
         return textField
     }()
     
-    fileprivate lazy var changePasswordButton: GRButton = {
-        let button = GRButton()
-        button.backgroundColor = .flatMidnightBlue
-        return button
-    }()
-    
-    fileprivate lazy var changePasswordLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "Change password"
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.sizeToFit()
-        return label
-    }()
-    
-    fileprivate lazy var passwordImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Asset.passwordIcon.image.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = .white
-        imageView.sizeToFit()
-        return imageView
-    }()
-    
-    fileprivate lazy var listsLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.flatBlack
-        label.text = "Lists"
-        label.font = UIFont.systemFont(ofSize: 22)
-        label.sizeToFit()
-        return label
-    }()
-    
     fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: self.bigMargin, bottom: 0, right: self.bigMargin)
+        layout.sectionInset = UIEdgeInsets(top: self.bigMargin, left: self.bigMargin, bottom: self.bigMargin, right: self.bigMargin)
         layout.minimumInteritemSpacing = self.smallMargin
         layout.minimumLineSpacing = self.smallMargin
         return layout
@@ -109,9 +77,9 @@ class SettingsViewController: BaseViewController {
     fileprivate lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewLayout)
         collectionView.backgroundColor = .clear
-        collectionView.register(CategorySelectionCollectionViewCell.self, forCellWithReuseIdentifier: CategorySelectionCollectionViewCell.reuseIdentifier)
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
+        collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -123,17 +91,14 @@ class SettingsViewController: BaseViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .flatCloud
-        statusBackgroundView.isHidden = true
+        statusBackgroundView.backgroundColor = .flatMidnightBlue
         
         view.addSubview(topView)
         topView.addSubview(closeButton)
         topView.addSubview(logoutButton)
         topView.addSubview(userImageView)
         topView.addSubview(userNameField)
-        view.addSubview(changePasswordButton)
-        changePasswordButton.addSubview(changePasswordLabel)
-        changePasswordButton.addSubview(passwordImageView)
-        view.addSubview(listsLabel)
+        view.addSubview(collectionView)
         
         // TEMP
         userImageView.image = Asset.misterT.image
@@ -151,7 +116,7 @@ class SettingsViewController: BaseViewController {
         logoutButton.frame.origin.x = topView.bounds.width - bigMargin - logoutButton.frame.width
         logoutButton.frame.origin.y = closeButton.frame.origin.y
         
-        userImageView.frame.size = CGSize(width: 150, height: 150)
+        userImageView.frame.size = CGSize(width: 130, height: 130)
         userImageView.frame.origin.y = closeButton.frame.origin.y
         userImageView.center.x = view.bounds.width/2
         userImageView.layer.cornerRadius = userImageView.frame.height/2
@@ -162,20 +127,45 @@ class SettingsViewController: BaseViewController {
         
         topView.frame.size.height = userNameField.frame.maxY + bigMargin
         
-        changePasswordButton.frame.size.width = view.bounds.size.width
-        changePasswordButton.frame.size.height = CGFloat.formFieldHeight
-        changePasswordButton.frame.origin.y = topView.frame.maxY + 10
-        
-        passwordImageView.frame.origin.x = changePasswordButton.bounds.width - passwordImageView.frame.width - bigMargin
-        passwordImageView.center.y = changePasswordButton.bounds.height/2
-        
-        changePasswordLabel.frame.size.width = passwordImageView.frame.minX - bigMargin*2
-        changePasswordLabel.frame.origin.x = bigMargin
-        changePasswordLabel.center.y = changePasswordButton.bounds.height/2
-        
-        listsLabel.frame.size.width = view.bounds.width - bigMargin*2
-        listsLabel.frame.origin.x = bigMargin
-        listsLabel.frame.origin.y = changePasswordButton.frame.maxY + 10
+        collectionView.frame.size.width = view.bounds.width
+        collectionView.frame.size.height = view.bounds.height - topView.frame.maxY
+        collectionView.frame.origin.y = topView.frame.maxY
     }
 
+}
+
+extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return TempDataService.lists.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.reuseIdentifier, for: indexPath) as! ListCollectionViewCell
+        cell.list = TempDataService.lists[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        let dimension = (collectionView.bounds.width - bigMargin*2 - smallMargin)/2
+        return CGSize(width: dimension, height: dimension)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //        selectedCategory = categories[indexPath.item]
+        //        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        //
+        //        for cell in collectionView.visibleCells {
+        //            guard let cell = cell as? CategorySelectionCollectionViewCell else {
+        //                continue
+        //            }
+        //
+        //            if let category = selectedCategory {
+        //                cell.isInSelection = cell.category == category
+        //            } else {
+        //                cell.isInSelection = false
+        //            }
+        //        }
+    }
+    
 }

@@ -23,7 +23,6 @@
 		1E0A84631EE9BCCE00FFE941 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A84621EE9BCCE00FFE941 /* APIService.swift */; };
 		1E0A84671EE9EEA800FFE941 /* UILabel+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A84661EE9EEA800FFE941 /* UILabel+groceries.swift */; };
 		1E0A846B1EEA04DB00FFE941 /* UITextField+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */; };
-		1E3392C91F03012A0054C50B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3392C81F03012A0054C50B /* SettingsViewController.swift */; };
 		1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433AA1EEA2D0700E25141 /* BaseViewController.swift */; };
 		1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433AC1EEA2D1700E25141 /* ListManagerViewController.swift */; };
 		1E4433B91EEA522400E25141 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E4433BB1EEA522400E25141 /* Localizable.strings */; };
@@ -49,6 +48,10 @@
 		1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C41EEB52570029D7C8 /* TempDataService.swift */; };
 		1EC28EAD1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */; };
 		1EC28EAF1EECF1D600FAE60B /* PriceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */; };
+		1ED8D1481F080FB300FEA4BC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D1471F080FB300FEA4BC /* SettingsViewController.swift */; };
+		1ED8D14B1F08108D00FEA4BC /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14A1F08108D00FEA4BC /* ListCollectionViewCell.swift */; };
+		1ED8D14D1F0821E000FEA4BC /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14C1F0821E000FEA4BC /* List.swift */; };
+		1ED8D14F1F0821F400FEA4BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14E1F0821F400FEA4BC /* User.swift */; };
 		D74AF178236AFB0B61A7A1CF /* Pods_Groceries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +95,6 @@
 		1E0A84621EE9BCCE00FFE941 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = Services/APIService.swift; sourceTree = "<group>"; };
 		1E0A84661EE9EEA800FFE941 /* UILabel+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UILabel+groceries.swift"; path = "Extensions/UILabel+groceries.swift"; sourceTree = "<group>"; };
 		1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+groceries.swift"; path = "Extensions/UITextField+groceries.swift"; sourceTree = "<group>"; };
-		1E3392C81F03012A0054C50B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/SettingsViewController.swift; sourceTree = "<group>"; };
 		1E4433AA1EEA2D0700E25141 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/BaseViewController.swift; sourceTree = "<group>"; };
 		1E4433AC1EEA2D1700E25141 /* ListManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListManagerViewController.swift; path = Controllers/List/ListManagerViewController.swift; sourceTree = "<group>"; };
 		1E4433BA1EEA522400E25141 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -119,6 +121,10 @@
 		1EA683C41EEB52570029D7C8 /* TempDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempDataService.swift; path = Services/TempDataService.swift; sourceTree = "<group>"; };
 		1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategorySelectionCollectionViewCell.swift; path = Controllers/List/Components/CategorySelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PriceSelectionView.swift; path = Controllers/List/Components/PriceSelectionView.swift; sourceTree = "<group>"; };
+		1ED8D1471F080FB300FEA4BC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
+		1ED8D14A1F08108D00FEA4BC /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCollectionViewCell.swift; path = Controllers/Settings/Components/ListCollectionViewCell.swift; sourceTree = "<group>"; };
+		1ED8D14C1F0821E000FEA4BC /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = List.swift; path = Models/List.swift; sourceTree = "<group>"; };
+		1ED8D14E1F0821F400FEA4BC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		267ABA873849129144FA8EE1 /* Pods-Groceries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.release.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.release.xcconfig"; sourceTree = "<group>"; };
 		4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Groceries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26074693FA53D79460268E /* Pods-Groceries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.debug.xcconfig"; sourceTree = "<group>"; };
@@ -214,8 +220,8 @@
 				1E9B4EEE1EF89A90001CAEFA /* LaunchViewController.swift */,
 				1E4433AA1EEA2D0700E25141 /* BaseViewController.swift */,
 				1E0A82E41EE873FB00FFE941 /* LoginViewController.swift */,
-				1E3392C81F03012A0054C50B /* SettingsViewController.swift */,
 				1E4433A91EEA2C8A00E25141 /* List */,
+				1ED8D1461F080F7300FEA4BC /* Settings */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -322,8 +328,27 @@
 				1EA683C01EEB44F50029D7C8 /* Element.swift */,
 				1EA683C21EEB46460029D7C8 /* Category.swift */,
 				1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */,
+				1ED8D14C1F0821E000FEA4BC /* List.swift */,
+				1ED8D14E1F0821F400FEA4BC /* User.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		1ED8D1461F080F7300FEA4BC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1ED8D1471F080FB300FEA4BC /* SettingsViewController.swift */,
+				1ED8D1491F08104300FEA4BC /* Components */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		1ED8D1491F08104300FEA4BC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1ED8D14A1F08108D00FEA4BC /* ListCollectionViewCell.swift */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 		3AAD6B8DBF7874772F336B2F /* Frameworks */ = {
@@ -544,10 +569,12 @@
 				1E89359C1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift in Sources */,
 				1E0A82F31EE8791A00FFE941 /* NetworkRequest.swift in Sources */,
 				1EC28EAD1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift in Sources */,
+				1ED8D14B1F08108D00FEA4BC /* ListCollectionViewCell.swift in Sources */,
 				1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */,
 				1E89358F1EEBB43300EBD2E9 /* String+groceries.swift in Sources */,
 				1E5C30EC1EF45F790067D880 /* QuantityIndicator.swift in Sources */,
 				1EA683C31EEB46460029D7C8 /* Category.swift in Sources */,
+				1ED8D14D1F0821E000FEA4BC /* List.swift in Sources */,
 				1E4433C11EEA538C00E25141 /* Localize.swift in Sources */,
 				1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */,
 				1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */,
@@ -557,6 +584,8 @@
 				1E0A82EB1EE8740400FFE941 /* CGFLoat+groceries.swift in Sources */,
 				1E0A82F51EE8792D00FFE941 /* NetworkResponse.swift in Sources */,
 				1EC28EAF1EECF1D600FAE60B /* PriceSelectionView.swift in Sources */,
+				1ED8D1481F080FB300FEA4BC /* SettingsViewController.swift in Sources */,
+				1ED8D14F1F0821F400FEA4BC /* User.swift in Sources */,
 				1E0A84671EE9EEA800FFE941 /* UILabel+groceries.swift in Sources */,
 				1E9B4EEF1EF89A90001CAEFA /* LaunchViewController.swift in Sources */,
 				1E4433C01EEA538C00E25141 /* Images.swift in Sources */,
@@ -566,7 +595,6 @@
 				1E0A82F01EE8751400FFE941 /* GRButton.swift in Sources */,
 				1E8935951EECABA000EBD2E9 /* LeftListCollectionViewCell.swift in Sources */,
 				1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */,
-				1E3392C91F03012A0054C50B /* SettingsViewController.swift in Sources */,
 				1E0A82E61EE873FB00FFE941 /* LoginViewController.swift in Sources */,
 				1E0A82B51EE872EF00FFE941 /* AppDelegate.swift in Sources */,
 			);
