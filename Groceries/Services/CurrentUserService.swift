@@ -10,6 +10,8 @@ import KeychainSwift
 
 class CurrentUserService {
     
+    // MARK: - Class properties
+    
     class var savedToken: String? {
         get {
             let keychain = KeychainSwift()
@@ -24,5 +26,15 @@ class CurrentUserService {
             keychain.set(newString, forKey: "saved_token")
         }
     }
+    
+    // MARK: - Properties
+    
+    var userLists: [List] = []
+    
+    // MARK: - Singleton logic
+    
+    static let shared = CurrentUserService()
+    
+    fileprivate init() {}
     
 }

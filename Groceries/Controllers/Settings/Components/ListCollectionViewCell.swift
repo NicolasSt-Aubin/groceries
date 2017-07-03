@@ -20,24 +20,24 @@ class ListCollectionViewCell: UICollectionViewCell {
     
     var list: List! {
         didSet {
-            titleLabel.text = list.title.capitalized
+            titleLabel.text = list.name.capitalized
             
             for view in imageContainerView.subviews {
                 view.removeFromSuperview()
             }
             
-            for i in 0..<min(list.users.count, maxImagesCount) {
+            for i in 0..<min(list.involvedUsers.count, maxImagesCount) {
                 let imageView = UIImageView()
                 imageView.contentMode = .scaleAspectFill
                 imageView.clipsToBounds = true
                 imageView.backgroundColor = .flatSilver
-                imageView.image = list.users[i].image
+                imageView.image = list.involvedUsers[i].image
                 imageView.borderize(width: 2, color: .white)
                 imageContainerView.addSubview(imageView)
             }
             
-            if list.users.count > maxImagesCount {
-                let additionnalUsersCount = list.users.count - maxImagesCount
+            if list.involvedUsers.count > maxImagesCount {
+                let additionnalUsersCount = list.involvedUsers.count - maxImagesCount
                 additionnalUserLabel.text = String(additionnalUsersCount) + "+"
                 imageContainerView.addSubview(additionnalUserView)
             }

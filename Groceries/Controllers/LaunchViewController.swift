@@ -47,21 +47,25 @@ class LaunchViewController: UIViewController {
         backgroundView.frame = view.bounds
         logoImageView.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height/2)
     }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        APIService.fetchLists(success: { lists in
+            CurrentUserService.shared.userLists = lists
+            self.completeAnimation()
+        }, failure: { error in
+            // TO DO
+        })
+        
+    }
+    
+    // MARK: - Private Methods
+    
+    func completeAnimation() {
+        
         UIView.animate(withDuration: 1, animations: {
-//            self.logoImageView.alpha = 0
-//            self.logoImageView.frame.size.height = 20
             self.backgroundView.frame.size.height = 20
-//            self.logoImageView.center = CGPoint(x: self.backgroundView.bounds.width/2, y: self.backgroundView.bounds.height/2)
         }, completion: { completed in
             self.dismiss(animated: false, completion: nil)
         })

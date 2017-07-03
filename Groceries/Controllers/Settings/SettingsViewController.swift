@@ -42,6 +42,7 @@ class SettingsViewController: BaseViewController {
         button.setImage(Asset.logoutIcon.image.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .white
         button.sizeToFit()
+        button.addTarget(self, action: #selector(self.didTapLogoutButton), for: .touchUpInside)
         return button
     }()
     
@@ -131,18 +132,25 @@ class SettingsViewController: BaseViewController {
         collectionView.frame.size.height = view.bounds.height - topView.frame.maxY
         collectionView.frame.origin.y = topView.frame.maxY
     }
+    
+    // MARK: - Selector methods
+    
+    func didTapLogoutButton() {
+        collectionView.reloadData()
+        print(CurrentUserService.shared.userLists.count)
+    }
 
 }
 
 extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TempDataService.lists.count
+        return CurrentUserService.shared.userLists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.reuseIdentifier, for: indexPath) as! ListCollectionViewCell
-        cell.list = TempDataService.lists[indexPath.row]
+        cell.list = CurrentUserService.shared.userLists[indexPath.row]
         return cell
     }
     

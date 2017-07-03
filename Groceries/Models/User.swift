@@ -12,11 +12,29 @@ import UIKit
 class User {
     var id: String!
     var name: String = ""
+    var email: String = ""
     var image: UIImage? = nil
     
-    init(id: String, name: String, image: UIImage? = nil) {
-        self.id = id
-        self.name = name
-        self.image = image
+    var json: AnyObject {
+        set {
+            if let id = newValue["_id"] as? String {
+                self.id = id
+            }
+            
+            if let name = newValue["name"] as? String {
+                self.name = name
+            }
+            
+            if let email = newValue["email"] as? String {
+                self.email = email
+            }
+        }
+        get {
+            return [
+              "name": self.name,
+              "email": self.email
+            ] as AnyObject 
+        }
     }
+    
 }

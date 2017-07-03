@@ -41,4 +41,31 @@ class APIService {
         
     }
     
+    class func fetchLists(success: @escaping ((_ lists: [List]) -> Void), failure: ((String) -> Void)? = nil) {
+        
+        NetworkRequest.fetchLists.execute() { response in
+            if let error = response.errorMessage {
+                failure?(error)
+                return
+            }
+            
+            guard let jsonLists = response.obj as? [AnyObject] else {
+                failure?(L10n.generalNetworkError)
+                return
+            }
+            
+            var lists: [List] = []
+            
+            for jsonList in jsonLists {
+                let list = List()
+                list.json = jsonList
+                lists.append(list)
+            }
+            
+            success(lists)
+            
+        }
+        
+    }
+    
 }

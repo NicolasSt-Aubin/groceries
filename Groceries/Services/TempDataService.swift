@@ -40,20 +40,4 @@ class TempDataService {
         ]
     }
     
-    class var users: [User] {
-        return [
-            User(id: "u1", name: "Mr T", image: Asset.misterT.image),
-            User(id: "u2", name: "Tony Stark", image: Asset.tonyStark.image),
-            User(id: "u3", name: "Peter Quill", image: Asset.starLord.image)
-        ]
-    }
-    
-    class var lists: [List] {
-        let users = TempDataService.users
-        return [
-            List(id: "l1", title: "appartment", users: [ users[0],users[2],users[2],users[2] ]),
-            List(id: "l2", title: "cottage", users: [ users[0],users[1],users[2],users[1],users[2] ]),
-            List(id: "l3", title: "trip", users: [ users[0],users[1] ]),
-        ]
-    }
 }
