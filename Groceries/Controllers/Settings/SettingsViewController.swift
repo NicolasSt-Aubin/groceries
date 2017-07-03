@@ -67,6 +67,36 @@ class SettingsViewController: BaseViewController {
         return textField
     }()
     
+    fileprivate lazy var actionView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    fileprivate lazy var updateUserButton: GRButton = {
+        let button = GRButton()
+        button.backgroundColor = .clear
+        button.setTitleColor(.flatMidnightBlue, for: .normal)
+        button.setTitle("Update User", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        return button
+    }()
+    
+    fileprivate lazy var verticalSeperatorLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .flatMidnightBlue
+        return view
+    }()
+    
+    fileprivate lazy var createListButton: GRButton = {
+        let button = GRButton()
+        button.backgroundColor = .clear
+        button.setTitleColor(.flatMidnightBlue, for: .normal)
+        button.setTitle("Create List", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        return button
+    }()
+    
     fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: self.bigMargin, left: self.bigMargin, bottom: self.bigMargin, right: self.bigMargin)
@@ -99,6 +129,10 @@ class SettingsViewController: BaseViewController {
         topView.addSubview(logoutButton)
         topView.addSubview(userImageView)
         topView.addSubview(userNameField)
+        view.addSubview(actionView)
+        actionView.addSubview(updateUserButton)
+        actionView.addSubview(verticalSeperatorLine)
+        actionView.addSubview(createListButton)
         view.addSubview(collectionView)
         
         // TEMP
@@ -128,9 +162,24 @@ class SettingsViewController: BaseViewController {
         
         topView.frame.size.height = userNameField.frame.maxY + bigMargin
         
+        actionView.frame.size.width = view.bounds.width
+        actionView.frame.size.height = CGFloat.formFieldHeight
+        actionView.frame.origin.y = topView.frame.maxY
+        
+        updateUserButton.frame.size.width = actionView.bounds.width/2
+        updateUserButton.frame.size.height = actionView.bounds.height
+        
+        verticalSeperatorLine.frame.size.width = 1
+        verticalSeperatorLine.frame.size.height = actionView.bounds.height*2/3
+        verticalSeperatorLine.center.x = actionView.bounds.width/2
+        verticalSeperatorLine.center.y = actionView.bounds.height/2
+        
+        createListButton.frame.size = updateUserButton.frame.size
+        createListButton.frame.origin.x = updateUserButton.frame.maxX
+        
         collectionView.frame.size.width = view.bounds.width
-        collectionView.frame.size.height = view.bounds.height - topView.frame.maxY
-        collectionView.frame.origin.y = topView.frame.maxY
+        collectionView.frame.size.height = view.bounds.height - actionView.frame.maxY
+        collectionView.frame.origin.y = actionView.frame.maxY
     }
     
     // MARK: - Selector methods
