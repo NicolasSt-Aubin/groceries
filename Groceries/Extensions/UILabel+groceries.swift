@@ -17,4 +17,11 @@ extension UILabel {
         return label
     }
     
+    class func generateInstructionLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = .flatGrey
+        label.font = UIFont.boldSystemFont(ofSize: 10)
+        return label
+    }
+    
 }

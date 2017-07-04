@@ -30,9 +30,7 @@ class PriceSelectionView: UIView {
     // MARK: - UI Elements
     
     fileprivate lazy var instructionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .flatGrey
-        label.font = UIFont.boldSystemFont(ofSize: 10)
+        let label = UILabel.generateInstructionLabel()
         label.text = L10n.selectPrice.uppercased()
         label.sizeToFit()
         return label

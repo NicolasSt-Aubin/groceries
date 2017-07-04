@@ -15,6 +15,8 @@ class SettingsViewController: BaseViewController {
     let bigMargin: CGFloat = 20
     let smallMargin: CGFloat = 10
     
+    var isInCreationMode: Bool = false
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -24,6 +26,7 @@ class SettingsViewController: BaseViewController {
     fileprivate lazy var topView: UIView = {
         let view = UIView()
         view.backgroundColor = .flatMidnightBlue
+        view.clipsToBounds = true
         return view
     }()
     
@@ -67,6 +70,34 @@ class SettingsViewController: BaseViewController {
         return textField
     }()
     
+    fileprivate lazy var createListView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    fileprivate lazy var createListLabel: UILabel = {
+        let label = UILabel.generateTitleLabel()
+        label.text = "Create List"
+        label.sizeToFit()
+        return label
+    }()
+    
+    fileprivate lazy var listNameInstructionLabel: UILabel = {
+        let label = UILabel.generateInstructionLabel()
+        label.text = "List Name"
+        label.sizeToFit()
+        return label
+    }()
+    
+    fileprivate lazy var listNameField: GRTextField = {
+        let textField = GRTextField(icon: Asset.addIcon.image)
+//        textField.delegate = self
+        textField.returnKeyType = .done
+        textField.placeholder = "Name"
+//        textField.addTarget(self, action: #selector(self.textFieldValueChanged), for: .allEditingEvents)
+        return textField
+    }()
+    
     fileprivate lazy var actionView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -79,6 +110,7 @@ class SettingsViewController: BaseViewController {
         button.setTitleColor(.flatMidnightBlue, for: .normal)
         button.setTitle("Update User", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(self.enterUpdateUserMode), for: .touchUpInside)
         return button
     }()
     
@@ -94,6 +126,7 @@ class SettingsViewController: BaseViewController {
         button.setTitleColor(.flatMidnightBlue, for: .normal)
         button.setTitle("Create List", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(self.enterListCreationMode), for: .touchUpInside)
         return button
     }()
     
@@ -129,6 +162,10 @@ class SettingsViewController: BaseViewController {
         topView.addSubview(logoutButton)
         topView.addSubview(userImageView)
         topView.addSubview(userNameField)
+        view.addSubview(createListView)
+        createListView.addSubview(createListLabel)
+        createListView.addSubview(listNameInstructionLabel)
+        createListView.addSubview(listNameField)
         view.addSubview(actionView)
         actionView.addSubview(updateUserButton)
         actionView.addSubview(verticalSeperatorLine)
@@ -160,11 +197,28 @@ class SettingsViewController: BaseViewController {
         userNameField.frame.origin.y = userImageView.frame.maxY + 20
         userNameField.center.x = topView.bounds.width/2
         
-        topView.frame.size.height = userNameField.frame.maxY + bigMargin
+        topView.frame.size.height = isInCreationMode ? 0 : userNameField.frame.maxY + bigMargin
         
+        actionView.alpha = isInCreationMode ? 0 : 1
         actionView.frame.size.width = view.bounds.width
         actionView.frame.size.height = CGFloat.formFieldHeight
         actionView.frame.origin.y = topView.frame.maxY
+        
+        createListView.alpha = isInCreationMode ? 1: 0
+        createListView.frame = view.bounds
+        
+        createListLabel.alpha = isInCreationMode ? 1: 0
+        createListLabel.frame.origin.y = CGFloat.topTitleMargin
+        createListLabel.frame.origin.x = CGFloat.pageMargin
+        
+        listNameInstructionLabel.frame.origin.x = createListLabel.frame.origin.x
+        listNameInstructionLabel.frame.origin.y = createListLabel.frame.maxY + 20
+        
+        listNameField.frame.size.width = view.bounds.width - CGFloat.pageMargin*2
+        listNameField.frame.size.height = CGFloat.formFieldHeight
+        listNameField.frame.origin.x = CGFloat.pageMargin
+        listNameField.frame.origin.y = listNameInstructionLabel.frame.maxY + CGFloat.formMargin
+        listNameField.layer.cornerRadius = CGFloat.formFieldRadius
         
         updateUserButton.frame.size.width = actionView.bounds.width/2
         updateUserButton.frame.size.height = actionView.bounds.height
@@ -177,16 +231,34 @@ class SettingsViewController: BaseViewController {
         createListButton.frame.size = updateUserButton.frame.size
         createListButton.frame.origin.x = updateUserButton.frame.maxX
         
+        collectionView.alpha = isInCreationMode ? 0 : 1
         collectionView.frame.size.width = view.bounds.width
         collectionView.frame.size.height = view.bounds.height - actionView.frame.maxY
         collectionView.frame.origin.y = actionView.frame.maxY
+        
+        print("LAYOUT SUBVIEWS")
     }
     
     // MARK: - Selector methods
     
     func didTapLogoutButton() {
         collectionView.reloadData()
-        print(CurrentUserService.shared.userLists.count)
+    }
+    
+    func enterListCreationMode() {
+        isInCreationMode = true
+        view.setNeedsLayout()
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func enterUpdateUserMode() {
+        isInCreationMode = false
+        view.setNeedsLayout()
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
     }
 
 }
