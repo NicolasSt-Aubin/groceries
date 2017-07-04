@@ -70,32 +70,9 @@ class SettingsViewController: BaseViewController {
         return textField
     }()
     
-    fileprivate lazy var createListView: UIScrollView = {
-        let scrollView = UIScrollView()
-        return scrollView
-    }()
-    
-    fileprivate lazy var createListLabel: UILabel = {
-        let label = UILabel.generateTitleLabel()
-        label.text = "Create List"
-        label.sizeToFit()
-        return label
-    }()
-    
-    fileprivate lazy var listNameInstructionLabel: UILabel = {
-        let label = UILabel.generateInstructionLabel()
-        label.text = "List Name"
-        label.sizeToFit()
-        return label
-    }()
-    
-    fileprivate lazy var listNameField: GRTextField = {
-        let textField = GRTextField(icon: Asset.addIcon.image)
-//        textField.delegate = self
-        textField.returnKeyType = .done
-        textField.placeholder = "Name"
-//        textField.addTarget(self, action: #selector(self.textFieldValueChanged), for: .allEditingEvents)
-        return textField
+    fileprivate lazy var createListView: CreateListView = {
+        let createListView = CreateListView()
+        return createListView
     }()
     
     fileprivate lazy var actionView: UIView = {
@@ -163,9 +140,6 @@ class SettingsViewController: BaseViewController {
         topView.addSubview(userImageView)
         topView.addSubview(userNameField)
         view.addSubview(createListView)
-        createListView.addSubview(createListLabel)
-        createListView.addSubview(listNameInstructionLabel)
-        createListView.addSubview(listNameField)
         view.addSubview(actionView)
         actionView.addSubview(updateUserButton)
         actionView.addSubview(verticalSeperatorLine)
@@ -206,19 +180,6 @@ class SettingsViewController: BaseViewController {
         
         createListView.alpha = isInCreationMode ? 1: 0
         createListView.frame = view.bounds
-        
-        createListLabel.alpha = isInCreationMode ? 1: 0
-        createListLabel.frame.origin.y = CGFloat.topTitleMargin
-        createListLabel.frame.origin.x = CGFloat.pageMargin
-        
-        listNameInstructionLabel.frame.origin.x = createListLabel.frame.origin.x
-        listNameInstructionLabel.frame.origin.y = createListLabel.frame.maxY + 20
-        
-        listNameField.frame.size.width = view.bounds.width - CGFloat.pageMargin*2
-        listNameField.frame.size.height = CGFloat.formFieldHeight
-        listNameField.frame.origin.x = CGFloat.pageMargin
-        listNameField.frame.origin.y = listNameInstructionLabel.frame.maxY + CGFloat.formMargin
-        listNameField.layer.cornerRadius = CGFloat.formFieldRadius
         
         updateUserButton.frame.size.width = actionView.bounds.width/2
         updateUserButton.frame.size.height = actionView.bounds.height
