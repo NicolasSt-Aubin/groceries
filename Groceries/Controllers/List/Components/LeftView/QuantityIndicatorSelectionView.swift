@@ -14,7 +14,6 @@ class QuantityIndicatorSelectionView: UIView {
     
     var selectedQuantityIndicator: QuantityIndicator = .unit {
         didSet {
-            print("allo coucou")
             UIView.animate(withDuration: 0.2) {
                 self.updateSelectionLayout()
             }

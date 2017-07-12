@@ -42,7 +42,7 @@ class ListCollectionViewCell: UICollectionViewCell {
                 imageContainerView.addSubview(additionnalUserView)
             }
             
-            dateLabel.text = "19 juin 2017"
+            dateLabel.text = "19 juin 2017" // TEMP
         }
     }
     
@@ -151,7 +151,5 @@ class ListCollectionViewCell: UICollectionViewCell {
         dateLabel.center.x = titleLabel.center.x
         dateLabel.frame.origin.y = contentView.bounds.height - dateLabel.frame.height - padding
     }
-    
-    // MARK: 
-    
+
 }

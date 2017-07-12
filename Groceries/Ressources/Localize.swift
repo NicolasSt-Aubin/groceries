@@ -20,18 +20,28 @@ enum L10n {
   static let category = L10n.tr("CATEGORY")
   /// Complete
   static let complete = L10n.tr("COMPLETE")
+  /// Create List
+  static let createList = L10n.tr("CREATE_LIST")
   /// Email
   static let email = L10n.tr("EMAIL")
   /// Network error
   static let generalNetworkError = L10n.tr("GENERAL_NETWORK_ERROR")
   /// In your cart
   static let inYourCart = L10n.tr("IN_YOUR_CART")
+  /// Invite
+  static let invite = L10n.tr("INVITE")
+  /// Invite Your Friends
+  static let inviteFriends = L10n.tr("INVITE_FRIENDS")
   /// kg
   static let kg = L10n.tr("KG")
   /// lbs
   static let lbs = L10n.tr("LBS")
+  /// List Name
+  static let listName = L10n.tr("LIST_NAME")
   /// Login
   static let login = L10n.tr("LOGIN")
+  /// Name
+  static let name = L10n.tr("NAME")
   /// Need to buy
   static let needToBuy = L10n.tr("NEED_TO_BUY")
   /// On the shelf

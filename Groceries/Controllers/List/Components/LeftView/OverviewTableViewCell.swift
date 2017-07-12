@@ -197,11 +197,6 @@ class OverviewTableViewCell: UITableViewCell {
 
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-    }
-    
     // MARK: - Selector Methods
 
     var initialPanPosition: CGFloat = CGFloat.pageMargin

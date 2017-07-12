@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// Temporary content to develop UI
+
 class TempDataService {
     
     class var categories: [Category] {

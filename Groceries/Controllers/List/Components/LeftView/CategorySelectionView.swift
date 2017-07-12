@@ -82,6 +82,8 @@ class CategorySelectionView: UIView {
     
 }
 
+// MARK: - UICollectionViewDelegate & UICollectionViewDataSource
+
 extension CategorySelectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

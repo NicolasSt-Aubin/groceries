@@ -88,8 +88,6 @@ class GRTextField: UITextField {
         tintColor = .flatBelizeHole
         
         addTarget(self, action: #selector(self.editingChanged), for: .editingChanged)
-        addTarget(self, action: #selector(self.editingDidBegin), for: .editingDidBegin)
-        addTarget(self, action: #selector(self.editingDidEnd), for: .editingDidEnd)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -126,18 +124,6 @@ class GRTextField: UITextField {
             self.iconImageView.tintColor = self.text != nil && self.text != "" ? .flatMidnightBlue : .flatSilver
             self.activityIndicatorView.color = self.text != nil && self.text != "" ? .flatMidnightBlue : .flatSilver
             self.rightView!.alpha = self.text != nil && self.text != "" ?  1 : 0
-        }
-    }
-    
-    func editingDidBegin() {
-        UIView.animate(withDuration: 0.2) {
-//            self.layer.borderColor = UIColor.flatMidnightBlue.cgColor
-        }
-    }
-    
-    func editingDidEnd() {
-        UIView.animate(withDuration: 0.2) {
-//            self.layer.borderColor = UIColor.flatSilver.cgColor
         }
     }
     

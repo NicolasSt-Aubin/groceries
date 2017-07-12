@@ -32,6 +32,8 @@ class Element {
         return name.lowercased().trimmingCharacters(in: .whitespaces).contains(query)
     }
     
+    // Unused complex search algorythm
+    
     /*func queryScore(query: String) -> Int {
         
         let queryWordArray = query.lowercased().components(separatedBy: " ").filter{$0 != ""}

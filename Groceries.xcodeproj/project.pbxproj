@@ -32,27 +32,26 @@
 		1E4433C71EEB143000E25141 /* GRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C61EEB143000E25141 /* GRTextField.swift */; };
 		1E4433C91EEB3AEF00E25141 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C81EEB3AEF00E25141 /* CheckButton.swift */; };
 		1E5C30EC1EF45F790067D880 /* QuantityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */; };
-		1E5C30EE1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30ED1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift */; };
-		1E89358F1EEBB43300EBD2E9 /* String+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89358E1EEBB43300EBD2E9 /* String+groceries.swift */; };
-		1E8935951EECABA000EBD2E9 /* LeftListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935911EECABA000EBD2E9 /* LeftListCollectionViewCell.swift */; };
-		1E8935961EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935921EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift */; };
-		1E8935971EECABA000EBD2E9 /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935931EECABA000EBD2E9 /* OverviewTableViewCell.swift */; };
-		1E8935981EECABA000EBD2E9 /* RightListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935941EECABA000EBD2E9 /* RightListCollectionViewCell.swift */; };
-		1E89359A1EECABE500EBD2E9 /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8935991EECABE500EBD2E9 /* CategorySelectionView.swift */; };
-		1E89359C1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E89359B1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift */; };
 		1E9B4EEF1EF89A90001CAEFA /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B4EEE1EF89A90001CAEFA /* LaunchViewController.swift */; };
-		1E9B4EF11EF8A3B3001CAEFA /* QuantitySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B4EF01EF8A3B3001CAEFA /* QuantitySelectionView.swift */; };
 		1EA677391EF04B12006DB694 /* Double+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA677381EF04B12006DB694 /* Double+groceries.swift */; };
 		1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C01EEB44F50029D7C8 /* Element.swift */; };
 		1EA683C31EEB46460029D7C8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C21EEB46460029D7C8 /* Category.swift */; };
 		1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C41EEB52570029D7C8 /* TempDataService.swift */; };
-		1EC28EAD1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */; };
-		1EC28EAF1EECF1D600FAE60B /* PriceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */; };
 		1ED8D1481F080FB300FEA4BC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D1471F080FB300FEA4BC /* SettingsViewController.swift */; };
 		1ED8D14B1F08108D00FEA4BC /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14A1F08108D00FEA4BC /* ListCollectionViewCell.swift */; };
 		1ED8D14D1F0821E000FEA4BC /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14C1F0821E000FEA4BC /* List.swift */; };
 		1ED8D14F1F0821F400FEA4BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14E1F0821F400FEA4BC /* User.swift */; };
 		1ED8D1511F0BDF0D00FEA4BC /* CreateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D1501F0BDF0D00FEA4BC /* CreateListView.swift */; };
+		1EE88B511F1696C000A657EF /* QuantitySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B501F1696C000A657EF /* QuantitySelectionView.swift */; };
+		1EE88B581F1696D600A657EF /* CategorySelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B521F1696D600A657EF /* CategorySelectionCollectionViewCell.swift */; };
+		1EE88B591F1696D600A657EF /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B531F1696D600A657EF /* CategorySelectionView.swift */; };
+		1EE88B5A1F1696D600A657EF /* LeftListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B541F1696D600A657EF /* LeftListCollectionViewCell.swift */; };
+		1EE88B5B1F1696D600A657EF /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B551F1696D600A657EF /* OverviewTableViewCell.swift */; };
+		1EE88B5C1F1696D600A657EF /* PriceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B561F1696D600A657EF /* PriceSelectionView.swift */; };
+		1EE88B5D1F1696D600A657EF /* QuantityIndicatorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B571F1696D600A657EF /* QuantityIndicatorSelectionView.swift */; };
+		1EE88B611F1696E100A657EF /* NeedToBuyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B5E1F1696E100A657EF /* NeedToBuyTableHeaderView.swift */; };
+		1EE88B621F1696E100A657EF /* NeedToBuyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B5F1F1696E100A657EF /* NeedToBuyTableViewCell.swift */; };
+		1EE88B631F1696E100A657EF /* RightListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE88B601F1696E100A657EF /* RightListCollectionViewCell.swift */; };
 		D74AF178236AFB0B61A7A1CF /* Pods_Groceries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,27 +105,26 @@
 		1E4433C61EEB143000E25141 /* GRTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRTextField.swift; path = Views/GRTextField.swift; sourceTree = "<group>"; };
 		1E4433C81EEB3AEF00E25141 /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckButton.swift; path = Views/CheckButton.swift; sourceTree = "<group>"; };
 		1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantityIndicator.swift; path = Models/QuantityIndicator.swift; sourceTree = "<group>"; };
-		1E5C30ED1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantityIndicatorSelectionView.swift; path = Controllers/List/Components/QuantityIndicatorSelectionView.swift; sourceTree = "<group>"; };
-		1E89358E1EEBB43300EBD2E9 /* String+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+groceries.swift"; path = "Extensions/String+groceries.swift"; sourceTree = "<group>"; };
-		1E8935911EECABA000EBD2E9 /* LeftListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftListCollectionViewCell.swift; path = Controllers/List/Components/LeftListCollectionViewCell.swift; sourceTree = "<group>"; };
-		1E8935921EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableViewCell.swift; path = Controllers/List/Components/NeedToBuyTableViewCell.swift; sourceTree = "<group>"; };
-		1E8935931EECABA000EBD2E9 /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverviewTableViewCell.swift; path = Controllers/List/Components/OverviewTableViewCell.swift; sourceTree = "<group>"; };
-		1E8935941EECABA000EBD2E9 /* RightListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightListCollectionViewCell.swift; path = Controllers/List/Components/RightListCollectionViewCell.swift; sourceTree = "<group>"; };
-		1E8935991EECABE500EBD2E9 /* CategorySelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategorySelectionView.swift; path = Controllers/List/Components/CategorySelectionView.swift; sourceTree = "<group>"; };
-		1E89359B1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableHeaderView.swift; path = Controllers/List/Components/NeedToBuyTableHeaderView.swift; sourceTree = "<group>"; };
 		1E9B4EEE1EF89A90001CAEFA /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchViewController.swift; path = Controllers/LaunchViewController.swift; sourceTree = "<group>"; };
-		1E9B4EF01EF8A3B3001CAEFA /* QuantitySelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantitySelectionView.swift; path = Controllers/List/Components/QuantitySelectionView.swift; sourceTree = "<group>"; };
 		1EA677381EF04B12006DB694 /* Double+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+groceries.swift"; path = "Extensions/Double+groceries.swift"; sourceTree = "<group>"; };
 		1EA683C01EEB44F50029D7C8 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Element.swift; path = Models/Element.swift; sourceTree = "<group>"; };
 		1EA683C21EEB46460029D7C8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Models/Category.swift; sourceTree = "<group>"; };
 		1EA683C41EEB52570029D7C8 /* TempDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempDataService.swift; path = Services/TempDataService.swift; sourceTree = "<group>"; };
-		1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategorySelectionCollectionViewCell.swift; path = Controllers/List/Components/CategorySelectionCollectionViewCell.swift; sourceTree = "<group>"; };
-		1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PriceSelectionView.swift; path = Controllers/List/Components/PriceSelectionView.swift; sourceTree = "<group>"; };
 		1ED8D1471F080FB300FEA4BC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		1ED8D14A1F08108D00FEA4BC /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCollectionViewCell.swift; path = Controllers/Settings/Components/ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1ED8D14C1F0821E000FEA4BC /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = List.swift; path = Models/List.swift; sourceTree = "<group>"; };
 		1ED8D14E1F0821F400FEA4BC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		1ED8D1501F0BDF0D00FEA4BC /* CreateListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateListView.swift; path = Controllers/Settings/Components/CreateListView.swift; sourceTree = "<group>"; };
+		1EE88B501F1696C000A657EF /* QuantitySelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantitySelectionView.swift; path = Views/QuantitySelectionView.swift; sourceTree = "<group>"; };
+		1EE88B521F1696D600A657EF /* CategorySelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategorySelectionCollectionViewCell.swift; path = Controllers/List/Components/LeftView/CategorySelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EE88B531F1696D600A657EF /* CategorySelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategorySelectionView.swift; path = Controllers/List/Components/LeftView/CategorySelectionView.swift; sourceTree = "<group>"; };
+		1EE88B541F1696D600A657EF /* LeftListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftListCollectionViewCell.swift; path = Controllers/List/Components/LeftView/LeftListCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EE88B551F1696D600A657EF /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OverviewTableViewCell.swift; path = Controllers/List/Components/LeftView/OverviewTableViewCell.swift; sourceTree = "<group>"; };
+		1EE88B561F1696D600A657EF /* PriceSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PriceSelectionView.swift; path = Controllers/List/Components/LeftView/PriceSelectionView.swift; sourceTree = "<group>"; };
+		1EE88B571F1696D600A657EF /* QuantityIndicatorSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantityIndicatorSelectionView.swift; path = Controllers/List/Components/LeftView/QuantityIndicatorSelectionView.swift; sourceTree = "<group>"; };
+		1EE88B5E1F1696E100A657EF /* NeedToBuyTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableHeaderView.swift; path = Controllers/List/Components/RightView/NeedToBuyTableHeaderView.swift; sourceTree = "<group>"; };
+		1EE88B5F1F1696E100A657EF /* NeedToBuyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedToBuyTableViewCell.swift; path = Controllers/List/Components/RightView/NeedToBuyTableViewCell.swift; sourceTree = "<group>"; };
+		1EE88B601F1696E100A657EF /* RightListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightListCollectionViewCell.swift; path = Controllers/List/Components/RightView/RightListCollectionViewCell.swift; sourceTree = "<group>"; };
 		267ABA873849129144FA8EE1 /* Pods-Groceries.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.release.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.release.xcconfig"; sourceTree = "<group>"; };
 		4E74D972BDFE32C01F5AB8CB /* Pods_Groceries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Groceries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F26074693FA53D79460268E /* Pods-Groceries.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceries.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Groceries/Pods-Groceries.debug.xcconfig"; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 				1E0A84661EE9EEA800FFE941 /* UILabel+groceries.swift */,
 				1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */,
 				1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */,
-				1E89358E1EEBB43300EBD2E9 /* String+groceries.swift */,
 				1EA677381EF04B12006DB694 /* Double+groceries.swift */,
 			);
 			name = Extensions;
@@ -246,10 +243,10 @@
 		1E0A82EE1EE874F100FFE941 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1EE88B501F1696C000A657EF /* QuantitySelectionView.swift */,
 				1E0A82EF1EE8751400FFE941 /* GRButton.swift */,
 				1E4433C61EEB143000E25141 /* GRTextField.swift */,
 				1E4433C81EEB3AEF00E25141 /* CheckButton.swift */,
-				1E9B4EF01EF8A3B3001CAEFA /* QuantitySelectionView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -304,12 +301,12 @@
 		1E89359D1EECB34100EBD2E9 /* LeftView */ = {
 			isa = PBXGroup;
 			children = (
-				1E8935911EECABA000EBD2E9 /* LeftListCollectionViewCell.swift */,
-				1E8935931EECABA000EBD2E9 /* OverviewTableViewCell.swift */,
-				1E8935991EECABE500EBD2E9 /* CategorySelectionView.swift */,
-				1EC28EAC1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift */,
-				1EC28EAE1EECF1D600FAE60B /* PriceSelectionView.swift */,
-				1E5C30ED1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift */,
+				1EE88B541F1696D600A657EF /* LeftListCollectionViewCell.swift */,
+				1EE88B521F1696D600A657EF /* CategorySelectionCollectionViewCell.swift */,
+				1EE88B531F1696D600A657EF /* CategorySelectionView.swift */,
+				1EE88B551F1696D600A657EF /* OverviewTableViewCell.swift */,
+				1EE88B561F1696D600A657EF /* PriceSelectionView.swift */,
+				1EE88B571F1696D600A657EF /* QuantityIndicatorSelectionView.swift */,
 			);
 			name = LeftView;
 			sourceTree = "<group>";
@@ -317,9 +314,9 @@
 		1E89359E1EECB35600EBD2E9 /* RightView */ = {
 			isa = PBXGroup;
 			children = (
-				1E8935941EECABA000EBD2E9 /* RightListCollectionViewCell.swift */,
-				1E89359B1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift */,
-				1E8935921EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift */,
+				1EE88B601F1696E100A657EF /* RightListCollectionViewCell.swift */,
+				1EE88B5E1F1696E100A657EF /* NeedToBuyTableHeaderView.swift */,
+				1EE88B5F1F1696E100A657EF /* NeedToBuyTableViewCell.swift */,
 			);
 			name = RightView;
 			sourceTree = "<group>";
@@ -561,43 +558,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E4433C71EEB143000E25141 /* GRTextField.swift in Sources */,
-				1E8935971EECABA000EBD2E9 /* OverviewTableViewCell.swift in Sources */,
+				1EE88B581F1696D600A657EF /* CategorySelectionCollectionViewCell.swift in Sources */,
 				1E4433C91EEB3AEF00E25141 /* CheckButton.swift in Sources */,
+				1EE88B621F1696E100A657EF /* NeedToBuyTableViewCell.swift in Sources */,
 				1E0A84611EE9BB4B00FFE941 /* CurrentUserService.swift in Sources */,
-				1E8935961EECABA000EBD2E9 /* NeedToBuyTableViewCell.swift in Sources */,
+				1EE88B591F1696D600A657EF /* CategorySelectionView.swift in Sources */,
 				1E0A846B1EEA04DB00FFE941 /* UITextField+groceries.swift in Sources */,
-				1E8935981EECABA000EBD2E9 /* RightListCollectionViewCell.swift in Sources */,
+				1EE88B5C1F1696D600A657EF /* PriceSelectionView.swift in Sources */,
 				1E0A82ED1EE8740400FFE941 /* UIView+groceries.swift in Sources */,
 				1E0A82EC1EE8740400FFE941 /* UIColor+groceries.swift in Sources */,
-				1E89359C1EECB06C00EBD2E9 /* NeedToBuyTableHeaderView.swift in Sources */,
 				1E0A82F31EE8791A00FFE941 /* NetworkRequest.swift in Sources */,
-				1EC28EAD1EECB69D00FAE60B /* CategorySelectionCollectionViewCell.swift in Sources */,
 				1ED8D14B1F08108D00FEA4BC /* ListCollectionViewCell.swift in Sources */,
 				1E4433AB1EEA2D0700E25141 /* BaseViewController.swift in Sources */,
-				1E89358F1EEBB43300EBD2E9 /* String+groceries.swift in Sources */,
+				1EE88B511F1696C000A657EF /* QuantitySelectionView.swift in Sources */,
 				1E5C30EC1EF45F790067D880 /* QuantityIndicator.swift in Sources */,
+				1EE88B631F1696E100A657EF /* RightListCollectionViewCell.swift in Sources */,
 				1EA683C31EEB46460029D7C8 /* Category.swift in Sources */,
 				1ED8D14D1F0821E000FEA4BC /* List.swift in Sources */,
+				1EE88B611F1696E100A657EF /* NeedToBuyTableHeaderView.swift in Sources */,
 				1E4433C11EEA538C00E25141 /* Localize.swift in Sources */,
+				1EE88B5D1F1696D600A657EF /* QuantityIndicatorSelectionView.swift in Sources */,
 				1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */,
 				1E4433AD1EEA2D1700E25141 /* ListManagerViewController.swift in Sources */,
 				1E0A84631EE9BCCE00FFE941 /* APIService.swift in Sources */,
 				1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */,
-				1E5C30EE1EF4639D0067D880 /* QuantityIndicatorSelectionView.swift in Sources */,
 				1E0A82EB1EE8740400FFE941 /* CGFLoat+groceries.swift in Sources */,
 				1E0A82F51EE8792D00FFE941 /* NetworkResponse.swift in Sources */,
-				1EC28EAF1EECF1D600FAE60B /* PriceSelectionView.swift in Sources */,
+				1EE88B5A1F1696D600A657EF /* LeftListCollectionViewCell.swift in Sources */,
 				1ED8D1481F080FB300FEA4BC /* SettingsViewController.swift in Sources */,
 				1ED8D14F1F0821F400FEA4BC /* User.swift in Sources */,
 				1E0A84671EE9EEA800FFE941 /* UILabel+groceries.swift in Sources */,
 				1E9B4EEF1EF89A90001CAEFA /* LaunchViewController.swift in Sources */,
 				1E4433C01EEA538C00E25141 /* Images.swift in Sources */,
-				1E89359A1EECABE500EBD2E9 /* CategorySelectionView.swift in Sources */,
 				1EA677391EF04B12006DB694 /* Double+groceries.swift in Sources */,
-				1E9B4EF11EF8A3B3001CAEFA /* QuantitySelectionView.swift in Sources */,
+				1EE88B5B1F1696D600A657EF /* OverviewTableViewCell.swift in Sources */,
 				1E0A82F01EE8751400FFE941 /* GRButton.swift in Sources */,
 				1ED8D1511F0BDF0D00FEA4BC /* CreateListView.swift in Sources */,
-				1E8935951EECABA000EBD2E9 /* LeftListCollectionViewCell.swift in Sources */,
 				1E4433C31EEA579400E25141 /* UIFont+Groceries.swift in Sources */,
 				1E0A82E61EE873FB00FFE941 /* LoginViewController.swift in Sources */,
 				1E0A82B51EE872EF00FFE941 /* AppDelegate.swift in Sources */,

@@ -191,6 +191,8 @@ class ListManagerViewController: BaseViewController {
 
 }
 
+// MARK: - LeftListCollectionViewCellDelegate & LeftListCollectionViewCellDataSource
+
 extension ListManagerViewController: LeftListCollectionViewCellDelegate, LeftListCollectionViewCellDataSource {
     
     func userDidStartSearching() {
@@ -210,6 +212,26 @@ extension ListManagerViewController: LeftListCollectionViewCellDelegate, LeftLis
     }
     
 }
+
+// MARK: - RightListCollectionViewCellDelegate & RightListCollectionViewCellDataSource
+
+extension ListManagerViewController: RightListCollectionViewCellDelegate, RightListCollectionViewCellDataSource {
+    
+    func shouldRefreshOverviewList() {
+        leftListCollectionViewCell?.refresh()
+    }
+    
+    func onShelfElements() -> [Element] {
+        return elements.filter({ element in return element.active && !element.inCart})
+    }
+    
+    func inCartElements() -> [Element] {
+        return elements.filter({ element in return element.active && element.inCart})
+    }
+    
+}
+
+// MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 
 extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -244,22 +266,6 @@ extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
-    }
-    
-}
-
-extension ListManagerViewController: RightListCollectionViewCellDelegate, RightListCollectionViewCellDataSource {
-    
-    func shouldRefreshOverviewList() {
-        leftListCollectionViewCell?.refresh()
-    }
-    
-    func onShelfElements() -> [Element] {
-        return elements.filter({ element in return element.active && !element.inCart})
-    }
-    
-    func inCartElements() -> [Element] {
-        return elements.filter({ element in return element.active && element.inCart})
     }
     
 }

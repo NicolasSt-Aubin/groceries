@@ -67,7 +67,6 @@ class RightListCollectionViewCell: UICollectionViewCell {
     fileprivate lazy var completeButton: GRButton = {
         let button = GRButton()
         button.setTitle(L10n.complete, for: .normal)
-        //        button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
         return button
     }()
     
@@ -193,6 +192,8 @@ class RightListCollectionViewCell: UICollectionViewCell {
     
 }
 
+// MARK: - UITableViewDelegate & UITableViewDataSource
+
 extension RightListCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
     
     // Header
@@ -276,6 +277,8 @@ extension RightListCollectionViewCell: UITableViewDelegate, UITableViewDataSourc
     }
     
 }
+
+// MARK: - NeedToBuyTableViewCellDelegate
 
 extension RightListCollectionViewCell: NeedToBuyTableViewCellDelegate {
     

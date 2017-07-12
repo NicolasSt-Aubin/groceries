@@ -14,6 +14,8 @@
 "UNIT" = "unit";
 "KG" = "kg";
 "LBS" = "lbs";
+"NAME" = "Name";
+"INVITE" = "Invite";
 
 // ERRORS
 
@@ -39,3 +41,6 @@
 "SELECT_CATEGORY" = "Select Category";
 "SELECT_PRICE" = "Select Price";
 "SELECT_QUANTITY_INDICATOR" = "Select Quantity Indicator";
+"CREATE_LIST" = "Create List";
+"LIST_NAME" = "List Name";
+"INVITE_FRIENDS" = "Invite Your Friends";

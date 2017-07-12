@@ -11,6 +11,8 @@ import PKHUD
 
 class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // MARK: - Properties
+    
     var isLoading: Bool = false {
         didSet {
             if isLoading {

@@ -196,8 +196,6 @@ class SettingsViewController: BaseViewController {
         collectionView.frame.size.width = view.bounds.width
         collectionView.frame.size.height = view.bounds.height - actionView.frame.maxY
         collectionView.frame.origin.y = actionView.frame.maxY
-        
-        print("LAYOUT SUBVIEWS")
     }
     
     // MARK: - Selector methods
@@ -224,6 +222,8 @@ class SettingsViewController: BaseViewController {
 
 }
 
+// MARK: - UICollectionViewDelegate & UICollectionViewDataSource
+
 extension SettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -239,23 +239,6 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let dimension = (collectionView.bounds.width - bigMargin*2 - smallMargin)/2
         return CGSize(width: dimension, height: dimension)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        selectedCategory = categories[indexPath.item]
-        //        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        //
-        //        for cell in collectionView.visibleCells {
-        //            guard let cell = cell as? CategorySelectionCollectionViewCell else {
-        //                continue
-        //            }
-        //
-        //            if let category = selectedCategory {
-        //                cell.isInSelection = cell.category == category
-        //            } else {
-        //                cell.isInSelection = false
-        //            }
-        //        }
     }
     
 }

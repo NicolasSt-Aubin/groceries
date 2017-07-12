@@ -14,46 +14,55 @@ class CreateListView: UIView {
 
     fileprivate lazy var createListLabel: UILabel = {
         let label = UILabel.generateTitleLabel()
-        label.text = "Create List"
+        label.text = L10n.createList
         label.sizeToFit()
         return label
     }()
     
     fileprivate lazy var listNameInstructionLabel: UILabel = {
         let label = UILabel.generateInstructionLabel()
-        label.text = "List Name".uppercased()
+        label.text = L10n.listName.uppercased()
         label.sizeToFit()
         return label
     }()
     
     fileprivate lazy var listNameField: GRTextField = {
         let textField = GRTextField(icon: Asset.addIcon.image)
-//        textField.delegate = self
         textField.returnKeyType = .next
-        textField.placeholder = "Name"
-//        textField.addTarget(self, action: #selector(self.textFieldValueChanged), for: .allEditingEvents)
+        textField.placeholder = L10n.name
         return textField
     }()
     
     fileprivate lazy var inviteInstructionLabel: UILabel = {
         let label = UILabel.generateInstructionLabel()
-        label.text = "Invite Your Friends".uppercased()
+        label.text = L10n.inviteFriends.uppercased()
         label.sizeToFit()
         return label
     }()
     
     fileprivate lazy var inviteField: GRTextField = {
         let textField = GRTextField(icon: Asset.userIcon.image)
-        //        textField.delegate = self
         textField.returnKeyType = .go
-        textField.placeholder = "Email"
-        //        textField.addTarget(self, action: #selector(self.textFieldValueChanged), for: .allEditingEvents)
+        textField.placeholder = L10n.email.capitalized
         return textField
     }()
     
     fileprivate lazy var inviteButton: GRButton = {
         let button = GRButton()
-        button.setTitle("Invite", for: .normal)
+        button.setTitle(L10n.invite, for: .normal)
+        return button
+    }()
+    
+    fileprivate lazy var cancelButton: GRButton = {
+        let button = GRButton()
+        button.setTitle(L10n.cancel, for: .normal)
+        button.backgroundColor = .flatSilver
+        return button
+    }()
+    
+    fileprivate lazy var addButton: GRButton = {
+        let button = GRButton()
+        button.setTitle(L10n.add, for: .normal)
         return button
     }()
     
@@ -68,6 +77,8 @@ class CreateListView: UIView {
         addSubview(inviteInstructionLabel)
         addSubview(inviteField)
         addSubview(inviteButton)
+        addSubview(cancelButton)
+        addSubview(addButton)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -22,12 +22,9 @@ class QuantitySelectionView: UIView {
     
     var quantity: Int = 1 {
         didSet {
-            if quantity < minValue {
-                quantity = minValue
-            }
+            if quantity < minValue { quantity = minValue }
             minusButton.isEnabled = quantity > minValue
             quantityLabel.text = String(quantity)
-            //TO DO find a way to reset timer
         }
     }
     

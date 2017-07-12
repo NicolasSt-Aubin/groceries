@@ -112,7 +112,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     fileprivate lazy var addButton: GRButton = {
         let button = GRButton()
         button.setTitle(L10n.add, for: .normal)
-//        button.addTarget(self, action: #selector(self.login), for: .touchUpInside)
         return button
     }()
     
@@ -220,10 +219,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func test() {
-        print("coucou")
-    }
-    
     // MARK: - Public Methods
     
     func refresh() {
@@ -322,6 +317,8 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     
 }
 
+// MARK: - UITextFieldDelegate
+
 extension LeftListCollectionViewCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -342,6 +339,8 @@ extension LeftListCollectionViewCell: UITextFieldDelegate {
     
 }
 
+// MARK: - UITableViewDelegate & UITableViewDataSource
+
 extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -361,10 +360,11 @@ extension LeftListCollectionViewCell: UITableViewDelegate, UITableViewDataSource
     
 }
 
+// MARK: - OverviewTableViewCellDelegate
+
 extension LeftListCollectionViewCell: OverviewTableViewCellDelegate {
     
     func restartActivationProcess(forElement element: Element) {
-        print("restarting")
         element.activationTimer?.invalidate()
         element.activationTimer = nil
         element.activationTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: {_ in

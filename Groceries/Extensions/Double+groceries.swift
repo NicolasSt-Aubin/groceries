@@ -10,12 +10,12 @@ import UIKit
 
 extension Double {
     
-    mutating func decimalRound() {
-        self = Darwin.round(self * 10) / 10
-        if getDecimals() < 0.5 {
-            
-        }
-    }
+//    mutating func decimalRound() {
+//        self = Darwin.round(self * 10) / 10
+//        if getDecimals() < 0.5 {
+//            
+//        }
+//    }
     
     mutating func getDecimals() -> Double {
         let x:Double = self

@@ -38,17 +38,10 @@ class NeedToBuyTableViewCell: UITableViewCell {
                 titleLabel.center.y = checkButton.center.y
             }
             
-//            quantitySelectionView.quantity = element.desiredQuantity
         }
     }
     
     // MARK: - UI Elements
-    
-//    fileprivate lazy var quantitySelectionView: QuantitySelectionView = {
-//        let quantitySelectionView = QuantitySelectionView()
-//        quantitySelectionView.delegate = self
-//        return quantitySelectionView
-//    }()
     
     lazy var checkButton: CheckButton = {
         let button = CheckButton()
@@ -89,8 +82,7 @@ class NeedToBuyTableViewCell: UITableViewCell {
         backgroundColor = .clear
         
         contentView.backgroundColor = .white
-        
-//        contentView.addSubview(quantitySelectionView)
+
         contentView.addSubview(checkButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
@@ -121,10 +113,6 @@ class NeedToBuyTableViewCell: UITableViewCell {
         checkButton.layer.cornerRadius = checkButton.frame.height/2
         checkButton.frame.origin.x = contentView.bounds.width - checkButton.frame.width - cellPadding
         checkButton.center.y = contentView.bounds.height/2
-        
-//        quantitySelectionView.frame.size = CGSize(width: 20, height: contentView.bounds.height - 10)
-//        quantitySelectionView.center.y = contentView.bounds.height/2
-//        quantitySelectionView.frame.origin.x = cellPadding
         
         titleLabel.frame.size.width = checkButton.frame.minX - cellMargin - cellPadding
         titleLabel.frame.origin.x = cellPadding
@@ -214,16 +202,6 @@ extension NeedToBuyTableViewCell {
             }
         }
         return true
-    }
-    
-}
-
-// MARK: - QuantitySelectionViewDelegate
-
-extension NeedToBuyTableViewCell: QuantitySelectionViewDelegate {
-    
-    func didUpdateQuantity() {
-//        element.desiredQuantity = quantitySelectionView.quantity
     }
     
 }

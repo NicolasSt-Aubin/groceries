@@ -15,6 +15,10 @@ class LoginViewController: BaseViewController {
     
     fileprivate var keyboardHeight: CGFloat = 0
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: - UI Elements
     
     fileprivate lazy var welcomeLabel: UILabel = {
