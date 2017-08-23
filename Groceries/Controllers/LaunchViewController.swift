@@ -53,6 +53,7 @@ class LaunchViewController: UIViewController {
         
         APIService.fetchLists(success: { lists in
             CurrentUserService.shared.userLists = lists
+            
             self.completeAnimation()
         }, failure: { error in
             // TO DO

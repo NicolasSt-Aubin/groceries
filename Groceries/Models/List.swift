@@ -12,6 +12,7 @@ class List {
     var id: String!
     var name = ""
     var involvedUsers: [User] = []
+    var elements: [Element] = []
     
     var json: AnyObject {
         set {

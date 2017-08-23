@@ -31,6 +31,13 @@ class CurrentUserService {
     
     var userLists: [List] = []
     
+    var selectedList: List? {
+        if userLists.count > 0 {
+            return userLists[0]
+        }
+        return nil
+    }
+    
     // MARK: - Singleton logic
     
     static let shared = CurrentUserService()

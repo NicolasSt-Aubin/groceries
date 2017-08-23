@@ -72,6 +72,7 @@ class SettingsViewController: BaseViewController {
     
     fileprivate lazy var createListView: CreateListView = {
         let createListView = CreateListView()
+        createListView.delegate = self
         return createListView
     }()
     
@@ -206,6 +207,8 @@ class SettingsViewController: BaseViewController {
     
     func enterListCreationMode() {
         isInCreationMode = true
+        createListView.list = nil
+        createListView.listNameField.becomeFirstResponder()
         view.setNeedsLayout()
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
@@ -213,11 +216,7 @@ class SettingsViewController: BaseViewController {
     }
     
     func enterUpdateUserMode() {
-        isInCreationMode = false
-        view.setNeedsLayout()
-        UIView.animate(withDuration: 1) {
-            self.view.layoutIfNeeded()
-        }
+        
     }
 
 }
@@ -239,6 +238,20 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let dimension = (collectionView.bounds.width - bigMargin*2 - smallMargin)/2
         return CGSize(width: dimension, height: dimension)
+    }
+    
+}
+
+// MARK: - CreateListViewDelegate
+
+extension SettingsViewController: CreateListViewDelegate {
+    
+    func shouldStopCreation() {
+        isInCreationMode = false
+        view.setNeedsLayout()
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
     }
     
 }

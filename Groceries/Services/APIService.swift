@@ -68,4 +68,27 @@ class APIService {
         
     }
     
+    class func createList(list: List, success: @escaping ((_ list: List) -> Void), failure: ((String) -> Void)? = nil) {
+        
+        let params: [String: AnyObject]? = list.json as? [String: AnyObject]
+        
+        NetworkRequest.createList.execute(params) { response in
+            if let error = response.errorMessage {
+                failure?(error)
+                return
+            }
+            
+            guard let jsonList = response.obj as? AnyObject else {
+                failure?(L10n.generalNetworkError)
+                return
+            }
+            
+            let list = List()
+            list.json = jsonList
+            success(list)
+            
+        }
+        
+    }
+    
 }

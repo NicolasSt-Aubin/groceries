@@ -23,7 +23,13 @@ class ListManagerViewController: BaseViewController {
         }
     }
     
-    var elements: [Element] = []
+    var elements: [Element] {
+        if let list = CurrentUserService.shared.selectedList {
+            return list.elements
+        } else {
+            return []
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -108,8 +114,6 @@ class ListManagerViewController: BaseViewController {
         headerView.addSubview(pageSelectionIndicatorView)
         
         view.addSubview(collectionView)
-        
-        elements = TempDataService.elements // TEMP
     }
     
     override func viewWillLayoutSubviews() {
