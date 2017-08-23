@@ -16,16 +16,50 @@ class CreateListView: UIView {
 
     // MARK: - Properties
     
-    var delegate: CreateListViewDelegate? = nil
-    
-    var list: List? = nil {
+    var keyboardHeight: CGFloat = 0 {
         didSet {
-            userTalbeView.reloadData()
             setNeedsLayout()
             UIView.animate(withDuration: 0.5) {
                 self.layoutIfNeeded()
             }
         }
+    }
+    
+    var delegate: CreateListViewDelegate? = nil
+    
+    var list: List? = nil {
+        didSet {
+            if let list = list {
+                listNameField.text = list.name
+                listNameField.editingChanged()
+                
+                doneButton.setTitle(L10n.done, for: .normal)
+                doneButton.backgroundColor = .flatBelizeHole
+            } else {
+                listNameField.clearText()
+                
+                doneButton.setTitle(L10n.cancel, for: .normal)
+                doneButton.backgroundColor = .flatSilver
+            }
+
+            userTableView.reloadData()
+            setNeedsLayout()
+            UIView.animate(withDuration: 0.5) {
+                self.layoutIfNeeded()
+            }
+        }
+    }
+    
+    var involvedUsers: [User] {
+        if let list = list {
+            return list.involvedUsers
+        } else {
+            return []
+        }
+    }
+    
+    var isInviting: Bool {
+        return inviteField.isFirstResponder && keyboardHeight > 0
     }
     
     // MARK: - UI Elements
@@ -46,7 +80,7 @@ class CreateListView: UIView {
     
     lazy var listNameField: GRTextField = {
         let textField = GRTextField(icon: Asset.addIcon.image)
-        textField.returnKeyType = UIReturnKeyType.send
+        textField.returnKeyType = .send
         textField.placeholder = L10n.name
         textField.delegate = self
         return textField
@@ -59,7 +93,7 @@ class CreateListView: UIView {
         return label
     }()
     
-    fileprivate lazy var userTalbeView: UITableView = {
+    fileprivate lazy var userTableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
@@ -67,14 +101,18 @@ class CreateListView: UIView {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.clipsToBounds = true
+        tableView.borderize(width: 1, color: .flatSilver)
         tableView.showsVerticalScrollIndicator = false
+        tableView.bounces = false
         return tableView
     }()
     
     fileprivate lazy var inviteField: GRTextField = {
         let textField = GRTextField(icon: Asset.userIcon.image)
-        textField.returnKeyType = .go
+        textField.returnKeyType = .send
         textField.placeholder = L10n.email.capitalized
+        textField.delegate = self
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
@@ -84,17 +122,10 @@ class CreateListView: UIView {
         return button
     }()
     
-    fileprivate lazy var cancelButton: GRButton = {
+    fileprivate lazy var doneButton: GRButton = {
         let button = GRButton()
-        button.setTitle(L10n.cancel, for: .normal)
-        button.backgroundColor = .flatSilver
-        button.addTarget(self, action: #selector(self.didTapCancelButton), for: .touchUpInside)
-        return button
-    }()
-    
-    fileprivate lazy var addButton: GRButton = {
-        let button = GRButton()
-        button.setTitle(L10n.add, for: .normal)
+        button.setTitle(L10n.done, for: .normal)
+        button.addTarget(self, action: #selector(self.didTapDoneButton), for: .touchUpInside)
         return button
     }()
     
@@ -107,11 +138,15 @@ class CreateListView: UIView {
         addSubview(listNameInstructionLabel)
         addSubview(listNameField)
         addSubview(inviteInstructionLabel)
-        addSubview(userTalbeView)
+        addSubview(userTableView)
         addSubview(inviteField)
-        addSubview(inviteButton)
-//        addSubview(cancelButton)
-//        addSubview(addButton)
+        addSubview(doneButton)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.resignAllSelectors))
+        addGestureRecognizer(tapGestureRecognizer)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,12 +158,15 @@ class CreateListView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        createListLabel.alpha = isInviting ? 0 : 1
         createListLabel.frame.origin.y = CGFloat.topTitleMargin
         createListLabel.frame.origin.x = CGFloat.pageMargin
         
+        listNameInstructionLabel.alpha = isInviting ? 0 : 1
         listNameInstructionLabel.frame.origin.x = createListLabel.frame.origin.x
         listNameInstructionLabel.frame.origin.y = createListLabel.frame.maxY + 20
         
+        listNameField.alpha = isInviting ? 0 : 1
         listNameField.frame.size.width = bounds.width - CGFloat.pageMargin*2
         listNameField.frame.size.height = CGFloat.formFieldHeight
         listNameField.frame.origin.x = CGFloat.pageMargin
@@ -137,48 +175,56 @@ class CreateListView: UIView {
         
         inviteInstructionLabel.alpha = list == nil ? 0 : 1
         inviteInstructionLabel.frame.origin.x = createListLabel.frame.origin.x
-        inviteInstructionLabel.frame.origin.y = listNameField.frame.maxY + 20
+        inviteInstructionLabel.frame.origin.y = isInviting ? CGFloat.pageMargin + 20 : listNameField.frame.maxY + 20
         
-//        userTalbeView.frame.size.wi
-        
-        inviteButton.alpha = list == nil ? 0 : 1
-        inviteButton.sizeToFit()
-        inviteButton.frame.size.width += 6*CGFloat.formMargin
-        inviteButton.frame.size.height = CGFloat.formFieldHeight
-        inviteButton.frame.origin.y = inviteInstructionLabel.frame.maxY + CGFloat.formMargin
-        inviteButton.layer.cornerRadius = CGFloat.formFieldRadius
+        userTableView.alpha = list == nil ? 0 : 1
+        userTableView.frame.size.width = bounds.width - CGFloat.pageMargin*2
+        userTableView.frame.size.height = CGFloat(involvedUsers.count) * UserTableViewCell.height
+        userTableView.layer.cornerRadius = CGFloat.formFieldRadius
+        userTableView.frame.origin.y = inviteInstructionLabel.frame.maxY + CGFloat.formMargin
+        userTableView.center.x = bounds.width/2
         
         inviteField.alpha = list == nil ? 0 : 1
-        inviteField.frame.size.width = bounds.width - 2*CGFloat.pageMargin - CGFloat.formMargin - inviteButton.frame.width
+        inviteField.frame.size.width = bounds.width - 2*CGFloat.pageMargin //- CGFloat.formMargin - inviteButton.frame.width
         inviteField.frame.size.height = CGFloat.formFieldHeight
-        inviteField.frame.origin.y = inviteButton.frame.origin.y
+        inviteField.frame.origin.y = isInviting ? bounds.height - inviteField.frame.height - CGFloat.pageMargin - keyboardHeight : userTableView.frame.maxY + CGFloat.formMargin
         inviteField.frame.origin.x = CGFloat.pageMargin
         
-        inviteButton.frame.origin.x = inviteField.frame.maxX + CGFloat.formMargin
+        doneButton.frame.size.width = bounds.width - CGFloat.pageMargin*2
+        doneButton.frame.size.height = CGFloat.formFieldHeight
+        doneButton.layer.cornerRadius = CGFloat.formFieldRadius
+        doneButton.frame.origin.y = bounds.height - doneButton.frame.height - CGFloat.pageMargin
+        doneButton.center.x = bounds.width/2
         
-        let dualFormAvailableWidth: CGFloat = bounds.width - 2 * CGFloat.pageMargin - CGFloat.formMargin
-        
-//        cancelButton.frame.size.width = dualFormAvailableWidth/2
-//        cancelButton.frame.size.height = CGFloat.formFieldHeight
-//        cancelButton.frame.origin.x = CGFloat.pageMargin
-//        cancelButton.frame.origin.y = bounds.height - cancelButton.frame.height - CGFloat.pageMargin
-//        cancelButton.layer.cornerRadius = CGFloat.formFieldRadius
-//        
-//        addButton.frame.size = cancelButton.frame.size
-//        addButton.frame.origin.x = cancelButton.frame.maxX + CGFloat.formMargin
-//        addButton.frame.origin.y = cancelButton.frame.origin.y
-//        addButton.layer.cornerRadius = CGFloat.formFieldRadius
     }
     
     // MARK: - Selector Methods
     
-    func didTapCancelButton() {
+    func didTapDoneButton() {
+        listNameField.clearText()
+        inviteField.clearText()
         delegate?.shouldStopCreation()
+    }
+    
+    func resignAllSelectors() {
+        endEditing(true)
+    }
+    
+    func keyboardWillChangeFrame(_ notification: NSNotification) {
+        
+        if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            keyboardHeight = frame.height
+        }
+        
+    }
+    
+    func keyboardWillHide(_ notification: NSNotification) {
+        keyboardHeight = 0
     }
     
     // MARK: - Private Methods
     
-    func saveList() {
+    fileprivate func saveList() {
         if let list = list {
             // TO DO: Update list
         } else {
@@ -186,16 +232,35 @@ class CreateListView: UIView {
             list.name = listNameField.text!
             
             listNameField.resignFirstResponder()
+            
             listNameField.isLoading = true
             
             APIService.createList(list: list, success: { list in
                 self.listNameField.isLoading = false
+                CurrentUserService.shared.userLists.append(list)
                 self.list = list
-                self.inviteField.becomeFirstResponder()
             }, failure: { error in
-                // TO DO: Helper class de momo pour
+                self.listNameField.isLoading = false
+                Popup.showError(error)
             })
         }
+    }
+    
+    fileprivate func inviteUserToList() {
+        guard let list = list else {
+            return
+        }
+        
+        inviteField.isLoading = true
+        
+        APIService.inviteUser(toList: list, email: inviteField.text!, success: { list in
+            self.inviteField.isLoading = false
+            self.inviteField.text = ""
+            self.list = list
+        }, failure: { error in
+            self.inviteField.isLoading = false
+            Popup.showError(error)
+        })
     }
     
 }
@@ -204,12 +269,27 @@ extension CreateListView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField.text != nil && textField.text != "" && !listNameField.isLoading {
-            saveList()
+        switch textField {
+        case listNameField:
+            if textField.text != nil && textField.text != "" && !listNameField.isLoading {
+                saveList()
+                return true
+            } else {
+                Popup.showError()
+                return false
+            }
+        case inviteField:
+            if textField.text != nil && textField.text != "" && !inviteField.isLoading {
+                inviteUserToList()
+                return true
+            } else {
+                Popup.showError()
+                return false
+            }
+        default:
             return true
         }
-        
-        return false
+
     }
     
 }
@@ -219,10 +299,7 @@ extension CreateListView: UITextFieldDelegate {
 extension CreateListView: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let list = list else {
-            return 0
-        }
-        return list.involvedUsers.count
+        return involvedUsers.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -230,14 +307,9 @@ extension CreateListView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        guard let list = list else {
-            return UITableViewCell()
-        }
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.reuseIdentifier, for: indexPath) as! UserTableViewCell
-        cell.separatorView.isHidden = indexPath.row == elements.count-1
-        cell.user = list.involvedUsers[indexPath.row]
+        cell.separatorView.isHidden = indexPath.row == involvedUsers.count-1
+        cell.user = involvedUsers[indexPath.row]
         return cell
     }
     

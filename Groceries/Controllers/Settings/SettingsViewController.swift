@@ -240,6 +240,15 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         return CGSize(width: dimension, height: dimension)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        isInCreationMode = true
+        createListView.list = CurrentUserService.shared.userLists[indexPath.row]
+        view.setNeedsLayout()
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
 }
 
 // MARK: - CreateListViewDelegate
@@ -248,6 +257,7 @@ extension SettingsViewController: CreateListViewDelegate {
     
     func shouldStopCreation() {
         isInCreationMode = false
+        collectionView.reloadData()
         view.setNeedsLayout()
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()

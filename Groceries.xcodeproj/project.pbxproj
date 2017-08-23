@@ -38,6 +38,7 @@
 		1EA683C31EEB46460029D7C8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C21EEB46460029D7C8 /* Category.swift */; };
 		1EA683C51EEB52570029D7C8 /* TempDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C41EEB52570029D7C8 /* TempDataService.swift */; };
 		1EB6702F1F4D1AE80016C277 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB6702E1F4D1AE80016C277 /* UserTableViewCell.swift */; };
+		1ECE36F71F4DA52F004FACC8 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECE36F61F4DA52F004FACC8 /* Popup.swift */; };
 		1ED8D1481F080FB300FEA4BC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D1471F080FB300FEA4BC /* SettingsViewController.swift */; };
 		1ED8D14B1F08108D00FEA4BC /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14A1F08108D00FEA4BC /* ListCollectionViewCell.swift */; };
 		1ED8D14D1F0821E000FEA4BC /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED8D14C1F0821E000FEA4BC /* List.swift */; };
@@ -112,6 +113,7 @@
 		1EA683C21EEB46460029D7C8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Models/Category.swift; sourceTree = "<group>"; };
 		1EA683C41EEB52570029D7C8 /* TempDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempDataService.swift; path = Services/TempDataService.swift; sourceTree = "<group>"; };
 		1EB6702E1F4D1AE80016C277 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewCell.swift; path = Controllers/Settings/Components/UserTableViewCell.swift; sourceTree = "<group>"; };
+		1ECE36F61F4DA52F004FACC8 /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Popup.swift; path = Helpers/Popup.swift; sourceTree = "<group>"; };
 		1ED8D1471F080FB300FEA4BC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		1ED8D14A1F08108D00FEA4BC /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCollectionViewCell.swift; path = Controllers/Settings/Components/ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1ED8D14C1F0821E000FEA4BC /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = List.swift; path = Models/List.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		1E0A82B31EE872EF00FFE941 /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				1ECE36F51F4DA50B004FACC8 /* Helpers */,
 				1EA683BF1EEB44D00029D7C8 /* Models */,
 				1E4433B61EEA501800E25141 /* Ressources */,
 				1E0A845F1EE9BAF100FFE941 /* Services */,
@@ -333,6 +336,14 @@
 				1ED8D14E1F0821F400FEA4BC /* User.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		1ECE36F51F4DA50B004FACC8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1ECE36F61F4DA52F004FACC8 /* Popup.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		1ED8D1461F080F7300FEA4BC /* Settings */ = {
@@ -560,6 +571,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ECE36F71F4DA52F004FACC8 /* Popup.swift in Sources */,
 				1E4433C71EEB143000E25141 /* GRTextField.swift in Sources */,
 				1EE88B581F1696D600A657EF /* CategorySelectionCollectionViewCell.swift in Sources */,
 				1E4433C91EEB3AEF00E25141 /* CheckButton.swift in Sources */,

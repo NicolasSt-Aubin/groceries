@@ -17,7 +17,7 @@ class UserTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var user: User {
+    var user: User! {
         didSet {
             nameLabel.text = user.name
             emailLabel.text = user.email
@@ -45,7 +45,7 @@ class UserTableViewCell: UITableViewCell {
     fileprivate lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.font  = .systemFont(ofSize: 10)
-        label.textColor = .flatSilver
+        label.textColor = .flatGrey
         label.text = "15.00$"
         label.sizeToFit()
         return label
@@ -96,11 +96,11 @@ class UserTableViewCell: UITableViewCell {
         
         nameLabel.frame.size.width = contentView.bounds.width - userImageView.frame.maxX - cellMargin
         nameLabel.frame.origin.x = userImageView.frame.maxX + cellMargin
-        nameLabel.center.y = userImageView.center.y - nameLabel.frame.height/3
+        nameLabel.center.y = userImageView.center.y - nameLabel.frame.height/2
         
-        emailLabel.frame.size.width = emailLabel.frame.width
-        emailLabel.frame.origin.x = emailLabel.frame.origin.x
-        emailLabel.frame.origin.y = emailLabel.frame.maxY + 3
+        emailLabel.frame.size.width = nameLabel.frame.width
+        emailLabel.frame.origin.x = nameLabel.frame.origin.x
+        emailLabel.frame.origin.y = nameLabel.frame.maxY + 3
         
         separatorView.frame.size.width = contentView.bounds.width
         separatorView.frame.size.height = 1

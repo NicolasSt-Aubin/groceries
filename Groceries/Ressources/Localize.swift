@@ -22,6 +22,8 @@ enum L10n {
   static let complete = L10n.tr("COMPLETE")
   /// Create List
   static let createList = L10n.tr("CREATE_LIST")
+  /// Done
+  static let done = L10n.tr("DONE")
   /// Email
   static let email = L10n.tr("EMAIL")
   /// Network error

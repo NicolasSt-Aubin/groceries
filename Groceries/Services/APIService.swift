@@ -41,6 +41,8 @@ class APIService {
         
     }
     
+    // MARK: - List
+    
     class func fetchLists(success: @escaping ((_ lists: [List]) -> Void), failure: ((String) -> Void)? = nil) {
         
         NetworkRequest.fetchLists.execute() { response in
@@ -86,7 +88,30 @@ class APIService {
             let list = List()
             list.json = jsonList
             success(list)
+        }
+        
+    }
+    
+    class func inviteUser( toList list: List, email: String, success: @escaping ((_ list: List) -> Void), failure: ((String) -> Void)? = nil) {
+        
+        let params: [String: AnyObject] = [
+            "userEmail": email as AnyObject
+        ]
+        
+        NetworkRequest.inviteUserToList.execute(params, urlArguments: [list.id]) { response in
+            if let error = response.errorMessage {
+                failure?(error)
+                return
+            }
             
+            guard let jsonList = response.obj as? AnyObject else {
+                failure?(L10n.generalNetworkError)
+                return
+            }
+            
+            let list = List()
+            list.json = jsonList
+            success(list)
         }
         
     }
