@@ -92,6 +92,28 @@ class APIService {
         
     }
     
+    class func updateList(list: List, success: @escaping ((_ list: List) -> Void), failure: ((String) -> Void)? = nil) {
+        
+        let params: [String: AnyObject]? = list.json as? [String: AnyObject]
+        
+        NetworkRequest.updateList.execute(params, urlArguments: [list.id]) { response in
+            if let error = response.errorMessage {
+                failure?(error)
+                return
+            }
+            
+            guard let jsonList = response.obj as? AnyObject else {
+                failure?(L10n.generalNetworkError)
+                return
+            }
+            
+            let list = List()
+            list.json = jsonList
+            success(list)
+        }
+        
+    }
+    
     class func inviteUser( toList list: List, email: String, success: @escaping ((_ list: List) -> Void), failure: ((String) -> Void)? = nil) {
         
         let params: [String: AnyObject] = [

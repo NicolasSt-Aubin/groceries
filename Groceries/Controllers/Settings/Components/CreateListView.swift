@@ -41,6 +41,8 @@ class CreateListView: UIView {
                 doneButton.setTitle(L10n.cancel, for: .normal)
                 doneButton.backgroundColor = .flatSilver
             }
+            
+            inviteField.clearText()
 
             userTableView.reloadData()
             setNeedsLayout()
@@ -60,6 +62,14 @@ class CreateListView: UIView {
     
     var isInviting: Bool {
         return inviteField.isFirstResponder && keyboardHeight > 0
+    }
+    
+    var userTableViewMaxHeight: CGFloat {
+        if isInviting {
+            return bounds.height - keyboardHeight - 20 - CGFloat.pageMargin*2 - CGFloat.formMargin*4 - CGFloat.formFieldHeight
+        } else {
+            return bounds.height - 80 - CGFloat.pageMargin - CGFloat.formMargin*3 - CGFloat.formFieldHeight*3 - createListLabel.frame.height - CGFloat.topTitleMargin
+        }
     }
     
     // MARK: - UI Elements
@@ -179,7 +189,7 @@ class CreateListView: UIView {
         
         userTableView.alpha = list == nil ? 0 : 1
         userTableView.frame.size.width = bounds.width - CGFloat.pageMargin*2
-        userTableView.frame.size.height = CGFloat(involvedUsers.count) * UserTableViewCell.height
+        userTableView.frame.size.height = min(CGFloat(involvedUsers.count) * UserTableViewCell.height, userTableViewMaxHeight)
         userTableView.layer.cornerRadius = CGFloat.formFieldRadius
         userTableView.frame.origin.y = inviteInstructionLabel.frame.maxY + CGFloat.formMargin
         userTableView.center.x = bounds.width/2
@@ -201,8 +211,6 @@ class CreateListView: UIView {
     // MARK: - Selector Methods
     
     func didTapDoneButton() {
-        listNameField.clearText()
-        inviteField.clearText()
         delegate?.shouldStopCreation()
     }
     
@@ -226,13 +234,28 @@ class CreateListView: UIView {
     
     fileprivate func saveList() {
         if let list = list {
-            // TO DO: Update list
+            let oldName = list.name
+
+            list.name = listNameField.text!
+
+            listNameField.resignFirstResponder()
+            listNameField.isLoading = true
+            
+            APIService.updateList(list: list, success: { list in
+                self.listNameField.isLoading = false
+                self.list = list
+            }, failure: { error in
+                list.name = oldName
+                self.listNameField.text = oldName
+                self.listNameField.isLoading = false
+                Popup.showError(error)
+            })
+            
         } else {
             let list = List()
             list.name = listNameField.text!
             
             listNameField.resignFirstResponder()
-            
             listNameField.isLoading = true
             
             APIService.createList(list: list, success: { list in
@@ -257,6 +280,7 @@ class CreateListView: UIView {
             self.inviteField.isLoading = false
             self.inviteField.text = ""
             self.list = list
+            self.userTableView.scrollToRow(at: IndexPath(row: self.involvedUsers.count-1, section: 0), at: .bottom, animated: true)
         }, failure: { error in
             self.inviteField.isLoading = false
             Popup.showError(error)

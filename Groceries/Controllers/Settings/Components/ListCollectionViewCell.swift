@@ -43,6 +43,9 @@ class ListCollectionViewCell: UICollectionViewCell {
             }
             
             dateLabel.text = "19 juin 2017" // TEMP
+            
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
