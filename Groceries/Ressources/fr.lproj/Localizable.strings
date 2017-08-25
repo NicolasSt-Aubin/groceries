@@ -17,6 +17,8 @@
 "NAME" = "Nom";
 "INVITE" = "Inviter";
 "DONE" = "Terminer";
+"LEAVE" = "Quitter";
+"DELETE" = "Supprimer";
 
 // ERRORS
 
@@ -43,5 +45,11 @@
 "SELECT_PRICE" = "Selectionner un prix";
 "SELECT_QUANTITY_INDICATOR" = "Selectionner un indice de quantité";
 "CREATE_LIST" = "Créer une liste";
+"UPDATE_USER" = "Changer votre MDP";
+"MANAGE_LIST" = "Gestion de la liste";
 "LIST_NAME" = "Nom de la liste";
 "INVITE_FRIENDS" = "Inviter des amis";
+
+// PROMPTS
+
+"CONFIRMATION_QUESTION" = "Êtes-vous sûr(e) de vouloir quitter %@ %@?";

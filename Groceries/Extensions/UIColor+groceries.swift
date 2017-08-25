@@ -100,6 +100,10 @@ extension UIColor {
         return UIColor(colorString: "#2c3e50")
     }
     
+    class var flatAlizarin: UIColor {
+        return UIColor(colorString: "#e74c3c")
+    }
+    
     class var flatBlack: UIColor {
         return UIColor(colorString: "#222222")
     }

@@ -10,6 +10,7 @@ import UIKit
 
 protocol CreateListViewDelegate {
     func shouldStopCreation()
+    func presentAlertController(_ alertController: UIAlertController)
 }
 
 class CreateListView: UIView {
@@ -72,13 +73,72 @@ class CreateListView: UIView {
         }
     }
     
+    var leaveAlertController: UIAlertController {
+        let alertController = UIAlertController(title: L10n.leave + " " + list!.name, message: L10n.confirmationQuestion(L10n.leave, list!.name), preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil)
+        
+        let leaveAction = UIAlertAction(title: L10n.leave, style: .destructive, handler: { _ in
+            self.leaveList()
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(leaveAction)
+        
+        return alertController
+    }
+    
+    var deleteAlertController: UIAlertController {
+        let alertController = UIAlertController(title: L10n.delete + " " + list!.name, message: L10n.confirmationQuestion(L10n.delete, list!.name), preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil)
+        
+        let deleteAction = UIAlertAction(title: L10n.delete, style: .destructive, handler: { _ in
+            self.deleteList()
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        
+        return alertController
+    }
+    
+    var optionAlertController: UIAlertController {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let leaveAction = UIAlertAction(title: L10n.leave, style: .default, handler: { _ in
+            self.delegate?.presentAlertController(self.leaveAlertController)
+        })
+        
+        let deleteAction = UIAlertAction(title: L10n.delete, style: .destructive, handler: { _ in
+            self.delegate?.presentAlertController(self.deleteAlertController)
+        })
+        
+        let cancelButton = UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil)
+        
+        alertController.addAction(leaveAction)
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelButton)
+        
+        return alertController
+    }
+    
     // MARK: - UI Elements
 
     fileprivate lazy var createListLabel: UILabel = {
         let label = UILabel.generateTitleLabel()
-        label.text = L10n.createList
+        label.text = L10n.manageList
         label.sizeToFit()
         return label
+    }()
+    
+    fileprivate lazy var optionButton: GRButton = {
+        let button = GRButton()
+        button.backgroundColor = .clear
+        button.setImage(Asset.optionsIcon.image, for: .normal)
+        button.addTarget(self, action: #selector(self.didTapOptionsButton), for: .touchUpInside)
+        button.sizeToFit()
+        return button
     }()
     
     fileprivate lazy var listNameInstructionLabel: UILabel = {
@@ -145,6 +205,7 @@ class CreateListView: UIView {
         super.init(frame: .zero)
         
         addSubview(createListLabel)
+        addSubview(optionButton)
         addSubview(listNameInstructionLabel)
         addSubview(listNameField)
         addSubview(inviteInstructionLabel)
@@ -171,6 +232,12 @@ class CreateListView: UIView {
         createListLabel.alpha = isInviting ? 0 : 1
         createListLabel.frame.origin.y = CGFloat.topTitleMargin
         createListLabel.frame.origin.x = CGFloat.pageMargin
+        
+        optionButton.alpha = !isInviting && list != nil ? 1 : 0
+        optionButton.frame.size.width = 40
+        optionButton.frame.size.height = 40
+        optionButton.center.y = createListLabel.center.y
+        optionButton.frame.origin.x = bounds.width - optionButton.frame.width - CGFloat.pageMargin
         
         listNameInstructionLabel.alpha = isInviting ? 0 : 1
         listNameInstructionLabel.frame.origin.x = createListLabel.frame.origin.x
@@ -212,6 +279,10 @@ class CreateListView: UIView {
     
     func didTapDoneButton() {
         delegate?.shouldStopCreation()
+    }
+    
+    func didTapOptionsButton() {
+        delegate?.presentAlertController(optionAlertController)
     }
     
     func resignAllSelectors() {
@@ -285,6 +356,44 @@ class CreateListView: UIView {
             self.inviteField.isLoading = false
             Popup.showError(error)
         })
+    }
+    
+    fileprivate func leaveList() {
+        guard let list = list else {
+            return
+        }
+        
+        Popup.showProgress()
+        
+        APIService.leaveList(list: list, success: {
+            Popup.showSuccess()
+            if let index = CurrentUserService.shared.userLists.index(where: {secondList in secondList == list}) {
+                CurrentUserService.shared.userLists.remove(at: index)
+            }
+            self.delegate?.shouldStopCreation()
+        }, failure: { error in
+            Popup.showError(error)
+        })
+        
+    }
+    
+    fileprivate func deleteList() {
+        guard let list = list else {
+            return
+        }
+        
+        Popup.showProgress()
+        
+        APIService.deleteList(list: list, success: { list in
+            Popup.showSuccess()
+            if let index = CurrentUserService.shared.userLists.index(where: {secondList in secondList == list}) {
+                CurrentUserService.shared.userLists.remove(at: index)
+            }
+            self.delegate?.shouldStopCreation()
+        }, failure: { error in
+            Popup.showError(error)
+        })
+        
     }
     
 }

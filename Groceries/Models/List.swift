@@ -40,3 +40,7 @@ class List {
     }
 
 }
+
+func == (lhs:List,rhs:List) -> Bool {
+    return lhs.id == rhs.id
+}

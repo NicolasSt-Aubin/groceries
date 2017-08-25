@@ -138,4 +138,37 @@ class APIService {
         
     }
     
+    class func leaveList(list: List, success: @escaping (() -> Void), failure: ((String) -> Void)? = nil) {
+        
+        NetworkRequest.leaveList.execute(urlArguments: [list.id]) { response in
+            if let error = response.errorMessage {
+                failure?(error)
+                return
+            }
+            
+            success()
+        }
+        
+    }
+    
+    class func deleteList(list: List, success: @escaping ((_ list: List) -> Void), failure: ((String) -> Void)? = nil) {
+        
+        NetworkRequest.deleteList.execute(urlArguments: [list.id]) { response in
+            if let error = response.errorMessage {
+                failure?(error)
+                return
+            }
+            
+            guard let jsonList = response.obj as? AnyObject else {
+                failure?(L10n.generalNetworkError)
+                return
+            }
+            
+            let list = List()
+            list.json = jsonList
+            success(list)
+        }
+        
+    }
+    
 }

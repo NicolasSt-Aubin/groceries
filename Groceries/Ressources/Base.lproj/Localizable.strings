@@ -17,6 +17,8 @@
 "NAME" = "Name";
 "INVITE" = "Invite";
 "DONE" = "Done";
+"LEAVE" = "Leave";
+"DELETE" = "Delete";
 
 // ERRORS
 
@@ -43,5 +45,11 @@
 "SELECT_PRICE" = "Select Price";
 "SELECT_QUANTITY_INDICATOR" = "Select Quantity Indicator";
 "CREATE_LIST" = "Create List";
+"UPDATE_USER" = "Update password";
+"MANAGE_LIST" = "Manage list";
 "LIST_NAME" = "List Name";
 "INVITE_FRIENDS" = "Invite Your Friends";
+
+// PROMPTS
+
+"CONFIRMATION_QUESTION" = "Are you sure you want to %@ %@?";

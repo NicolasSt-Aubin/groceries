@@ -20,8 +20,14 @@ enum L10n {
   static let category = L10n.tr("CATEGORY")
   /// Complete
   static let complete = L10n.tr("COMPLETE")
+  /// Are you sure you want to %@ %@?
+  static func confirmationQuestion(_ p1: String, _ p2: String) -> String {
+    return L10n.tr("CONFIRMATION_QUESTION", p1, p2)
+  }
   /// Create List
   static let createList = L10n.tr("CREATE_LIST")
+  /// Delete
+  static let delete = L10n.tr("DELETE")
   /// Done
   static let done = L10n.tr("DONE")
   /// Email
@@ -38,10 +44,14 @@ enum L10n {
   static let kg = L10n.tr("KG")
   /// lbs
   static let lbs = L10n.tr("LBS")
+  /// Leave
+  static let leave = L10n.tr("LEAVE")
   /// List Name
   static let listName = L10n.tr("LIST_NAME")
   /// Login
   static let login = L10n.tr("LOGIN")
+  /// Manage list
+  static let manageList = L10n.tr("MANAGE_LIST")
   /// Name
   static let name = L10n.tr("NAME")
   /// Need to buy
@@ -66,6 +76,8 @@ enum L10n {
   static let selectQuantityIndicator = L10n.tr("SELECT_QUANTITY_INDICATOR")
   /// unit
   static let unit = L10n.tr("UNIT")
+  /// Update password
+  static let updateUser = L10n.tr("UPDATE_USER")
   /// Welcome
   static let welcome = L10n.tr("WELCOME")
 }

@@ -25,7 +25,7 @@ class Popup{
         PKHUD.sharedHUD.show()
     }
     
-    static func showSuccess(_ _string:String,completion: (() -> Void)? = nil){
+    static func showSuccess(_ _string:String = "" ,completion: (() -> Void)? = nil){
         PKHUD.sharedHUD.contentView = PKHUDSuccessView(subtitle: _string)
         PKHUD.sharedHUD.show()
         PKHUD.sharedHUD.hide(afterDelay: 2.0,completion:{(isComplete) in

@@ -86,7 +86,7 @@ class SettingsViewController: BaseViewController {
         let button = GRButton()
         button.backgroundColor = .clear
         button.setTitleColor(.flatMidnightBlue, for: .normal)
-        button.setTitle("Update User", for: .normal)
+        button.setTitle(L10n.updateUser, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.addTarget(self, action: #selector(self.enterUpdateUserMode), for: .touchUpInside)
         return button
@@ -102,7 +102,7 @@ class SettingsViewController: BaseViewController {
         let button = GRButton()
         button.backgroundColor = .clear
         button.setTitleColor(.flatMidnightBlue, for: .normal)
-        button.setTitle("Create List", for: .normal)
+        button.setTitle(L10n.createList, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.addTarget(self, action: #selector(self.enterListCreationMode), for: .touchUpInside)
         return button
@@ -264,4 +264,7 @@ extension SettingsViewController: CreateListViewDelegate {
         }
     }
     
+    func presentAlertController(_ alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
