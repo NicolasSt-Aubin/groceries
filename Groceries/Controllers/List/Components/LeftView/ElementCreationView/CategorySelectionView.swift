@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol CategorySelectionViewDelegate {
+    func categorySelectionViewDidChangeValue()
+}
+
 class CategorySelectionView: UIView {
 
     // MARK: - Class Properties 
     
     var categories: [Category] = TempDataService.categories // TEMP
+    
+    var delegate: CategorySelectionViewDelegate? = nil
     
     // MARK: - Properties
     
@@ -124,6 +130,8 @@ extension CategorySelectionView: UICollectionViewDelegate, UICollectionViewDataS
                 cell.isInSelection = false
             }
         }
+        
+        delegate?.categorySelectionViewDidChangeValue()
     }
     
 }

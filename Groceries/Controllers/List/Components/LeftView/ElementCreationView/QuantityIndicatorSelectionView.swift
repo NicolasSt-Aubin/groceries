@@ -8,12 +8,19 @@
 
 import UIKit
 
+protocol QuantityIndicatorSelectionViewDelegate {
+    func quantityIndicatorSelectionViewDidChangeValue()
+}
+
 class QuantityIndicatorSelectionView: UIView {
 
     // MARK: - Properties
     
+    var delegate: QuantityIndicatorSelectionViewDelegate? = nil
+    
     var selectedQuantityIndicator: QuantityIndicator = .unit {
         didSet {
+            delegate?.quantityIndicatorSelectionViewDidChangeValue()
             UIView.animate(withDuration: 0.2) {
                 self.updateSelectionLayout()
             }
@@ -88,14 +95,17 @@ class QuantityIndicatorSelectionView: UIView {
         let buttonSize = CGSize(width: buttonWidth, height:35)
         
         unitButton.frame.size = buttonSize
+        unitButton.layer.cornerRadius = CGFloat.formFieldRadius
         unitButton.frame.origin.x = instructionLabel.frame.origin.x
         unitButton.frame.origin.y = instructionLabel.frame.maxY + CGFloat.formMargin
         
         kgButton.frame.size = buttonSize
+        kgButton.layer.cornerRadius = CGFloat.formFieldRadius
         kgButton.frame.origin.x = unitButton.frame.maxX + CGFloat.formMargin
         kgButton.frame.origin.y = unitButton.frame.origin.y
         
         lbsButton.frame.size = buttonSize
+        lbsButton.layer.cornerRadius = CGFloat.formFieldRadius
         lbsButton.frame.origin.x = kgButton.frame.maxX + CGFloat.formMargin
         lbsButton.frame.origin.y = unitButton.frame.origin.y
     }

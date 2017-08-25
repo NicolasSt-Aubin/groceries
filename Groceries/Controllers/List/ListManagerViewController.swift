@@ -23,13 +23,7 @@ class ListManagerViewController: BaseViewController {
         }
     }
     
-    var elements: [Element] {
-        if let list = CurrentUserService.shared.selectedList {
-            return list.elements
-        } else {
-            return []
-        }
-    }
+    var elements: [Element] = TempDataService.elements
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -138,7 +132,7 @@ class ListManagerViewController: BaseViewController {
         pageSelectionIndicatorView.layer.cornerRadius = pageSelectionIndicatorView.frame.height/2
         
         headerView.frame.size.width = view.bounds.width
-        headerView.frame.size.height = userIsSearching ? 20 : pageSelectionIndicatorView.frame.maxY + 2
+        headerView.frame.size.height = userIsSearching ? 20 : pageSelectionIndicatorView.frame.maxY
         
         collectionView.frame.size.width = view.bounds.width
         collectionView.frame.size.height = view.bounds.height - headerView.frame.maxY
@@ -222,7 +216,7 @@ extension ListManagerViewController: LeftListCollectionViewCellDelegate, LeftLis
 extension ListManagerViewController: RightListCollectionViewCellDelegate, RightListCollectionViewCellDataSource {
     
     func shouldRefreshOverviewList() {
-        leftListCollectionViewCell?.refresh()
+//        leftListCollectionViewCell?.refresh()
     }
     
     func onShelfElements() -> [Element] {

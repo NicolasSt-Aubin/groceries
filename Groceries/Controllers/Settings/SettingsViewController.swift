@@ -210,7 +210,7 @@ class SettingsViewController: BaseViewController {
         createListView.list = nil
         createListView.listNameField.becomeFirstResponder()
         view.setNeedsLayout()
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
@@ -244,7 +244,7 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         isInCreationMode = true
         createListView.list = CurrentUserService.shared.userLists[indexPath.row]
         view.setNeedsLayout()
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
@@ -259,7 +259,7 @@ extension SettingsViewController: CreateListViewDelegate {
         isInCreationMode = false
         collectionView.reloadData()
         view.setNeedsLayout()
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }

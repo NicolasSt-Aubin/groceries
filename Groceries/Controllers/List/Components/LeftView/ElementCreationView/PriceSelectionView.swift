@@ -8,14 +8,21 @@
 
 import UIKit
 
+protocol PriceSelectionViewDelate {
+    func priceSelectionViewDidChangeValue()
+}
+
 class PriceSelectionView: UIView {
 
     // MARK: - Properties
+    
+    var delegate: PriceSelectionViewDelate? = nil
     
     var value: Double = 0 {
         didSet {
             value = round(value)
             priceLabel.text = String(format: "%.2f$", value)
+            delegate?.priceSelectionViewDidChangeValue()
         }
     }
     var minValue: Double = 0
@@ -192,6 +199,11 @@ class PriceSelectionView: UIView {
     
     // MARK: - Public Methods
     
+    func reset() {
+        value = 0
+        updatePos()
+    }
+    
     func updatePos() {
         let ratioPos = (value - minValue) / (maxValue - minValue)
         circleView.center.x = ( CGFloat(ratioPos) * (maxX - minX) ) + minX
@@ -200,7 +212,7 @@ class PriceSelectionView: UIView {
     
     // MARK: - Private Methods
     
-    func positionPriceIndicator() {
+    fileprivate func positionPriceIndicator() {
         priceIndicatorView.center.x = circleView.center.x
         
         if priceIndicatorView.frame.minX < instructionLabel.frame.minX {
