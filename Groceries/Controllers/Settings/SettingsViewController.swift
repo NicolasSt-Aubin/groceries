@@ -36,6 +36,7 @@ class SettingsViewController: BaseViewController {
         button.setImage(Asset.clearIcon.image.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .white
         button.sizeToFit()
+        button.addTarget(self, action: #selector(self.didTapCloseButton), for: .touchUpInside)
         return button
     }()
     
@@ -201,6 +202,10 @@ class SettingsViewController: BaseViewController {
     
     // MARK: - Selector methods
     
+    func didTapCloseButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func didTapLogoutButton() {
         collectionView.reloadData()
     }
@@ -218,7 +223,7 @@ class SettingsViewController: BaseViewController {
     func enterUpdateUserMode() {
         
     }
-
+    
 }
 
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource

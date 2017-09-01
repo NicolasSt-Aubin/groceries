@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = CurrentUserService.savedToken == nil ? LoginViewController() : ListManagerViewController()
         window?.makeKeyAndVisible()
         
-//        let launchViewController = LaunchViewController()
-//        launchViewController.modalPresentationStyle = .overCurrentContext
-//        window?.rootViewController?.present(launchViewController, animated: false, completion: nil)
+        let launchViewController = LaunchViewController()
+        launchViewController.modalPresentationStyle = .overCurrentContext
+        window?.rootViewController?.present(launchViewController, animated: false, completion: nil)
         
         return true
     }

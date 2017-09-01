@@ -111,7 +111,7 @@ class ElementCreationView: UIScrollView {
         cancelButton.frame.size.height = CGFloat.formFieldHeight
         cancelButton.layer.cornerRadius = CGFloat.formFieldRadius
         cancelButton.frame.origin.x = CGFloat.pageMargin
-        cancelButton.frame.origin.y = quantityIndicatorSelectionView.frame.maxY + 40
+        cancelButton.frame.origin.y = quantityIndicatorSelectionView.frame.maxY + 20
         
         addButton.frame.size = cancelButton.frame.size
         addButton.layer.cornerRadius = CGFloat.formFieldRadius
@@ -119,6 +119,12 @@ class ElementCreationView: UIScrollView {
         addButton.frame.origin.y = cancelButton.frame.origin.y
         
         contentSize.height = addButton.frame.maxY + CGFloat.pageMargin
+        
+        if contentSize.height < bounds.height {
+            cancelButton.frame.origin.y = bounds.height - cancelButton.frame.height - CGFloat.pageMargin
+            addButton.frame.origin.y = cancelButton.frame.origin.y
+        }
+        
     }
     
     // MARK: - Public methods

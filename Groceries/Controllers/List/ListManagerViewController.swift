@@ -42,6 +42,11 @@ class ListManagerViewController: BaseViewController {
         let label = UILabel.generateTitleLabel()
         label.text = "Appartement"
         label.sizeToFit()
+        label.isUserInteractionEnabled = true
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapTitleLabel))
+        label.addGestureRecognizer(tapGestureRecognizer)
+        
         return label
     }()
     
@@ -100,6 +105,7 @@ class ListManagerViewController: BaseViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .flatCloud
+        statusBackgroundView.backgroundColor = .flatMidnightBlue
         
         view.addSubview(headerView)
         headerView.addSubview(titleLabel)
@@ -140,6 +146,11 @@ class ListManagerViewController: BaseViewController {
     }
     
     // MARK: - Selector Methods
+    
+    func didTapTitleLabel() {
+        let settingsViewController = SettingsViewController()
+        present(settingsViewController, animated: true, completion: nil)
+    }
     
     func selectLeftPage() {
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true)

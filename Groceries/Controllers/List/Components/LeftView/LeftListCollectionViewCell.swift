@@ -79,8 +79,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     
     fileprivate lazy var addButton: GRButton = {
         let button = GRButton()
-//        let image = Asset.addIcon.image.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-//        button.setImage(image, for: .normal)
         button.setTitle("+", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
         button.tintColor = .white

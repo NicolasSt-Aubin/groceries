@@ -8,7 +8,7 @@
 
 import Alamofire
 
-let APIURL = "http://localhost:9000/api/"
+let APIURL = "http://192.168.0.144:9000/api/"
 
 enum NetworkRequest {
     

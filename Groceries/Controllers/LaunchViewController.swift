@@ -43,9 +43,6 @@ class LaunchViewController: UIViewController {
         
         view.addSubview(backgroundView)
         backgroundView.addSubview(logoImageView)
-        
-        backgroundView.frame = view.bounds
-        logoImageView.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height/2)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,7 +50,6 @@ class LaunchViewController: UIViewController {
         
         APIService.fetchLists(success: { lists in
             CurrentUserService.shared.userLists = lists
-            
             self.completeAnimation()
         }, failure: { error in
             // TO DO
@@ -61,16 +57,31 @@ class LaunchViewController: UIViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        backgroundView.frame = view.bounds
+        logoImageView.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height/2)
+    }
+    
     // MARK: - Private Methods
     
     func completeAnimation() {
-        
-        UIView.animate(withDuration: 1, animations: {
-            self.backgroundView.frame.size.height = 20
-        }, completion: { completed in
-            self.dismiss(animated: false, completion: nil)
-        })
-        
+
+//        let customPresentAnimationController =
+//        let vc = ListManagerViewController()
+//        vc.transitioningDelegate = self
+//        self.present(vc, animated: true, completion: nil)
+        self.transitioningDelegate = self
+        self.dismiss(animated: true, completion: nil)
     }
 
+}
+
+extension LaunchViewController: UIViewControllerTransitioningDelegate {
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return CustomPresentAnimationController()
+//    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomPresentAnimationController()
+    }
 }
