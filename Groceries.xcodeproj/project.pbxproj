@@ -37,6 +37,7 @@
 		1E4433C71EEB143000E25141 /* GRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C61EEB143000E25141 /* GRTextField.swift */; };
 		1E4433C91EEB3AEF00E25141 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4433C81EEB3AEF00E25141 /* CheckButton.swift */; };
 		1E5C30EC1EF45F790067D880 /* QuantityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */; };
+		1E6642B71F5DE7DB00E84273 /* UIImage+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6642B61F5DE7DB00E84273 /* UIImage+groceries.swift */; };
 		1E9B4EEF1EF89A90001CAEFA /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9B4EEE1EF89A90001CAEFA /* LaunchViewController.swift */; };
 		1EA677391EF04B12006DB694 /* Double+groceries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA677381EF04B12006DB694 /* Double+groceries.swift */; };
 		1EA683C11EEB44F50029D7C8 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA683C01EEB44F50029D7C8 /* Element.swift */; };
@@ -114,6 +115,7 @@
 		1E4433C61EEB143000E25141 /* GRTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRTextField.swift; path = Views/GRTextField.swift; sourceTree = "<group>"; };
 		1E4433C81EEB3AEF00E25141 /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckButton.swift; path = Views/CheckButton.swift; sourceTree = "<group>"; };
 		1E5C30EB1EF45F790067D880 /* QuantityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuantityIndicator.swift; path = Models/QuantityIndicator.swift; sourceTree = "<group>"; };
+		1E6642B61F5DE7DB00E84273 /* UIImage+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+groceries.swift"; path = "Extensions/UIImage+groceries.swift"; sourceTree = "<group>"; };
 		1E9B4EEE1EF89A90001CAEFA /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchViewController.swift; path = Controllers/LaunchViewController.swift; sourceTree = "<group>"; };
 		1EA677381EF04B12006DB694 /* Double+groceries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+groceries.swift"; path = "Extensions/Double+groceries.swift"; sourceTree = "<group>"; };
 		1EA683C01EEB44F50029D7C8 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Element.swift; path = Models/Element.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				1E0A846A1EEA04DB00FFE941 /* UITextField+groceries.swift */,
 				1E4433C21EEA579400E25141 /* UIFont+Groceries.swift */,
 				1EA677381EF04B12006DB694 /* Double+groceries.swift */,
+				1E6642B61F5DE7DB00E84273 /* UIImage+groceries.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				1E279CB51F4FABB100F5F325 /* ElementCreationView.swift in Sources */,
 				1E0A82E61EE873FB00FFE941 /* LoginViewController.swift in Sources */,
 				1E0A82B51EE872EF00FFE941 /* AppDelegate.swift in Sources */,
+				1E6642B71F5DE7DB00E84273 /* UIImage+groceries.swift in Sources */,
 				1E279CBD1F4FABFE00F5F325 /* PriceSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

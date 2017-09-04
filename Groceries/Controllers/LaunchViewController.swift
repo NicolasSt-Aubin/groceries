@@ -28,7 +28,7 @@ class LaunchViewController: UIViewController {
     fileprivate lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = Asset.logo.image
+        imageView.image = UIImage.loadingAnimatedImage
         imageView.clipsToBounds = true
         imageView.sizeToFit()
         return imageView
@@ -43,6 +43,9 @@ class LaunchViewController: UIViewController {
         
         view.addSubview(backgroundView)
         backgroundView.addSubview(logoImageView)
+        
+        backgroundView.frame = view.bounds
+        logoImageView.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height/2)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,31 +60,17 @@ class LaunchViewController: UIViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        backgroundView.frame = view.bounds
-        logoImageView.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height/2)
-    }
-    
     // MARK: - Private Methods
     
     func completeAnimation() {
 
-//        let customPresentAnimationController =
-//        let vc = ListManagerViewController()
-//        vc.transitioningDelegate = self
-//        self.present(vc, animated: true, completion: nil)
-        self.transitioningDelegate = self
-        self.dismiss(animated: true, completion: nil)
+        UIView.animate(withDuration: 0.8, animations: {
+            self.backgroundView.frame.size.height = 0
+        }, completion: { _ in
+            self.dismiss(animated: false, completion: nil)
+        })
+        
     }
 
 }
 
-extension LaunchViewController: UIViewControllerTransitioningDelegate {
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        return CustomPresentAnimationController()
-//    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomPresentAnimationController()
-    }
-}
