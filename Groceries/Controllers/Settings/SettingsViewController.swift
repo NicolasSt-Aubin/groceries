@@ -132,7 +132,7 @@ class SettingsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .flatCloud
         statusBackgroundView.backgroundColor = .flatMidnightBlue
         

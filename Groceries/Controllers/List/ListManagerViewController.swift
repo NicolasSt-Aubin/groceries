@@ -23,7 +23,14 @@ class ListManagerViewController: BaseViewController {
         }
     }
     
-    var elements: [Element] = TempDataService.elements
+    var interactivePopTransition: UIPercentDrivenInteractiveTransition? = nil
+    var elements: [Element] {
+        if let list = CurrentUserService.shared.selectedList {
+            return list.elements
+        } else {
+            return []
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -112,8 +119,11 @@ class ListManagerViewController: BaseViewController {
         headerView.addSubview(leftPageButton)
         headerView.addSubview(rightPageButton)
         headerView.addSubview(pageSelectionIndicatorView)
-        
         view.addSubview(collectionView)
+        
+        transitioningDelegate = self
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:)))
+        view.addGestureRecognizer(panGestureRecognizer)
     }
     
     override func viewWillLayoutSubviews() {
@@ -147,8 +157,36 @@ class ListManagerViewController: BaseViewController {
     
     // MARK: - Selector Methods
     
+    func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+//        print("wololo")
+//        let percent = ((sender.translation(in: view).y) / view.bounds.height)
+//        
+//        switch sender.state {
+//        case .began:
+//            interactivePopTransition = UIPercentDrivenInteractiveTransition()
+//            let settingsViewController = SettingsViewController()
+//            settingsViewController.transitioningDelegate = NavigationManager.main
+//            present(settingsViewController, animated: false, completion: nil)
+//            break
+//        case .changed:
+//            interactivePopTransition?.update(percent)
+//            break
+//        case .ended:
+//            if percent > 0.5 || sender.velocity(in: view).y > 350 {
+//                interactivePopTransition?.finish()
+//            } else {
+//                interactivePopTransition?.cancel()
+//            }
+//            interactivePopTransition = nil
+//        default:
+//            break
+//        }
+        
+    }
+    
     func didTapTitleLabel() {
         let settingsViewController = SettingsViewController()
+        settingsViewController.transitioningDelegate = NavigationManager.main
         present(settingsViewController, animated: true, completion: nil)
     }
     
@@ -277,4 +315,12 @@ extension ListManagerViewController: UICollectionViewDelegate, UICollectionViewD
         return collectionView.bounds.size
     }
     
+}
+
+
+extension ListManagerViewController: UIViewControllerTransitioningDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactivePopTransition
+    }
 }

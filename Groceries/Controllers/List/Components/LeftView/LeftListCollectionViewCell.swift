@@ -35,8 +35,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
     
     var elements: [Element] = []
     
-//    var userIsCreating: Bool = false
-    
     fileprivate var keyboardHeight: CGFloat = 0 {
         didSet {
             UIView.animate(withDuration: 0.5) {
@@ -70,10 +68,6 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         textField.placeholder = L10n.searchPlaceholder
         textField.addTarget(self, action: #selector(self.searchFieldTextDidChange), for: .editingChanged)
         textField.clearButtonMode = .always
-
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapSearchFieldClearButton))
-//        textField.rightView!.addGestureRecognizer(tapGestureRecognizer)
-        
         return textField
     }()
     
@@ -173,96 +167,25 @@ class LeftListCollectionViewCell: UICollectionViewCell {
         searchTextField.resignFirstResponder()
         delegate?.userDidStopSearching()
     }
-//
-//    func didTapSearchFieldClearButton() {
-//        if !searchAddTextField.isFirstResponder {
-//            cancelCreation()
-//        } else {
-//            searchAddTextField.clearText()
-//        }
-//    }
-//    
-//    // MARK: - Public Methods
-//    
-//    func refresh() {
-//        guard let text = searchAddTextField.text else {
-//            updateElements()
-//            return
-//        }
-//        updateElements(query: text)
-//    }
-//    
+
     // MARK: - Private Methods
 
     fileprivate func updateElements(query: String = "") {
         guard let dataSource = dataSource else {
             elements = []
             tableView.reloadData()
-//            updateInputLayout()
             return
         }
         guard query != "" else {
             elements = dataSource.unactiveElements()
             tableView.reloadData()
-//            updateInputLayout()
             return
         }
 
         elements = dataSource.unactiveElements().filter({ element in return element.matchesQuery(query: query.lowercased().trimmingCharacters(in: .whitespaces)) })
         tableView.reloadData()
-//        updateInputLayout()
     }
 
-//    fileprivate func updateInputLayout() {
-//        
-//        if userIsCreating && elements.count > 0 {
-//            userIsCreating = false
-//        } else if !userIsCreating && elements.count == 0 {
-//            userIsCreating = true
-//        } else {
-//            return
-//        }
-//        
-//        if userIsCreating {
-//            
-//            searchAddTextField.iconImage = Asset.addIcon.image
-//            searchAddTextField.returnKeyType = .done
-//            searchAddTextField.reloadInputViews()
-//            elementCreationView.isHidden = false
-//            
-//            UIView.animate(withDuration: 0.3, animations: {
-//                
-//                self.elementCreationView.alpha = 1
-//                self.tableView.alpha = 0
-//                
-//            }, completion: { completed in
-//                
-//                self.tableView.isHidden = true
-//                
-//            })
-//            
-//        } else {
-//            
-//            searchAddTextField.iconImage = Asset.searchIcon.image
-//            searchAddTextField.returnKeyType = .search
-//            searchAddTextField.reloadInputViews()
-//            tableView.isHidden = false
-//            
-//            UIView.animate(withDuration: 0.3, animations: {
-//                
-//                self.elementCreationView.alpha = 0
-//                self.tableView.alpha = 1
-//                
-//            }, completion: { completed in
-//                
-//                self.elementCreationView.isHidden = true
-//                self.categorySelectionView.reset()
-//            })
-//            
-//        }
-//        
-//    }
-//    
     fileprivate func activateElement(element: Element) {
         if let index = elements.index(where: {elem in element == elem}) {
             let indexPath = IndexPath(row: index, section: 0)
